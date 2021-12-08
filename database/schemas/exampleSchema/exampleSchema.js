@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ExampleSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
     index: true
   },
   age: {

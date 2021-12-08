@@ -11,7 +11,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 const port = process.env.PORT || 3000;
-const exampleMap = require('./routes/exampleMap/exampleMapRoute');
+
+// import your routes below here
+const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
 
 
 // middleware
@@ -30,7 +32,9 @@ const config = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }
-const connect = mongoose.connect(remoteUrl, config);//comment out to use local database
+
+//comment out to use local mongo db
+const connect = mongoose.connect(remoteUrl, config);
 
 // const localUrl = 'mongodb://localhost:27017/blueOcean'; //comment out to use remote database
 // testing
@@ -42,9 +46,10 @@ connect
 
 
 
-
 //routes
-// import your routes below here
+
+// use imported routes here
+
 // example route
 app.use('/exampleSchema', exampleMap);
 
