@@ -7,7 +7,7 @@ const {ExampleSchema} = require('../../../database');
 //add example to exampleSchema collection
 route.post('/', (req, res) => {
   let name = req.body.name;
-  let age = req.body.age
+  let age = req.body.age;
   ExampleSchema.create({name, age})
     .then(example => {
       console.log("example create");

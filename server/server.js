@@ -37,14 +37,13 @@ const config = {
 //comment out to use local mongo db
 const connect = mongoose.connect(remoteUrl, config);
 
-// const localUrl = 'mongodb://localhost:27017/blueOcean'; //comment out to use remote database
+// const localUrl = 'mongodb://127.0.0.1:27017/blueOcean'; //comment out to use remote database
 // testing
 // const connect = mongoose.connect(localUrl, config);//comment out to use remote database
 
 connect
   .then(db => console.log('connected to DB'))
   .catch(err => console.error(err));
-
 
 
 //routes
