@@ -1,0 +1,40 @@
+{
+  "name": "blue-ocean",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode development -w",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HR-Spaghetti-20/blue-ocean.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HR-Spaghetti-20/blue-ocean/issues"
+  },
+  "homepage": "https://github.com/HR-Spaghetti-20/blue-ocean#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jest": "^27.4.3",
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.1.0",
+    "node": "^17.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.65.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "babel-jest": "^27.4.2",
+    "babel-loader": "^8.2.3",
+    "webpack-cli": "^4.9.1"
+  }
+}
