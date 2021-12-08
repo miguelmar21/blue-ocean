@@ -2,9 +2,9 @@
   "name": "blue-ocean",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "webpack --mode development -w",
+    "run": "nodemon server/server.js",
     "test": "jest"
   },
   "repository": {
