@@ -1,5 +1,8 @@
 const route = require('express').Router();
+
+// destructure the schema you need from index.js
 const {ExampleSchema} = require('../../../database');
+
 
 //add example to exampleSchema collection
 route.post('/', (req, res) => {
