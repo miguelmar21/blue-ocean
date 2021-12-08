@@ -6,8 +6,14 @@ route.post('/', (req, res) => {
   let name = req.body.name;
   let age = req.body.age
   ExampleSchema.create({name, age})
-    .then(example => console.log("example create"))
-    .catch(err => console.error("error"))
+    .then(example => {
+      console.log("example create");
+      res.send('successful');
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400).send('successful');
+    })
 });
 
 module.exports = route;
