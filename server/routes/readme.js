@@ -1,1 +1,1 @@
-// create the folders housing routes for your features in here
+// create the folders housing routes for your features in this rootfolder
