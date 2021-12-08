@@ -1,18 +1,7 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const endpoint = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@spaghetti-cluster.p5ovz.mongodb.net/myFirstDatabase`;
+// import schema here
+const ExampleSchema = require("./schemas/exampleSchema/exampleSchema");
 
 
-mongoose.connect('mongodb://localhost:27017/testdb'); //connect to local
-// mongoose.connect(endpoint); //connect to remote
-const db = mongoose.connection;
+// include imported schema in the object
+module.exports = { ExampleSchema};
 
-db.once('open', (success) => {
-  console.log('connected!', success)
-
-});
-
-module.exports = db;
