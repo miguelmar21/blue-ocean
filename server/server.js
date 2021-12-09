@@ -28,18 +28,18 @@ app.use(express.static(path.join(__dirname, '../dist')));
 // mongo connection
 const mongoose = require('mongoose');
 
-const remoteUrl = process.env.MONGO_URI;//deployment
+// const remoteUrl = process.env.MONGO_URI;//deployment
 const config = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }
 
 //comment out to use local mongo db
-const connect = mongoose.connect(remoteUrl, config);
+// const connect = mongoose.connect(remoteUrl, config);
 
-// const localUrl = 'mongodb://127.0.0.1:27017/blueOcean'; //comment out to use remote database
+const localUrl = 'mongodb://127.0.0.1:27017/blueOcean'; //comment out to use remote database
 // testing
-// const connect = mongoose.connect(localUrl, config);//comment out to use remote database
+const connect = mongoose.connect(localUrl, config);//comment out to use remote database
 
 connect
   .then(db => console.log('connected to DB'))

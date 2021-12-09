@@ -1,26 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import Profiles from './profiles/profiles.js';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default function App() {
 
-  }
-
-  componentDidMount(){
-
-  }
-
-  render() {
-    const { name } = this.props;
-    return (
-      <div>
-        <h1>
-          { name }
-        </h1>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Profiles></Profiles>
+    </div>
+  )
 }
 
-export default App;
