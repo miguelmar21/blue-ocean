@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
-  InfoWindow
+  InfoWindow,
 } from "react-google-maps";
 import usePlacesAutocomplete, {
   getGeoCode,
@@ -16,10 +16,8 @@ import {
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
-} from '@reach/combobox'
+} from "@reach/combobox";
 import mapStyle from "./mapStyle";
-
-
 
 const options = {
   styles: mapStyle,
@@ -33,20 +31,20 @@ const Map = withScriptjs(
     const [selected, setSelected] = React.useState(null);
 
     const onMapClick = React.useCallback((event) => {
-      setMarkers(currentMarkers => [
+      setMarkers((currentMarkers) => [
         ...currentMarkers,
         {
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
-          time: new Date
-        }
-      ])
+          time: new Date(),
+        },
+      ]);
     }, []);
 
     const mapRef = React.useRef();
     const onMapLoad = React.useCallback((map) => {
       mapRef.current = map;
-    }, [])
+    }, []);
 
     return (
       <GoogleMap
@@ -56,34 +54,51 @@ const Map = withScriptjs(
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map(marker => 
-          <Marker 
+        {markers.map((marker) => (
+          <Marker
             key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }} 
+            position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
-              url: 'https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg',
+              url: "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg",
               scaledSize: new window.google.maps.Size(30, 30),
               origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15)
+              anchor: new window.google.maps.Point(15, 15),
             }}
-            onClick={() => 
-              setSelected(marker)}/>
-          )}
-          {selected ? 
-          <InfoWindow 
-            position={{lat: selected.lat, lng: selected.lng}}
+            onClick={() => setSelected(marker)}
+          />
+        ))}
+        {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
             onCloseClick={() => {
               setSelected(null);
-            }}>
+            }}
+          >
             <div>
               <h2>Music performance here!</h2>
             </div>
-          </InfoWindow> : null}
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     );
   })
 );
 
 export default Map;
+
+function Search() {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 27.522628, lng: () => -99.489061 },
+      radius: 200 * 1000,
+    },
+  });
+}
 
 //event OnClick gives you the longitude latitude
