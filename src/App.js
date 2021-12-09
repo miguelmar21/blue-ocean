@@ -1,26 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default function App()  {
 
-  }
+  const [loggedInUser, setLoggedInUser] = useState();
 
-  componentDidMount(){
-
-  }
-
-  render() {
-    const { name } = this.props;
-    return (
+  return (
       <div>
-        <h1>
-          { name }
-        </h1>
+        Testing
       </div>
-    )
-  }
-}
+  )
+};
 
-export default App;
