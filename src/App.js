@@ -1,26 +1,9 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
+import PerformersNearby from "./performersNearby/index.js";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  componentDidMount(){
-
-  }
-
-  render() {
-    const { name } = this.props;
-    return (
-      <div>
-        <h1>
-          { name }
-        </h1>
-      </div>
-    )
-  }
+function App() {
+  return <PerformersNearby />;
 }
 
 export default App;
