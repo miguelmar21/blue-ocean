@@ -19,27 +19,23 @@
   "homepage": "https://github.com/HR-Spaghetti-20/blue-ocean#readme",
   "dependencies": {
     "axios": "^0.24.0",
-    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "install": "^0.13.0",
-    "jest": "^27.4.3",
-    "mongo": "^0.1.0",
-    "mongodb": "^4.2.1",
     "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
-    "node": "^17.2.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "webpack": "^5.65.0"
-  },
+    "react-dom": "^17.0.2"
+    },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack": "^5.65.0",
+    "jest": "^27.4.3"
   }
 }
