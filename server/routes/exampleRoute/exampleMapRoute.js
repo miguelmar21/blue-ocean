@@ -15,7 +15,7 @@ route.post('/', (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      res.status(400).send('successful');
+      res.status(400).send('Error');
     })
 });
 
