@@ -9,6 +9,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
+const cookieParser = require('cookie-parser');
+const serverSignature = require('./serverSignature');
 const port = process.env.PORT || 3000;
 
 
@@ -21,7 +23,9 @@ const auth = require("./routes/authRoutes/auth");
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser(serverSignature));
 app.use(express.urlencoded({extended: true}));
+app.use(auth);
 app.use(express.static(path.join(__dirname, '../dist')));
 
 
@@ -45,13 +49,11 @@ connect
   .then(db => console.log('connected to DB'))
   .catch(err => console.error(err));
 
-
 //routes
 
 // use imported routes here
 
 // example route
-app.use(auth);
 app.use('/exampleSchema', exampleMap);
 
 
