@@ -14,13 +14,14 @@ const port = process.env.PORT || 3000;
 
 // import your routes below here
 const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
+const auth = require("./routes/authRoutes/auth");
 
 
 // middleware
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 
@@ -50,6 +51,7 @@ connect
 // use imported routes here
 
 // example route
+app.use(auth);
 app.use('/exampleSchema', exampleMap);
 
 
