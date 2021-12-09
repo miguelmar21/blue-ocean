@@ -10,7 +10,7 @@ function SearchRadius(props) {
 
   const handleChange = (event) => {
     setMiles(event.target.value);
-    //props.setSearchRadius(miles);
+    props.setSearchRadius(event.target.value);
   };
 
   return (

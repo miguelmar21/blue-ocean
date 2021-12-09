@@ -4,13 +4,13 @@ import SearchRadius from "./searchRadius";
 import { Carousel } from "3d-react-carousal";
 
 function PerformersNearby(props) {
-  let [searchRadius, setsearchRadius] = useState();
+  let [searchRadius, setSearchRadius] = useState("");
+
   //let location = props.location;
 
   //miguel will have a state called location that will be eqaul to the current location (lat & long)
   //use state here to grab all users from the database where location is <= the search radius
   //populate slides by mapping through the array of objects sent back from the database
-
   let slides = [
     <div className="PN_performer">
       <img src="https://picsum.photos/800/300/?random" alt="1" />
@@ -53,7 +53,7 @@ function PerformersNearby(props) {
     <div className="performersNearby">
       <div className="PN_filter">
         <h1>Performers Nearby</h1>
-        <SearchRadius />
+        <SearchRadius setSearchRadius={setSearchRadius} />
       </div>
       <Carousel slides={slides} />
     </div>
