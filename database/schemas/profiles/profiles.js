@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = require('../index.js')
+//const db = require('../index.js')
 
 const userSchema = new mongoose.Schema({
   //add min length validator for username
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   }]
 })
 
-var User = mongoose.model("User", userSchema);
+//var User = mongoose.model("User", userSchema);
 
 // async function addUser() {
 
@@ -51,3 +51,6 @@ var User = mongoose.model("User", userSchema);
 // }
 
 // //performance location may need to be changed to longitude, latitude
+
+
+module.exports = mongoose.model('userSchema', userSchema);

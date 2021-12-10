@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 
 // import your routes below here
 const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
-
+const updateUser = require('./routes/profiles/updateUser.js');
 
 // middleware
 app.use(morgan('dev'));
@@ -35,11 +35,11 @@ const config = {
 }
 
 //comment out to use local mongo db
-// const connect = mongoose.connect(remoteUrl, config);
+const connect = mongoose.connect(remoteUrl, config);
 
-const localUrl = 'mongodb://127.0.0.1:27017/blueOcean'; //comment out to use remote database
+// const localUrl = 'mongodb://127.0.0.1:27017/blueOcean'; //comment out to use remote database
 // testing
-const connect = mongoose.connect(localUrl, config);//comment out to use remote database
+//const connect = mongoose.connect(localUrl, config);//comment out to use remote database
 
 connect
   .then(db => console.log('connected to DB'))
@@ -52,7 +52,7 @@ connect
 
 // example route
 app.use('/exampleSchema', exampleMap);
-
+app.use('/updateUser', updateUser);
 
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
