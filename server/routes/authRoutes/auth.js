@@ -12,7 +12,7 @@
 
 const auth = (req, res, next) => {
 
-  if(!req.signedCookies.user) {
+  if(!req.session.user) {
     let authHeader = req.headers.authorization;
     if (!authHeader) {
       let err = new Error("You're not authenticated");
@@ -28,13 +28,13 @@ const auth = (req, res, next) => {
     let err = new Error('Wrong username and/or password');
     err.status = 401;
     if(authenticated) {
-      res.cookie('user', 'admin', {signed: true});
+      req.session.user = 'admin';//note that with cookies, you setup the cookie and add it to the response, but with sessions, you add the user to the session property on the request
       return next();
     }
-    req.setHeader('WWW-Authenticate', 'Basic');
+    res.setHeader('WWW-Authenticate', 'Basic');
     return next(err);
   } else {
-    if(req.signedCookies.user === 'admin') {
+    if(req.session.user === 'admin') {
       return next();
     }
     let err = new Error("Invalid login credentials");

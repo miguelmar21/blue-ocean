@@ -9,8 +9,9 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
-const cookieParser = require('cookie-parser');
-const serverSignature = require('./serverSignature');
+const serverSignature = require('../server/routes/authRoutes/serverSignature');
+const session = require('express-session');
+const fileStore = require('session-file-store')(session);//will stores sessions in a file
 const port = process.env.PORT || 3000;
 
 
@@ -23,8 +24,14 @@ const auth = require("./routes/authRoutes/auth");
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser(serverSignature));
 app.use(express.urlencoded({extended: true}));
+app.use(session({
+  name: 'session_id',
+  secret: serverSignature,
+  saveUninitialized: false,
+  resave: false,
+  store: new fileStore()
+}));//will add a session to each new request
 app.use(auth);
 app.use(express.static(path.join(__dirname, '../dist')));
 
