@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   withScriptjs,
   withGoogleMap,
@@ -25,10 +25,13 @@ const options = {
   zoomControl: true,
 };
 
+const defaultCenter = { lat: 27.522628, lng: -99.489061 };
+
 const Map = withScriptjs(
   withGoogleMap((props) => {
     const [markers, setMarkers] = useState([]);
-    const [selected, setSelected] = React.useState(null);
+    const [selected, setSelected] = useState(null);
+    const [panTo, setPanTo] = useState(null);
 
     const onMapClick = React.useCallback((event) => {
       setMarkers((currentMarkers) => [
@@ -41,20 +44,15 @@ const Map = withScriptjs(
       ]);
     }, []);
 
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
-      mapRef.current = map;
-    }, []);
-
     return (
       <div>
-        <Search />
+        <Search setPanTo={setPanTo}/>
         <GoogleMap
           defaultZoom={8}
-          defaultCenter={{ lat: 27.522628, lng: -99.489061 }}
+          defaultCenter={defaultCenter}
           options={options}
           onClick={onMapClick}
-          onLoad={onMapLoad}
+          ref={(map) => map && panTo !== null && map.panTo(panTo)}
         >
           {markers.map((marker) => (
             <Marker
@@ -89,7 +87,7 @@ const Map = withScriptjs(
 
 export default Map;
 
-function Search() {
+function Search({setPanTo}) {
   const {
     ready,
     value,
@@ -112,6 +110,7 @@ function Search() {
           })
           .then((LatLng) => {
             const { lat, lng } = LatLng;
+            setPanTo({lat, lng});
           })
           .catch((error) => console.log(error));
       }}
