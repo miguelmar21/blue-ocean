@@ -46,7 +46,8 @@ const Map = withScriptjs(
 
     return (
       <div>
-        <Search setPanTo={setPanTo}/>
+        <Search setPanTo={setPanTo} />
+        <Locate setPanTo={setPanTo} />
         <GoogleMap
           defaultZoom={8}
           defaultCenter={defaultCenter}
@@ -87,7 +88,27 @@ const Map = withScriptjs(
 
 export default Map;
 
-function Search({setPanTo}) {
+function Locate({ setPanTo }) {
+  return (
+    <button
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setPanTo({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          () => null
+        );
+      }}
+    >
+      Click here to relocate to your position!
+    </button>
+  );
+}
+
+function Search({ setPanTo }) {
   const {
     ready,
     value,
@@ -104,13 +125,16 @@ function Search({setPanTo}) {
   return (
     <Combobox
       onSelect={(address) => {
+        setValue(address, false);
+        clearSuggestions();
+
         getGeocode({ address })
           .then((geocode) => {
             return getLatLng(geocode[0]);
           })
           .then((LatLng) => {
             const { lat, lng } = LatLng;
-            setPanTo({lat, lng});
+            setPanTo({ lat, lng });
           })
           .catch((error) => console.log(error));
       }}
@@ -124,10 +148,12 @@ function Search({setPanTo}) {
         placeholder="Enter an address"
       />
       <ComboboxPopover>
-        {status === "OK" &&
-          data.map(({ id, description }) => (
-            <ComboboxOption key={id} value={description} />
-          ))}
+        <ComboboxList>
+          {status === "OK" &&
+            data.map(({ id, description }) => (
+              <ComboboxOption key={id} value={description} />
+            ))}
+        </ComboboxList>
       </ComboboxPopover>
     </Combobox>
   );
