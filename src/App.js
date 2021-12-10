@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import Map from "./Map/Map";
 import API_KEY from '../config'
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState();
   return (
     <div>
       <Map
