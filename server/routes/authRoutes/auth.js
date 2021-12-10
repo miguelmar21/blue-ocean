@@ -11,34 +11,36 @@
 // else send error path
 
 const auth = (req, res, next) => {
-  console.log(req.signedCookies);
+
   if(!req.signedCookies.user) {
     let authHeader = req.headers.authorization;
-    if(!authHeader){
-      let err = new Error('You are not authenticated!');
+    if (!authHeader) {
+      let err = new Error("You're not authenticated");
       err.status = 401;
       res.setHeader('WWW-Authenticate', 'Basic');
+      err.status = 401;
       return next(err);
     }
-    let auth = new Buffer(authHeader.split(' ')[1], 'base64').toString().split(':');
+    let auth =  new Buffer(authHeader.split(' ')[1], 'base64').toString().split(':')
     let username = auth[0], password = auth[1];
+
     let authenticated = username === 'admin' && password === 'password';
-    let err = new Error('Wrong username and password');
+    let err = new Error('Wrong username and/or password');
     err.status = 401;
-    if (authenticated) {
+    if(authenticated) {
       res.cookie('user', 'admin', {signed: true});
       return next();
     }
-    return next(err)
+    req.setHeader('WWW-Authenticate', 'Basic');
+    return next(err);
   } else {
-    if(req.signedCookies.user === 'admin'){
+    if(req.signedCookies.user === 'admin') {
       return next();
-    } else {
-      let err = new Error('Invalid username');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      return next(err);
     }
+    let err = new Error("Invalid login credentials");
+    err.status = 401;
+    err.status = 401;
+    return next(err);
   }
 }
 
