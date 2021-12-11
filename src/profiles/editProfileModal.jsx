@@ -22,11 +22,17 @@ const style = {
   borderRadius: 15
 };
 
-var details = {};
+const [details, setDetails] = useState({username: props.username})
 
 var saveText = function(field, e) {
-  details.field = e.target.value;
-  console.log(field,' is now', details.field)
+  var val = e.target.value;
+  var t = JSON.parse(`{"${field}": "${val}"}`);
+  let newDetails = Object.assign(details, t)
+  setDetails(newDetails)
+}
+
+var submit = function() {
+  console.log('submitting ', details)
 }
 
 useEffect(() => {
@@ -73,6 +79,7 @@ useEffect(() => {
 
             </tbody></table>
           </Typography>
+          <Button onClick={submit}>Submit</Button>
         </Box>
       </Modal>
 
