@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
+import axios from 'axios'
+
 
 export default function EditProfileModal(props) {
 
@@ -33,10 +35,20 @@ var saveText = function(field, e) {
 
 var submit = function() {
   console.log('submitting ', details)
+  //update this to a PUT request after deployment works the first time
+
+  axios.post('http://localhost:3000/updateUser', details)
+  .then((success)=> {
+    console.log('success!', success);
+  })
+  .catch((err)=> {
+    console.error('error!', err);
+  })
 }
 
 useEffect(() => {
   //query the db for user details and populate
+  //borrow Adam's code to do this when he's done
 }, []);
 
 

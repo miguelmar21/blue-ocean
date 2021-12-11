@@ -10,7 +10,7 @@ export default function App()  {
 
   return (
       <div>
-        <EditProfileModal username='miguelito' />
+        <EditProfileModal username='Miguelito' />
       </div>
   )
 };
