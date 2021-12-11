@@ -26,6 +26,16 @@ const style = {
 
 const [details, setDetails] = useState({username: props.username})
 
+var convertToArrays = function(naiveDetails) {
+  //convert the appropriate fields in naive details to arrays
+  //return the result
+  let betterDetails = naiveDetails;
+  //for now, expect the would-be arrays to be comma-delimited.
+
+
+  return betterDetails;
+}
+
 var saveText = function(field, e) {
   var val = e.target.value;
   var t = JSON.parse(`{"${field}": "${val}"}`);
@@ -35,9 +45,11 @@ var saveText = function(field, e) {
 
 var submit = function() {
   console.log('submitting ', details)
-  //update this to a PUT request after deployment works the first time
+  //operate on array fields and convert to arrays
+  let properlyStructuredDetails = convertToArrays(details);
 
-  axios.post('http://localhost:3000/updateUser', details)
+  //update this to a PUT request after deployment works the first time
+  axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
   .then((success)=> {
     console.log('success!', success);
   })
@@ -49,6 +61,7 @@ var submit = function() {
 useEffect(() => {
   //query the db for user details and populate
   //borrow Adam's code to do this when he's done
+  console.log('borrow Adam\'s code to populate the modal')
 }, []);
 
 
