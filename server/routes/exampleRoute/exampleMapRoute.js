@@ -10,8 +10,8 @@ route.post('/', (req, res) => {
   let age = req.body.age;
   ExampleSchema.create({name, age})
     .then(example => {
-      console.log("example create");
-      res.send('successful');
+      res.session.user = 'authenticated';
+      res.redirect('/');
     })
     .catch(err => {
       console.error(err);

@@ -9,32 +9,11 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
-const serverSignature = require('../server/routes/authRoutes/serverSignature');
+const serverSignature = require('./routes/authRoutes/authHandlers/serverSignature');
+const errorHandler = require('./routes/authRoutes/authHandlers/errorHandler');
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);//will stores sessions in a file
 const port = process.env.PORT || 3000;
-
-
-// import your routes below here
-const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
-const auth = require("./routes/authRoutes/auth");
-
-
-// middleware
-app.use(morgan('dev'));
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(session({
-  name: 'session_id',
-  secret: serverSignature,
-  saveUninitialized: false,
-  resave: false,
-  store: new fileStore()
-}));//will add a session to each new request
-app.use(auth);
-app.use(express.static(path.join(__dirname, '../dist')));
-
 
 // mongo connection
 const mongoose = require('mongoose');
@@ -56,12 +35,41 @@ connect
   .then(db => console.log('connected to DB'))
   .catch(err => console.error(err));
 
-//routes
 
+// import your routes below here
+const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
+const auth = require("./routes/authRoutes/authHandlers/auth");
+const signout = require('./routes/authRoutes/signout');
+const login = require('./routes/authRoutes/login');
+const signup = require('./routes/authRoutes/signup')
+
+
+// middleware
+app.use(morgan('dev'));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(session({
+  name: 'session_id',
+  secret: serverSignature,
+  saveUninitialized: false,
+  resave: false,
+  store: new fileStore()
+}));
+
+// auth paths
+app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/login', login);
+app.use('/signup', signup);
+app.use(auth);
+
+//routes
 // use imported routes here
 
 // example route
 app.use('/exampleSchema', exampleMap);
+app.use('/signout', signout);
+app.use(errorHandler);
 
 
 // listening

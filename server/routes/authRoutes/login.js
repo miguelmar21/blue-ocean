@@ -19,6 +19,16 @@ const route = require('express').Router();
 
 // after user successfully signs in, redirect them to profile page with access to resources
 
+// login possibilities
+// user already loggedin: on front-end, display already logged in message
+//user account doesnt exists: redirect to signup
+// password invalid: keepon login page, add message for invalid password
+
+// if res.status = 303, render signup page
+// if res.status = 301, render user profile page
+// if res.status = 201, render profile page of user
+
+
 route.post('/', (req, res, next) => {
   let username = req.body.username,
       password = req.body.password;
@@ -26,28 +36,33 @@ route.post('/', (req, res, next) => {
   if(req.session.user){
     if (req.session.user === 'authenticated'){
       //user successfully validated
-      // redirect to homepage
+      // redirect to user homepage
       // sending to next request for now
-      return next();
+      res.status(301).end()
     } else {
       // user with invalid session.user
       // handle gracefully and test
+      let err = new Error('has different authentication');
+      err.status = 400;
+      next(err);
     }
   } else {
     User.findOne({username})
         .then(user => {
           if(!user) {
-            let err = new Error('Username does not exist.');
-            err.status = 401;
-            next(err);
+            // redirect to signup
+            res.status(303).send('User does not have an account yet');
           } else {
             if(user.password !== password){
+              // on front-end, catch this error and render helpertext asking user for correct password
               let err = new Error('Invalid Password.');
               err.status = 401;
               next(err);
             } else {
-              res.session.user = 'authenticated';
-              res.status(200).redirect('/');
+              req.session.user = 'authenticated';
+              // redirect to profile page of user
+              // render profile page of user
+              res.status(200).end();
             }
           }
         })
