@@ -11,7 +11,7 @@ const [loggedInUser, setLoggedInUser] = useState();
 
   return (
     <div>
-      <Profiles></Profiles>
+      <Profiles ></Profiles>
     </div>
   )
 }

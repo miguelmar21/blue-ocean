@@ -6,9 +6,10 @@ import Video from './videos';
 //import components here
 
 
-export default function Profiles() {
+export default function Profiles(props) {
 
   const [user, setUser] = useState({
+    //sample data for testing purposes
     username: 'BuskALennon',
     is_performer: true,
     name:'John Lennon',
