@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 //import components here
 
 
-export default function Profiles {
+export default function Profiles() {
 
   const [username, setUsername] = useState();
 
