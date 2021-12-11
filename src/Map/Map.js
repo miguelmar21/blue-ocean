@@ -34,7 +34,6 @@ const Map = withScriptjs(
     const [canSetMarker, setCanSetMarker] = useState(true);
     const [selected, setSelected] = useState(null);
     const [panTo, setPanTo] = useState(null);
-    const [category, setCategory] = useState("");
     const [formDisplayed, setFormDisplayed] = useState("none");
 
     const onMapClick = React.useCallback((event) => {
@@ -43,8 +42,9 @@ const Map = withScriptjs(
         {
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
-          time: new Date(),
-          icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png'
+          time: '',
+          icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png',
+          otherPerformers: null
         },
       ]);
       setCanSetMarker(false);
@@ -64,7 +64,6 @@ const Map = withScriptjs(
         >
           {markers.map((marker) => (
             <Marker
-              key={marker.time.toISOString()}
               position={{ lat: marker.lat, lng: marker.lng }}
               icon={{
                 url: marker.icon,
@@ -91,7 +90,6 @@ const Map = withScriptjs(
         <MarkerForm
           formDisplayed={formDisplayed}
           setFormDisplayed={setFormDisplayed}
-          setCategory={setCategory}
           markers={markers}
           setMarkers={setMarkers}
         />
