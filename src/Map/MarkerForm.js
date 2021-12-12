@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function MarkerForm({
   formDisplayed,
   setFormDisplayed,
+  setCanSetMarker,
   markers,
   setMarkers
 }) {
@@ -29,6 +30,8 @@ export default function MarkerForm({
     newMarkerArray.pop();
     newMarkerArray.push(lastMarker);
     setMarkers([...newMarkerArray]);
+    setFormDisplayed("none");
+    setCanSetMarker(true);
     e.preventDefault();
   }
 

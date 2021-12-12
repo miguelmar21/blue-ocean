@@ -42,14 +42,27 @@ const Map = withScriptjs(
         {
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
-          time: '',
-          icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png',
-          otherPerformers: null
+          time: "",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png",
+          otherPerformers: null,
         },
       ]);
       setCanSetMarker(false);
-      setFormDisplayed('marker-form')
+      setFormDisplayed("marker-form");
     }, []);
+
+    function deletePerfomance(marker) {
+      console.log("Looking for marker...");
+      for (var i = 0; i < markers.length; i++) {
+        if (markers[i].lng === marker.lng) {
+          console.log("found!");
+          markers.splice(i, 1);
+          setMarkers([...markers]);
+          setSelected(null);
+          return;
+        }
+      }
+    }
 
     return (
       <div>
@@ -82,7 +95,15 @@ const Map = withScriptjs(
               }}
             >
               <div>
-                <h2>Music performance here!</h2>
+                <p>**Performer name here**</p>
+                <p>{selected.time}</p>
+                <p>With: {selected.otherPerformers}</p>
+                {canSetMarker && (
+                  <button onClick={() => deletePerfomance(selected)}>
+                    Delete performance
+                  </button>
+                )}
+                {/* Fix this to delete by performer, not lng */}
               </div>
             </InfoWindow>
           ) : null}
@@ -90,6 +111,7 @@ const Map = withScriptjs(
         <MarkerForm
           formDisplayed={formDisplayed}
           setFormDisplayed={setFormDisplayed}
+          setCanSetMarker={setCanSetMarker}
           markers={markers}
           setMarkers={setMarkers}
         />
