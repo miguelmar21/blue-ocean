@@ -2,26 +2,20 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Band from './band';
 import Video from './videos';
+import Search from './search';
+
 
 //import components here
 
 
 export default function Profiles(props) {
 
-  const [user, setUser] = useState({
-    //sample data for testing purposes
-    username: 'BuskALennon',
-    is_performer: true,
-    name:'John Lennon',
-    bio: 'An English singer, songwriter, musician and peace activist who achieved worldwide fame as the founder, co-songwriter, co-lead vocalist and rhythm guitarist of the Beatles.',
-    user_picture: 'https://upload.wikimedia.org/wikipedia/commons/8/85/John_Lennon_1969_%28cropped%29.jpg',
-    social_media: ['https://www.facebook.com/johnlennon'],
-    categories: ['Singer', 'Guitarist'],
-    favorites: [],
-    band: {name: 'The Beatles', members:['Paul McCartney', 'Ringo Starr', 'George Harrison']},
-    media: ['https://www.youtube.com/embed/WHCnTP9Bels'],
-    performances: [{}],
-    });
+  const [user, setUser] = useState({user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
+  categories: [],
+  name: '',
+  username: 'Guest',
+  band: {name: 'Three Amigos', members: [Adam, Miguel]},
+  media: []});
 
   return (
     <div>
@@ -34,7 +28,7 @@ export default function Profiles(props) {
       <p>{user.bio}</p>
       <Band user={user}/>
       <Video user={user}/>
-
+      <Search/>
     </div>
   )
 }
