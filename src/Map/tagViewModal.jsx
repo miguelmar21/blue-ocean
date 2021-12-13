@@ -61,7 +61,7 @@ useEffect(() => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
             <table align='center'><tbody>
               <tr>
-                <td>
+                <td bgcolor='999933'>
                   <img src='https://media-exp1.licdn.com/dms/image/C4D03AQFbYWzXl5btDw/profile-displayphoto-shrink_100_100/0/1626725202784?e=1643846400&v=beta&t=tYnIot-RdOL7ciCnI0LYsl4eRNY1lgZosBjucOGzowY'></img>
                 </td>
                 <td bgcolor='FFFFAA'>
