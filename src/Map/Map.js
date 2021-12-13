@@ -115,24 +115,10 @@ const Map = withScriptjs(
             />
           ))}
           {selected ? (
-            <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
-              onCloseClick={() => {
-                setSelected(null);
-              }}
-            >
+
               <TagViewModal />
-              {/* <div>
-                <p>**Performer name here**</p>
-                <p>{selected.time}</p>
-                <p>With: {selected.otherPerformers}</p>
-                {canSetMarker && (
-                  <button onClick={() => deletePerfomance(selected)}>
-                    Delete performance
-                  </button>
-                )}
-              </div> */}
-            </InfoWindow>
+
+
           ) : null}
         </GoogleMap>
         <MarkerForm
