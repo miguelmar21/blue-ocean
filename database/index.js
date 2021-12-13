@@ -1,6 +1,7 @@
 // import schema here
 const ExampleSchema = require("./schemas/exampleSchema/exampleSchema");
-const userSchema = require("./schemas/profiles/profiles.js");
+const UserSchema = require("./schemas/profiles/profiles");
+
 
 // include imported schema in the object
-module.exports = { ExampleSchema, userSchema };
+module.exports = { ExampleSchema, UserSchema };
