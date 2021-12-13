@@ -61,15 +61,15 @@ useEffect(() => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
             <table><tbody>
-              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='20' ></input></td></tr>
-              <tr><td>name </td><td><input type='text' id='name' size='20' ></input></td></tr>
-              <tr><td>category  </td><td><input type='text' id='category' size='20' ></input></td></tr>
-              <tr><td>time: </td><td><input type='text' id='time' size='20' ></input></td></tr>
-              <tr><td>location: </td><td><input type='text' id='location' size='20' ></input></td></tr>
-              <tr><td>profile: </td><td><input type='text' id='profile' size='20' ></input></td></tr>
+              <tr><td>user_picture: </td><td></td></tr>
+              <tr><td>name </td><td></td></tr>
+              <tr><td>category  </td><td></td></tr>
+              <tr><td>time: </td><td></td></tr>
+              <tr><td>location: </td><td></td></tr>
+              <tr><td>profile: </td><td></td></tr>
             </tbody></table>
           </Typography>
-          <Button onClick={submit}>Submit</Button>
+          {/* <Button onClick={submit}>Submit</Button> */}
         </Box>
       </Modal>
 

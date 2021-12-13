@@ -18,15 +18,11 @@
   },
   "homepage": "https://github.com/HR-Spaghetti-20/blue-ocean#readme",
   "dependencies": {
-<<<<<<< HEAD
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.3",
     "@reach/combobox": "^0.16.5",
     "3d-react-carousal": "^4.0.2",
-=======
-    "@mui/material": "^5.2.3",
->>>>>>> jeff_tag_view
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

@@ -6,7 +6,7 @@ import API_KEY from '../config'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState();
-  
+
   return (
     <div>
       <Map

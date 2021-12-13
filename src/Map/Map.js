@@ -22,6 +22,7 @@ import mapStyle from "./mapStyle";
 import MarkerForm from "./MarkerForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TagViewModal from './tagViewModal.jsx';
 
 const options = {
   styles: mapStyle,
@@ -120,7 +121,8 @@ const Map = withScriptjs(
                 setSelected(null);
               }}
             >
-              <div>
+              <TagViewModal />
+              {/* <div>
                 <p>**Performer name here**</p>
                 <p>{selected.time}</p>
                 <p>With: {selected.otherPerformers}</p>
@@ -129,8 +131,7 @@ const Map = withScriptjs(
                     Delete performance
                   </button>
                 )}
-                {/* Fix this to delete by performer, not lng */}
-              </div>
+              </div> */}
             </InfoWindow>
           ) : null}
         </GoogleMap>
