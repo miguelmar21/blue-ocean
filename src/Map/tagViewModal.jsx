@@ -15,7 +15,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 300,
   bgcolor: 'background.paper',
   border: '2px solid #ff0',
   boxShadow: 12,
@@ -34,6 +34,8 @@ var setTagData = function() {
 useEffect(() => {
   console.log('populate the modal with tag data');
   setTagData();
+  handleOpen();
+
 }, []);
 
 
@@ -44,8 +46,6 @@ useEffect(() => {
 
   return (
     <div>
-
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -55,17 +55,26 @@ useEffect(() => {
 
 
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Tag View
-          </Typography>
+          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+            Performance View
+          </Typography> */}
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
-            <table><tbody>
-              <tr><td>user_picture: </td><td></td></tr>
-              <tr><td>name </td><td></td></tr>
-              <tr><td>category  </td><td></td></tr>
-              <tr><td>time: </td><td></td></tr>
-              <tr><td>location: </td><td></td></tr>
-              <tr><td>profile: </td><td></td></tr>
+            <table align='center'><tbody>
+              <tr>
+                <td>
+                  <img src='https://media-exp1.licdn.com/dms/image/C4D03AQFbYWzXl5btDw/profile-displayphoto-shrink_100_100/0/1626725202784?e=1643846400&v=beta&t=tYnIot-RdOL7ciCnI0LYsl4eRNY1lgZosBjucOGzowY'></img>
+                </td>
+                <td bgcolor='FFFFAA'>
+                  <table><tbody>
+                    <tr><td>The Educators</td></tr>
+                    <tr><td align='right'>Music</td></tr>
+                  </tbody></table>
+                </td>
+              </tr>
+              <tr><td colspan='2' align='center'>9PM, 12/21/21</td></tr>
+              <tr><td colspan='2' align='center'>1 Brookings Drive,
+              Saint Louis, MO</td></tr>
+              <tr><td colspan='2' align='center'>[ profile ]</td></tr>
             </tbody></table>
           </Typography>
           {/* <Button onClick={submit}>Submit</Button> */}
