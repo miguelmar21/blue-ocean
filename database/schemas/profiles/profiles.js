@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   username: {index: true, unique: true, type: String, minLength: 7},
   password: String,
-  is_performer: {type: Boolean, default: false},
+  is_performer: { type: Boolean, default: false },
   name: String,
   bio: String,
   user_picture: String,
