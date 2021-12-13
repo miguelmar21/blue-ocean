@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import Map from "./Map/Map";
+import PerformersNearby from "./performersNearby/index.js";
 import API_KEY from '../config'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
+      <PerformersNearby/>
     </div>
   );
 }
