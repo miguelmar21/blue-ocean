@@ -5,4 +5,3 @@ const UserSchema = require("./schemas/profiles/profiles");
 
 // include imported schema in the object
 module.exports = { ExampleSchema, UserSchema };
-
