@@ -14,7 +14,7 @@ export default function Profiles(props) {
   categories: [],
   name: '',
   username: 'Guest',
-  band: {name: 'Three Amigos', members: [Adam, Miguel]},
+  band: {name: '', members: []},
   media: []});
 
   return (
