@@ -6,6 +6,7 @@ import API_KEY from '../config'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState();
+  
   return (
     <div>
       <Map
@@ -15,7 +16,7 @@ function App() {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-      <PerformersNearby/>
+      {/* <PerformersNearby/> */}
     </div>
   );
 }

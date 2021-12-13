@@ -17,8 +17,11 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
+import "@reach/combobox/styles.css";
 import mapStyle from "./mapStyle";
 import MarkerForm from "./MarkerForm";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const options = {
   styles: mapStyle,
@@ -29,12 +32,17 @@ const options = {
 const defaultCenter = { lat: 27.522628, lng: -99.489061 };
 
 const Map = withScriptjs(
-  withGoogleMap((props) => {
+  withGoogleMap(() => {
     const [markers, setMarkers] = useState([]);
+    const [filteredMarkers, setFilteredMarkers] = useState([]);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     const [canSetMarker, setCanSetMarker] = useState(true);
     const [selected, setSelected] = useState(null);
     const [panTo, setPanTo] = useState(null);
     const [formDisplayed, setFormDisplayed] = useState("none");
+
+    let displayedMarkers = filteredMarkers.length > 0 ? filteredMarkers : markers
 
     const onMapClick = React.useCallback((event) => {
       setMarkers((currentMarkers) => [
@@ -64,6 +72,24 @@ const Map = withScriptjs(
       }
     }
 
+    function filterByTime() {
+      function isBetweenDates(markers) {
+        let date = new Date(markers.time);
+        if (date.getTime() <= endDate.getTime() && date.getTime() >= startDate.getTime()) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      let filteredMarkers = markers.filter(isBetweenDates);
+      setFilteredMarkers([...filteredMarkers])
+    }
+
+    function deleteFilter() {
+      setFilteredMarkers([]);
+    }
+
     return (
       <div>
         <Search setPanTo={setPanTo} />
@@ -75,7 +101,7 @@ const Map = withScriptjs(
           onClick={canSetMarker && onMapClick}
           ref={(map) => map && panTo !== null && map.panTo(panTo)}
         >
-          {markers.map((marker) => (
+          {displayedMarkers.map((marker) => (
             <Marker
               position={{ lat: marker.lat, lng: marker.lng }}
               icon={{
@@ -115,6 +141,23 @@ const Map = withScriptjs(
           markers={markers}
           setMarkers={setMarkers}
         />
+        <div>Filter here</div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => {setStartDate(date); setEndDate(date)}}
+          showTimeSelect
+          dateFormat="Pp"
+          minDate={new Date()}
+        />
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
+          showTimeSelect
+          dateFormat="Pp"
+          minDate={startDate}
+        />
+        <button onClick={filterByTime}>Filter</button>
+        <button onClick={deleteFilter}>Delete filter</button>
       </div>
     );
   })
@@ -192,5 +235,3 @@ function Search({ setPanTo }) {
     </Combobox>
   );
 }
-
-//event OnClick gives you the longitude latitude
