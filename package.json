@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/HR-Spaghetti-20/blue-ocean#readme",
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.3",
+    "3d-react-carousal": "^4.0.2",
+    "@reach/combobox": "^0.16.5",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -25,8 +30,11 @@
     "install": "^0.13.0",
     "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-google-maps": "^9.4.5",
+    "use-places-autocomplete": "^1.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
