@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react';
 import Band from './band';
 import Video from './videos';
 import Search from './search';
-
+import EditProfileModal from './editProfileModal.jsx'
 
 //import components here
-
 
 export default function Profiles(props) {
 
@@ -29,6 +28,7 @@ export default function Profiles(props) {
       <Band user={user}/>
       <Video user={user}/>
       <Search/>
+      <EditProfileModal username='user.username' />
     </div>
   )
 }
