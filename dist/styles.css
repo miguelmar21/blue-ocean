@@ -2,3 +2,7 @@
   background-color: lightgrey;
   text-align: center;
 }
+
+.PN_filter {
+  display: inline;
+}
