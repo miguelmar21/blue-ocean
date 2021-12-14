@@ -3,21 +3,26 @@ const {UserSchema} = require('../../../database');
 
 route.put('/', async (req, res) => {
   try {
-    const data = await UserSchema.updateOne({username: "Miguelito"}, {$push: {performances: {
-      location: {
-        lat: 1,
-        lng: 2
-      },
-      time: '9',
-      category: 'comedy',
-      additionalPerformers: null
+    const data = await UserSchema.updateOne({username: req.body.username}, {$push: {performances: {
+      location: req.body.location,
+      time: req.body.time,
+      category: req.body.category,
+      additionalPerformers: req.body.additionalPerformers
     }}})
-    console.log(data);
+    res.status(201).send(data);
   } catch {
-    console.log('no good');
+    res.status(500).send('Could not update database');
   }
 })
 
+route.get('/', async (req, res) => {
+  try {
+    const data = await UserSchema.find({performances: { $exists: true, $ne: []}}, {performances: 1,_id: 0})
+    res.status(200).send(data);
+  } catch{
+    res.status(500).send('Could not fetch from database');
+  }
+})
 // db.userschemas.updateOne({username: "Miguelito"}, {$push: {performances: 'test1'}})
 // db.userschemas.updateOne({username: "Miguelito"}, { $pull: {performances: "test1"}})
 

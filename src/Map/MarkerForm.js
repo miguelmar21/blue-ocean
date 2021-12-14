@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {addToPerformances} from './mapHelpers';
 
 export default function MarkerForm({
   formDisplayed,
@@ -22,15 +23,15 @@ export default function MarkerForm({
     let lastMarker = markers[markers.length - 1];
     let lastMarkerFix =
       categoryValue === "music"
-        ? (lastMarker.icon =
+        ? (lastMarker.category =
             "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg")
         : categoryValue === "comedy"
-        ? (lastMarker.icon =
+        ? (lastMarker.category =
             "https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg")
         : categoryValue === "dance"
-        ? (lastMarker.icon =
+        ? (lastMarker.category =
             "https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg")
-        : (lastMarker.icon =
+        : (lastMarker.category =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png");
     lastMarker.time = startDate.toString();
     lastMarker.otherPerformers = otherPerformers;
@@ -38,6 +39,16 @@ export default function MarkerForm({
     newMarkerArray.pop();
     newMarkerArray.push(lastMarker);
     setMarkers([...newMarkerArray]);
+    // addToPerformances({
+    //   username: 'Miguelito',
+    //   location: {
+    //     lat: lastMarker.lat,
+    //     lng: lastMarker.lng,
+    //   },
+    //   time: lastMarker.time,
+    //   category: lastMarker.category,
+    //   additionalPerformers: lastMarker.otherPerformers
+    // })
     setFormDisplayed("none");
     setCanSetMarker(true);
     e.preventDefault();

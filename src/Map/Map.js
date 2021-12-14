@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   withScriptjs,
   withGoogleMap,
@@ -34,7 +35,7 @@ const defaultCenter = { lat: 27.522628, lng: -99.489061 };
 const Map = withScriptjs(
   withGoogleMap(() => {
     const [markers, setMarkers] = useState([]);
-    const [filteredMarkers, setFilteredMarkers] = useState([]);
+    const [filteredMarkers, setFilteredMarkers] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [canSetMarker, setCanSetMarker] = useState(true);
@@ -42,16 +43,38 @@ const Map = withScriptjs(
     const [panTo, setPanTo] = useState(null);
     const [formDisplayed, setFormDisplayed] = useState("none");
 
-    let displayedMarkers = filteredMarkers.length > 0 ? filteredMarkers : markers
+    useEffect(() => {
+      axios
+        .get("http://localhost:3000/updatePerformances")
+        .then((response) => {
+          let performances = [];
+          for (const setOfPerformances of response.data) {
+            for (const performance of setOfPerformances.performances) {
+              performances.push(performance);
+            }
+          }
+          console.log(performances);
+          setMarkers(performances);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+
+    let displayedMarkers =
+      filteredMarkers !== null ? filteredMarkers : markers;
 
     const onMapClick = React.useCallback((event) => {
       setMarkers((currentMarkers) => [
         ...currentMarkers,
         {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
+          location: {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+          },
           time: "",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png",
+          category:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png",
           otherPerformers: null,
         },
       ]);
@@ -75,19 +98,24 @@ const Map = withScriptjs(
     function filterByTime() {
       function isBetweenDates(markers) {
         let date = new Date(markers.time);
-        if (date.getTime() <= endDate.getTime() && date.getTime() >= startDate.getTime()) {
+        console.log(startDate.getTime(), date.getTime(), endDate.getTime())
+        if (
+          date.getTime() <= endDate.getTime() &&
+          date.getTime() >= startDate.getTime()
+        ) {
           return true;
         } else {
+          console.log('false!')
           return false;
         }
       }
 
       let filteredMarkers = markers.filter(isBetweenDates);
-      setFilteredMarkers([...filteredMarkers])
+      setFilteredMarkers([...filteredMarkers]);
     }
 
     function deleteFilter() {
-      setFilteredMarkers([]);
+      setFilteredMarkers(null);
     }
 
     return (
@@ -103,9 +131,9 @@ const Map = withScriptjs(
         >
           {displayedMarkers.map((marker) => (
             <Marker
-              position={{ lat: marker.lat, lng: marker.lng }}
+              position={{ lat: marker.location.lat, lng: marker.location.lng }}
               icon={{
-                url: marker.icon,
+                url: marker.category,
                 scaledSize: new window.google.maps.Size(30, 30),
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
@@ -115,7 +143,10 @@ const Map = withScriptjs(
           ))}
           {selected ? (
             <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
+              position={{
+                lat: selected.location.lat,
+                lng: selected.location.lng,
+              }}
               onCloseClick={() => {
                 setSelected(null);
               }}
@@ -123,7 +154,6 @@ const Map = withScriptjs(
               <div>
                 <p>**Performer name here**</p>
                 <p>{selected.time}</p>
-                <p>With: {selected.otherPerformers}</p>
                 {canSetMarker && (
                   <button onClick={() => deletePerfomance(selected)}>
                     Delete performance
@@ -144,7 +174,10 @@ const Map = withScriptjs(
         <div>Filter here</div>
         <DatePicker
           selected={startDate}
-          onChange={(date) => {setStartDate(date); setEndDate(date)}}
+          onChange={(date) => {
+            setStartDate(date);
+            setEndDate(date);
+          }}
           showTimeSelect
           dateFormat="Pp"
           minDate={new Date()}
