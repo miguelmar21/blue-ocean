@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import Band from './band';
 import Video from './videos';
 import Search from './search';
-import EditProfileModal from './editProfileModal.jsx'
+import EditProfileModal from './editProfileModal.jsx';
+import Grid from "@mui/material/Grid";
 
 //import components here
 
@@ -18,18 +19,40 @@ export default function Profiles(props) {
 
   return (
     <div>
-      <img className="profilePic" src={user.user_picture} width="100" height="100"/>
-      <p>{`${user.name}, ${user.username}`}</p>
-      {user.categories.map((type) => {
-        //update map to include icons for different types of performers
-        return (<p key={type}>{type}</p>)
-      })}
-      <p>{user.bio}</p>
-      <Band user={user}/>
-      <Video user={user}/>
-      <Search/>
-      <EditProfileModal username='user.username' />
-    </div>
+    {(user !== null) ?
+      <div>
+        <Grid container>
+          <Grid item xs={4}/>
+          <Grid item xs={8}>
+            <Search setUser={setUser}/>
+          </Grid>
+          <Grid item xs={4}>
+            <img className="profilePic" src={user.user_picture} width="100" height="100"/>
+          </Grid>
+          <Grid item xs={8}>
+            <p>{`${user.name}, ${user.username}`}</p>
+          </Grid>
+          <Grid item xs={12}>
+            {(user.categories !== undefined) ? user.categories.map((type) => {
+              //update map to include icons for different types of performers
+              return (<p key={type}>{type}</p>)
+            }): <div></div>}
+          </Grid>
+          <Grid item xs={12}>
+            <p>{user.bio}</p>
+          </Grid>
+          <Grid item xs={12}>
+            <Band user={user}/>
+          </Grid>
+          <Grid item xs={12}>
+            <Video user={user}/>
+          </Grid>
+          <Grid item xs={12}>
+            <EditProfileModal username='user.username' />
+          </Grid>
+        </Grid>
+    </div> : <div></div>}
+  </div>
   )
 }
 
