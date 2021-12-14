@@ -45,9 +45,34 @@ var splitFields = function(twoFields, val) {
 }
 
 var saveText = function(field, e) {
-  var val = e.target.value;
+  var val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 
-  if(field.includes('.')) {
+  if(e.target.type === 'checkbox') {
+    console.log(field, val)
+    //if (val) {
+      if (!details.categories.includes(field)) {
+        var clone = JSON.parse(JSON.stringify(details));
+        clone.categories.push(field)
+        setDetails(clone)
+        console.log('details set to ', clone)
+        var newDetails = Object.assign(details, clone)
+      }
+    //} else {
+      else if (details.categories.includes(field)) {
+        var clone = JSON.parse(JSON.stringify(details));
+        var categories = clone.categories;
+        const index = categories.indexOf(field)
+        if (index > -1) {
+          categories.splice(index, 1)
+        }
+        console.log('categories is now ', categories);
+        clone.categories = categories;
+        setDetails(clone);
+        var newDetails = Object.assign(details, clone)
+        console.log('details are now set to ', details);
+      }
+    //}
+  } else if(field.includes('.')) {
     var twoFields = splitFields(field)
     //var nestedProfileElement = splitFields(field, val);
     var nestedProfileElement = JSON.parse(`{"${twoFields[1]}": "${val}"}`); //{twitter: www.twitter.com}
@@ -63,9 +88,6 @@ var saveText = function(field, e) {
     setDetails(newDetails)
     console.log('added ', profileElement, ' to ', newDetails)
   }
-
-
-
 }
 
 var submit = function() {
@@ -74,13 +96,13 @@ var submit = function() {
   let properlyStructuredDetails = convertToArrays(details);
 
   //update this to a PUT request after deployment works the first time
-  // axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
-  // .then((success)=> {
-  //   console.log('success!', success);
-  // })
-  // .catch((err)=> {
-  //   console.error('error!', err);
-  // })
+  axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
+  .then((success)=> {
+    console.log('success!', success);
+  })
+  .catch((err)=> {
+    console.error('error!', err);
+  })
 }
 
 useEffect(() => {
@@ -89,6 +111,7 @@ useEffect(() => {
   axios.get(`http://localhost:3000/getUser?username=${props.username}`)
   .then((user) => {
     if (user.data.length > 0 && user.data[0] !== undefined) {
+      console.log('get request:', user.data[0])
       setDetails(user.data[0])
     }
 
@@ -129,7 +152,6 @@ useEffect(() => {
                   is_performer:
                 </td>
                 <td>
-                  {/* <input type='text' id='is_performer' size='20' placeholder={details.is_performer} onChange={saveText.bind(null,'is_performer')}></input>*/}
                   <select id='is_performer' onChange={saveText.bind(null,'is_performer')}>
                     {
                       (details.is_performer)
@@ -162,8 +184,42 @@ useEffect(() => {
                 : <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='20' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
               }
 
+              <tr>
+                <td>
+                  categories:
+                </td>
+                <td>
+                  {
+                    (details.categories && details.categories.includes('Music'))
+                    ? <input type="checkbox" checked id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
+                    : <input type="checkbox" id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
+                  }
+                  Music<br></br>
+                  {
+                    (details.categories && details.categories.includes('Comedy'))
+                    ? <input type="checkbox" checked id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
+                    : <input type="checkbox" id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
+                  }
+                  Comedy<br></br>
+                  {
+                    (details.categories && details.categories.includes('Dance'))
+                    ? <input type="checkbox" checked id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
+                    : <input type="checkbox" id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
+                  }
+                  Dance<br></br>
+                  {
+                    (details.categories && details.categories.includes('Other'))
+                    ? <input type="checkbox" checked id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
+                    : <input type="checkbox" id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
+                  }
+                  Other<br></br>
+                  {/* <input type="checkbox" id="comedy" name="comedy" onChange={saveText.bind(null,'Comedy')}></input>Comedy<br></br>
+                  <input type="checkbox" id="dance" name="dance" onChange={saveText.bind(null,'Dance')}></input>Dance<br></br>
+                  <input type="checkbox" id="other" name="other" onChange={saveText.bind(null,'Other')}></input>Other<br></br> */}
+                </td>
+              </tr>
 
-              <tr><td>categories: []</td><td><input type='text' id='categories' size='20' placeholder={details.categories} onChange={saveText.bind(null,'categories')}></input></td></tr>
+
               <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' placeholder={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr>
               <tr><td>band: []</td><td><input type='text' id='band' size='20' placeholder={details.band} onChange={saveText.bind(null,'band')}></input></td></tr>
               <tr><td>media: []</td><td><input type='text' id='media' size='20' placeholder={details.media} onChange={saveText.bind(null,'media')}></input></td></tr>
