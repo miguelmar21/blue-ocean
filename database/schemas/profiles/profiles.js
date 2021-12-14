@@ -18,7 +18,10 @@ const userSchema = new mongoose.Schema({
   media: [String],
   performances: [{
     performance_id: {type: Number, unique: true, sparse:true},
-    location: String,
+    location: {
+      lat: Number,
+      lng: Number
+    },
     time: String,
     category: String,
     additionalPerformers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
