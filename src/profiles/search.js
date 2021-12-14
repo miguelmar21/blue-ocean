@@ -2,9 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import Grid from '@mui/material/Grid';
 
 export default function Search(props) {
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState('');
   const handleChange = e => {
     //possibly refactor to one line
     var inputText = e.target.value;
@@ -17,7 +18,13 @@ export default function Search(props) {
       }
     })
       .then((queriedUser) => {
-        console.log(queriedUser);
+        if (queriedUser.data[0] === undefined) {
+          alert(`${searchText} is not registered on Buskamove`);
+          setSearchText('');
+        } else {
+          props.setUser(queriedUser.data[0]);
+          setSearchText('');
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -25,12 +32,20 @@ export default function Search(props) {
   }
   return (
     <React.Fragment>
-      <TextField
-        variant='outlined'
-        label='Search for a performer'
-        onChange={handleChange}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <Grid container>
+        <Grid item xs={8}>
+          <TextField
+            variant='outlined'
+            label='Search for a performer'
+            onChange={handleChange}
+            value={searchText}
+            size='small'
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <button onClick={handleSearch}>Search</button>
+        </Grid>
+      </Grid>
     </React.Fragment>
   )
 }
