@@ -23,6 +23,7 @@ import mapStyle from "./mapStyle";
 import MarkerForm from "./MarkerForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { deletePerformance } from "./mapHelpers";
 
 const options = {
   styles: mapStyle,
@@ -83,16 +84,16 @@ const Map = withScriptjs(
     }, []);
 
     function deletePerfomance(marker) {
-      console.log("Looking for marker...");
       for (var i = 0; i < markers.length; i++) {
-        if (markers[i].lng === marker.lng) {
-          console.log("found!");
+        if (markers[i].location.lng === marker.location.lng) {
           markers.splice(i, 1);
           setMarkers([...markers]);
           setSelected(null);
-          return;
         }
       }
+      // deletePerformance({
+      // lat: marker.location.lat
+      // })
     }
 
     function filterByTime() {

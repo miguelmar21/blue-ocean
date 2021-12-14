@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 function addToPerformances(tagInfo) {
-  axios.put('http://localhost:3000/updatePerformances', {
+  axios.post('http://localhost:3000/updatePerformances', {
     username: tagInfo.username,
     location: tagInfo.location,
     time: tagInfo.time,
@@ -16,4 +16,19 @@ function addToPerformances(tagInfo) {
   })
 }
 
-export {addToPerformances}
+function deletePerformance(tagInfo) {
+  axios.patch('http://localhost:3000/updatePerformances', {
+    username: 'Miguelito',
+    lat: tagInfo.lat
+    //May not be the best way to delete a performance, 
+    //but for mvp it will do.
+  })
+  .then(response => {
+    console.log('patched!')
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+
+export {addToPerformances, deletePerformance}
