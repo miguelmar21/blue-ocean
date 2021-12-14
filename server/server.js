@@ -15,6 +15,7 @@ const performersNearby = require("./routes/performersNearby/performersRoute.js")
 const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
 const updateUser = require('./routes/profiles/updateUser.js');
 const performances = require('./routes/performances/performances');
+const getUser = require('./routes/profiles/getUser.js');
 
 // middleware
 app.use(morgan("dev"));
@@ -37,8 +38,8 @@ const remoteUrl = process.env.MONGO_URI;
 const connect = mongoose.connect(remoteUrl, config);
 
 //USE LOCAL DATABASE
-//const localUrl = 'mongodb://127.0.0.1:27017/blueOcean';
-//const connect = mongoose.connect(localUrl, config);
+// const localUrl = 'mongodb://127.0.0.1:27017/blueOcean';
+// const connect = mongoose.connect(localUrl, config);
 
 connect
   .then(db => console.log('connected to DB'))
@@ -48,5 +49,7 @@ connect
 app.use('/exampleSchema', exampleMap);
 app.use('/updateUser', updateUser);
 app.use('/updatePerformances', performances);
+app.use('/getUser', getUser);
+
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
