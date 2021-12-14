@@ -25,6 +25,7 @@ const style = {
 };
 
 const [details, setDetails] = useState({username: props.username})
+var is_performer = false;
 
 var convertToArrays = function(naiveDetails) {
   //convert the appropriate fields in naive details to arrays
@@ -90,7 +91,9 @@ useEffect(() => {
   .then((user) => {
     if (user.data.length > 0 && user.data[0] !== undefined) {
       setDetails(user.data[0])
+      is_performer = user.data[0].is_performer
     }
+
   })
 }, [props.username]);
 
@@ -123,28 +126,44 @@ useEffect(() => {
             <table><tbody>
               <tr><td>name: </td><td><input type='text' id='name' size='20' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
               <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr>
-              <tr><td>is_performer: </td><td><input type='text' id='is_performer' size='20' placeholder={details.is_performer} onChange={saveText.bind(null,'is_performer')}></input></td></tr>
+              <tr>
+                <td>
+                  is_performer:
+                </td>
+                <td>
+                  {/* <input type='text' id='is_performer' size='20' placeholder={details.is_performer} onChange={saveText.bind(null,'is_performer')}></input>*/}
+                  <select id='is_performer' onChange={saveText.bind(null,'is_performer')}>
+                    {
+                      (details.is_performer)
+                      ? <option selected value='true'>True</option>
+                      : <option value='true'>True</option>
+                    }
+                    {
+                      (details.is_performer)
+                      ? <option value='false'>False</option>
+                      : <option selected value='false'>False</option>
+                    }
+                  </select>
+                </td>
+              </tr>
               <tr><td>bio: </td><td><input type='text' id='bio' size='20' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
               <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='20' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
               {
                 (details.social_media)
-                ? <tr><td>facebook link: []</td><td><input type='text' id='social_media.facebook' size='20' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
-                : <tr><td>facebook link: []</td><td><input type='text' id='social_media.facebook' size='20' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                ? <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='20' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                : <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='20' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>instagram link: []</td><td><input type='text' id='social_media.instagram' size='20' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
-                : <tr><td>instagram link: []</td><td><input type='text' id='social_media.instagram' size='20' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                ? <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='20' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                : <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='20' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>twitter link: []</td><td><input type='text' id='social_media.twitter' size='20' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
-                : <tr><td>twitter link: []</td><td><input type='text' id='social_media.twitter' size='20' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                ? <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='20' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                : <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='20' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
               }
 
-
-
-              }
 
               <tr><td>categories: []</td><td><input type='text' id='categories' size='20' placeholder={details.categories} onChange={saveText.bind(null,'categories')}></input></td></tr>
               <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' placeholder={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr>
