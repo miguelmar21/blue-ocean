@@ -28,7 +28,7 @@ export default function Profiles(props) {
       <Band user={user}/>
       <Video user={user}/>
       <Search/>
-      <EditProfileModal username='user.username' />
+      <EditProfileModal username={user.username} />
     </div>
   )
 }

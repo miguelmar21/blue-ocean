@@ -62,7 +62,17 @@ useEffect(() => {
   //query the db for user details and populate
   //borrow Adam's code to do this when he's done
   console.log('borrow Adam\'s code to populate the modal')
-}, []);
+  let getURL = `http://localhost:3000/getUser?username=${props.username}`
+  console.log('getURL is', getURL)
+  axios.get(getURL)
+  .then((success)=> {
+    console.log('Should be Miguelito!', success.data);
+    setDetails(success)
+  })
+  .catch((err)=> {
+    console.error('error!', err);
+  })
+}, [props.username]);
 
 
 
