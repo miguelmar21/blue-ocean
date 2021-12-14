@@ -14,6 +14,7 @@ const port = process.env.PORT || 3000;
 const performersNearby = require("./routes/performersNearby/performersRoute.js");
 const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
 const updateUser = require('./routes/profiles/updateUser.js');
+const performances = require('./routes/performances/performances');
 
 // middleware
 app.use(morgan("dev"));
@@ -46,6 +47,6 @@ connect
 // use imported routes here
 app.use('/exampleSchema', exampleMap);
 app.use('/updateUser', updateUser);
-
+app.use('/updatePerformances', performances);
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
