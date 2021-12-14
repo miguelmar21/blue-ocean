@@ -85,13 +85,11 @@ var submit = function() {
 
 useEffect(() => {
   //query the db for user details and populate
-  //borrow Adam's code to do this when he's done
-  //console.log('borrow Adam\'s code to populate the modal with ', props.username)
+  //use Adam's endpoint to populate
   axios.get(`http://localhost:3000/getUser?username=${props.username}`)
   .then((user) => {
     if (user.data.length > 0 && user.data[0] !== undefined) {
       setDetails(user.data[0])
-      is_performer = user.data[0].is_performer
     }
 
   })
