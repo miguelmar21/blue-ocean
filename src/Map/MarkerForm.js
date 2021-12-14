@@ -1,35 +1,54 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {addToPerformances} from './mapHelpers';
 
 export default function MarkerForm({
   formDisplayed,
   setFormDisplayed,
   setCanSetMarker,
   markers,
-  setMarkers
+  setMarkers,
 }) {
   const [categoryValue, setCategoryValue] = useState("music");
-  const [time, setTime] = useState("");
   const [otherPerformers, setOtherPerformers] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
 
   function handleChange(e, field) {
-    if (field === 'category') setCategoryValue(e.target.value);
-    if (field === 'time') setTime(e.target.value); 
-    if (field === 'otherPerformers') setOtherPerformers(e.target.value);
+    if (field === "category") setCategoryValue(e.target.value);
+    if (field === "otherPerformers") setOtherPerformers(e.target.value);
   }
 
   function handleSubmit(e) {
     let lastMarker = markers[markers.length - 1];
-    let lastMarkerFix = 
-        categoryValue === "music" ? lastMarker.icon = "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg" :
-        categoryValue === "comedy" ? lastMarker.icon = "https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg":
-        categoryValue === "dance" ? lastMarker.icon = "https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg":
-        lastMarker.icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png"
-    lastMarker.time = time;
+    let lastMarkerFix =
+      categoryValue === "music"
+        ? (lastMarker.category =
+            "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg")
+        : categoryValue === "comedy"
+        ? (lastMarker.category =
+            "https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg")
+        : categoryValue === "dance"
+        ? (lastMarker.category =
+            "https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg")
+        : (lastMarker.category =
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png");
+    lastMarker.time = startDate.toString();
     lastMarker.otherPerformers = otherPerformers;
     let newMarkerArray = markers;
     newMarkerArray.pop();
     newMarkerArray.push(lastMarker);
     setMarkers([...newMarkerArray]);
+    // addToPerformances({
+    //   username: 'Miguelito',
+    //   location: {
+    //     lat: lastMarker.lat,
+    //     lng: lastMarker.lng,
+    //   },
+    //   time: lastMarker.time,
+    //   category: lastMarker.category,
+    //   additionalPerformers: lastMarker.otherPerformers
+    // })
     setFormDisplayed("none");
     setCanSetMarker(true);
     e.preventDefault();
@@ -44,21 +63,36 @@ export default function MarkerForm({
   return (
     <div>
       <form className={className} onSubmit={handleSubmit}>
-        <label htmlFor="category">Select a category:</label>
-        <select name="category" value={categoryValue} onChange={e=> handleChange(e, 'category')}>
+        <label htmlFor="category">Select a category:</label><br></br>
+        <select
+          name="category"
+          value={categoryValue}
+          onChange={(e) => handleChange(e, "category")}
+        >
           <option value="music">Music</option>
           <option value="comedy">Comedy</option>
           <option value="dance">Dance</option>
           <option value="misc">Miscellaneous</option>
-        </select>
+        </select><br></br>
 
-        <label htmlFor="time">What time?</label>
-        <input type="text" id="time" name="time" onChange={e => handleChange(e, 'time')}></input>
+        <label htmlFor="time">Select a date and time</label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          showTimeSelect
+          dateFormat="Pp"
+          minDate={new Date()}
+        /><br></br>
 
         <label htmlFor="performers">
           What other performers are performing here?
-        </label>
-        <input type="text" id="performers" name="performers" onChange={e=> handleChange(e, 'otherPerformers')}></input>
+        </label><br></br>
+        <input
+          type="text"
+          id="performers"
+          name="performers"
+          onChange={(e) => handleChange(e, "otherPerformers")}
+        ></input>
 
         <input type="submit" value="Submit" />
       </form>
