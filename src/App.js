@@ -10,7 +10,7 @@ const [loggedInUser, setLoggedInUser] = useState();
   return (
 
       <div>
-        {/* <Profiles></Profiles> */}
+        <Profiles></Profiles>
         <Map
           isMarkerShown
           googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
