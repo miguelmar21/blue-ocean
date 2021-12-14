@@ -1,0 +1,11 @@
+.profilePic {
+  border-radius: 50%;
+}
+
+.hidden{
+  display: none;
+}
+
+.active{
+  display: block;
+}
