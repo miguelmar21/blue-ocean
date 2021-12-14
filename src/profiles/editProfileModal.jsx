@@ -36,11 +36,35 @@ var convertToArrays = function(naiveDetails) {
   return betterDetails;
 }
 
+var splitFields = function(twoFields, val) {
+  //returns an object
+  var fields = twoFields.split('.')
+  //return JSON.parse(`{"${fields[0]}": {"${fields[1]}": "${val}"}}`)
+  return fields;
+}
+
 var saveText = function(field, e) {
   var val = e.target.value;
-  var t = JSON.parse(`{"${field}": "${val}"}`);
-  let newDetails = Object.assign(details, t)
-  setDetails(newDetails)
+
+  if(field.includes('.')) {
+    var twoFields = splitFields(field)
+    //var nestedProfileElement = splitFields(field, val);
+    var nestedProfileElement = JSON.parse(`{"${twoFields[1]}": "${val}"}`); //{twitter: www.twitter.com}
+    let trashDetails = details;
+    let newFirstDot = Object.assign(details[twoFields[0]], nestedProfileElement) //trashdetails[social_media] = {twitter: www.twitter.com}
+    //let nestedDetails = Object.assign(details, newFirstDot)
+    console.log('details was', details)
+    //setDetails(nestedDetails);
+    console.log('dot-added ', nestedProfileElement, ' to ', details)
+  } else {
+    var profileElement = JSON.parse(`{"${field}": "${val}"}`);
+    let newDetails = Object.assign(details, profileElement)
+    setDetails(newDetails)
+    console.log('added ', profileElement, ' to ', newDetails)
+  }
+
+
+
 }
 
 var submit = function() {
@@ -49,13 +73,13 @@ var submit = function() {
   let properlyStructuredDetails = convertToArrays(details);
 
   //update this to a PUT request after deployment works the first time
-  axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
-  .then((success)=> {
-    console.log('success!', success);
-  })
-  .catch((err)=> {
-    console.error('error!', err);
-  })
+  // axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
+  // .then((success)=> {
+  //   console.log('success!', success);
+  // })
+  // .catch((err)=> {
+  //   console.error('error!', err);
+  // })
 }
 
 useEffect(() => {
@@ -97,35 +121,35 @@ useEffect(() => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
             <table><tbody>
-              <tr><td>name: </td><td><input type='text' id='name' size='20' value={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
-              <tr><td>password:  </td><td><input type='password' id='password' size='20' value={details.password} onChange={saveText.bind(null,'password')}></input></td></tr>
-              <tr><td>is_performer: </td><td><input type='text' id='is_performer' size='20' value={details.is_performer} onChange={saveText.bind(null,'is_performer')}></input></td></tr>
-              <tr><td>bio: </td><td><input type='text' id='bio' size='20' value={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
-              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='20' value={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
+              <tr><td>name: </td><td><input type='text' id='name' size='20' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
+              <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr>
+              <tr><td>is_performer: </td><td><input type='text' id='is_performer' size='20' placeholder={details.is_performer} onChange={saveText.bind(null,'is_performer')}></input></td></tr>
+              <tr><td>bio: </td><td><input type='text' id='bio' size='20' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
+              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='20' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
               {
                 (details.social_media)
-                ? <tr><td>facebook link: []</td><td><input type='text' id='social_media' size='20' value={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
-                : <tr><td>facebook link: []</td><td><input type='text' id='social_media' size='20' value='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
-              }
-              {
-                (details.social_media)
-                ? <tr><td>instagram link: []</td><td><input type='text' id='social_media' size='20' value={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
-                : <tr><td>instagram link: []</td><td><input type='text' id='social_media' size='20' value='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                ? <tr><td>facebook link: []</td><td><input type='text' id='social_media.facebook' size='20' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                : <tr><td>facebook link: []</td><td><input type='text' id='social_media.facebook' size='20' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>twitter link: []</td><td><input type='text' id='social_media' size='20' value={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
-                : <tr><td>twitter link: []</td><td><input type='text' id='social_media' size='20' value='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                ? <tr><td>instagram link: []</td><td><input type='text' id='social_media.instagram' size='20' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                : <tr><td>instagram link: []</td><td><input type='text' id='social_media.instagram' size='20' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+              }
+              {
+                (details.social_media)
+                ? <tr><td>twitter link: []</td><td><input type='text' id='social_media.twitter' size='20' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                : <tr><td>twitter link: []</td><td><input type='text' id='social_media.twitter' size='20' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
               }
 
 
 
               }
 
-              <tr><td>categories: []</td><td><input type='text' id='categories' size='20' value={details.categories} onChange={saveText.bind(null,'categories')}></input></td></tr>
-              <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' value={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr>
-              <tr><td>band: []</td><td><input type='text' id='band' size='20' value={details.band} onChange={saveText.bind(null,'band')}></input></td></tr>
-              <tr><td>media: []</td><td><input type='text' id='media' size='20' value={details.media} onChange={saveText.bind(null,'media')}></input></td></tr>
+              <tr><td>categories: []</td><td><input type='text' id='categories' size='20' placeholder={details.categories} onChange={saveText.bind(null,'categories')}></input></td></tr>
+              <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' placeholder={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr>
+              <tr><td>band: []</td><td><input type='text' id='band' size='20' placeholder={details.band} onChange={saveText.bind(null,'band')}></input></td></tr>
+              <tr><td>media: []</td><td><input type='text' id='media' size='20' placeholder={details.media} onChange={saveText.bind(null,'media')}></input></td></tr>
 
             </tbody></table>
           </Typography>
