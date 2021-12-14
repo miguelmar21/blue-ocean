@@ -25,6 +25,7 @@ const style = {
 };
 
 const [details, setDetails] = useState({username: props.username})
+const [user, setUser] = useState({user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg'})
 
 var convertToArrays = function(naiveDetails) {
   //convert the appropriate fields in naive details to arrays
@@ -59,19 +60,20 @@ var submit = function() {
 }
 
 useEffect(() => {
+
   //query the db for user details and populate
   //borrow Adam's code to do this when he's done
-  console.log('borrow Adam\'s code to populate the modal')
+  console.log('borrow Adam\'s code to populate the modal for ', props.username)
   let getURL = `http://localhost:3000/getUser?username=${props.username}`
   console.log('getURL is', getURL)
-  axios.get(getURL)
-  .then((success)=> {
-    console.log('Should be Miguelito!', success.data);
-    setDetails(success)
-  })
-  .catch((err)=> {
-    console.error('error!', err);
-  })
+  // axios.get(getURL)
+  // .then((success)=> {
+  //   console.log('Should be Miguelito!', success.data);
+  //   setDetails(success)
+  // })
+  // .catch((err)=> {
+  //   console.error('error!', err);
+  // })
 }, [props.username]);
 
 
