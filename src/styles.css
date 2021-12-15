@@ -7,6 +7,30 @@
   border: 1px solid black;
 }
 
+.search{
+  position: absolute;
+  top: 6.2rem;
+  left: 62.5%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.relocate{
+  position: absolute;
+  top: 6.2rem;
+  left: 92%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.time-filter{
+  position: absolute;
+  top: 39rem;
+  left: 47%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
 .profilePic {
   border-radius: 50%;
 }
@@ -19,7 +43,18 @@
   display: block;
 }
 
+
 .profiles {
   height: 600px;
   border: 1px solid black;
+
+@media screen and (min-width: 1250px) {
+  .relocate{
+    left: 75%;
+  }
 }
+
+@media screen and (max-width: 1150px) {
+  .time-filter{
+    left: 52%
+  }
