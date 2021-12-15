@@ -2,12 +2,14 @@ import React from 'react';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import Grid from '@mui/material/Grid';
 
 
 
 export default function Search(props) {
-  const [user, setUser] = useState({user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg'})
-  const [searchText, setSearchText] = useState();
+
+  const [searchText, setSearchText] = useState('');
+
   const handleChange = e => {
     //possibly refactor to one line
     var inputText = e.target.value;
@@ -19,26 +21,37 @@ export default function Search(props) {
         username: searchText
       }
     })
-    .then((queriedUser) => {
-      // console.log(queriedUser);
-      if(queriedUser.data.length > 0) {
-        console.log('setting user to ', queriedUser.data[0])
-        setUser(queriedUser.data[0])
-        console.log('user is ', user)
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+
+      .then((queriedUser) => {
+        if (queriedUser.data[0] === undefined) {
+          alert(`${searchText} is not registered on Buskamove`);
+          setSearchText('');
+        } else {
+          props.setUser(queriedUser.data[0]);
+          setSearchText('');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
   }
   return (
     <React.Fragment>
-      <TextField
-        variant='outlined'
-        label='Search for a performer'
-        onChange={handleChange}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <Grid container>
+        <Grid item xs={8}>
+          <TextField
+            variant='outlined'
+            label='Search for a performer'
+            onChange={handleChange}
+            value={searchText}
+            size='small'
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <button onClick={handleSearch}>Search</button>
+        </Grid>
+      </Grid>
     </React.Fragment>
   )
 }

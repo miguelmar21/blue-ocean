@@ -5,12 +5,15 @@ export default function Band(props) {
   return (
       //add links to profile if they exist
     <div>
-      <h3>{props.user.band.name}</h3>
-    {props.user.band.members.map((member)=> {
-      return (
-        <p key={member}>{member}</p>
-      )
-   })}
+      {(props.user.band !== null) ?
+        <div>
+          <h3>{props.user.band.name}</h3>
+          {props.user.band.members.map((member)=> {
+            return (
+              <p key={member}>{member}</p>
+            )
+        })}
+        </div> : <div></div>}
    </div>
   )
 }
