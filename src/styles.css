@@ -54,14 +54,29 @@
   width: 100%;
 }
 
+@media screen and (max-width: 1150px) {
+  .time-filter{
+    left: 84%
+  }
+}
+
 @media screen and (min-width: 1250px) {
   .relocate{
     left: 88%;
   }
 }
 
-@media screen and (max-width: 1150px) {
+
+@media screen and (min-width: 1450px) {
+  .relocate{
+    left: 78%;
+  }
+  
   .time-filter{
-    left: 84%
+    left: 80%;
+  }
+
+  .search{
+    left: 55%;
   }
 }

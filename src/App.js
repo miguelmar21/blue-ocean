@@ -9,7 +9,10 @@ import Grid from "@mui/material/Grid";
 import Header from "./header/header";
 
 export default function App() {
-  const [currentLocation, setCurrentLocation] = useState({ lat: 30.267153, lng: -97.743057 })
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: 30.267153,
+    lng: -97.743057,
+  });
   const [loggedInUser, setLoggedInUser] = useState({
     user_picture:
       "https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg",
@@ -21,20 +24,21 @@ export default function App() {
     favorites: [],
   });
   return (
-      <div>
-        <Container>
-        <Header setLoggedInUser={setLoggedInUser}/>
-          <Grid container>
-            <Grid item xs={12} className="top-header">
-            </Grid>
-            <Grid item xs={3} className="left-section">
-              <Grid container>
-                <Grid item xs={12}>
-                  <Profiles updateUser={setLoggedInUser} loggedInUser={loggedInUser}></Profiles>
-                </Grid>
-                <Grid item xs={12}>
-                  <PerformersNearby/>
-                </Grid>
+    <div>
+      <Container>
+        <Header setLoggedInUser={setLoggedInUser} />
+        <Grid container>
+          <Grid item xs={12} className="top-header"></Grid>
+          <Grid item xs={3} className="left-section">
+            <Grid container>
+              <Grid item xs={12}>
+                <Profiles
+                  updateUser={setLoggedInUser}
+                  loggedInUser={loggedInUser}
+                ></Profiles>
+              </Grid>
+              <Grid item xs={12}>
+                <PerformersNearby />
               </Grid>
             </Grid>
           </Grid>
