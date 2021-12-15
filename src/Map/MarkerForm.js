@@ -51,7 +51,6 @@ export default function MarkerForm({
     })
     setFormDisplayed("none");
     setCanSetMarker(true);
-    e.preventDefault();
   }
 
   let className = "marker-form";

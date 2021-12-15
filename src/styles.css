@@ -8,6 +8,7 @@
 }
 
 .search{
+  border-radius: 25px;
   position: absolute;
   top: 4.5rem;
   left: 62.5%;
@@ -25,8 +26,8 @@
 
 .time-filter{
   position: absolute;
-  top: 6.2rem;
-  left: 47%;
+  top: 8.5rem;
+  left: 83%;
   transform: translateX(-50%);
   z-index: 10;
 }
@@ -43,20 +44,24 @@
   display: block;
 }
 
-
 .profiles {
   height: 600px;
   border: 1px solid black;
 }
 
+.tag-modal-img{
+  height: 100%;
+  width: 100%;
+}
+
 @media screen and (min-width: 1250px) {
   .relocate{
-    left: 75%;
+    left: 88%;
   }
 }
 
 @media screen and (max-width: 1150px) {
   .time-filter{
-    left: 52%
+    left: 84%
   }
 }

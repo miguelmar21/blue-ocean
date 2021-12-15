@@ -52,6 +52,8 @@ const Map = withScriptjs(
           let performances = [];
           for (const setOfPerformances of response.data) {
             for (const performance of setOfPerformances.performances) {
+              performance.name = setOfPerformances.name
+              performance.user_picture = setOfPerformances.user_picture 
               performances.push(performance);
             }
           }
@@ -157,16 +159,7 @@ const Map = withScriptjs(
                 setSelected(null);
               }}
             >
-              <div>
-                <p>**Performer name here**</p>
-                <p>{selected.time}</p>
-                {canSetMarker && (
-                  <button onClick={() => deletePerfomance(selected)}>
-                    Delete performance
-                  </button>
-                )}
-                {/* Fix this to delete by performer, not lng */}
-              </div>
+              <TagViewModal selected={selected} setSelected={setSelected}/>
             </InfoWindow>
           ) : null}
         </GoogleMap>
