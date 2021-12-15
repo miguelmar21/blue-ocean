@@ -76,10 +76,10 @@ app.use('/exampleSchema', exampleMap);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/signout', signout);
-app.use(auth);
+// app.use(auth);
 app.use('/updateUser', updateUser);
 app.use('/getUser', getUser);
-app.use(errorHandler);
+// app.use(errorHandler);
 app.use('/updatePerformances', performances);
 
 

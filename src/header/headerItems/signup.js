@@ -29,9 +29,10 @@ var Signup = () => {
     if ('username' in formValues) {
       if (!formValues.username) {
         temp.username = "This is a required Field";
-      } else {
-        temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
       }
+      // else {
+      //   temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
+      // }
     }
     if ('password1' in formValues) {
       temp.password1 = formValues.password1 ? "" : "This is a required Field";
@@ -100,7 +101,7 @@ var Signup = () => {
             Enter your username and password.
           </Typography>
           <Input
-            label="What's your email?"
+            label="What's your username?"
             name="username"
             value={values.username}
             onChange={handleChange}

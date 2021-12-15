@@ -11,7 +11,8 @@ import Signout from './headerItems/signout'
 
 const style = {
   backgroundColor: '#fff',
-  transform: 'translateZ(0)'
+  transform: 'translateZ(0)',
+  elevation: 0
 }
 
 

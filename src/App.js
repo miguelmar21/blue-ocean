@@ -22,7 +22,7 @@ media: []});
   return (
       <div>
         <Container>
-        <Header />
+        <Header setLoggedInUser={setLoggedInUser}/>
           <Grid container>
             <Grid item xs={12} className="top-header">
               <div>Hello this is the header</div>
