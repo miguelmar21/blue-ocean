@@ -1,13 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Carousel } from '3d-react-carousal';
 
 export default function Video(props) {
+  let slides = [];
+  for (let video of props.user.media) {
+    slides.push(<object data={video} width='560px' height='315px'></object>);
+  }
+
   return (
-    props.user.media.map((video, index)=> {
-      console.log(video)
-      return(
-      <object key={index} data={video} width='560px' height='315px'></object>
-      )
-    })
+    <Carousel slides={slides}/>
   )
 }
