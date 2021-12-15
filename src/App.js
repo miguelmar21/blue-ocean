@@ -13,7 +13,10 @@ const [loggedInUser, setLoggedInUser] = useState();
       <div>
         <Container>
           <Grid container>
-            <Grid item xs={3}>
+            <Grid item xs={12} className="top-header">
+              <div>Hello this is the header</div>
+            </Grid>
+            <Grid item xs={3} className="left-section">
               <Grid container>
                 <Grid item xs={12}>
                   <Profiles></Profiles>
@@ -28,7 +31,7 @@ const [loggedInUser, setLoggedInUser] = useState();
                 isMarkerShown
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `400px` }} />}
+                containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
               />
             </Grid>

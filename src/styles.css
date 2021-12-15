@@ -1,3 +1,12 @@
+.top-header{
+  background-color: lightblue;
+}
+
+.left-section{
+  padding-bottom: 200px;
+  border: 1px solid black;
+}
+
 .profilePic {
   border-radius: 50%;
 }
