@@ -3,6 +3,7 @@ import axios from 'axios';
 import Profiles from './profiles/profiles.js';
 import Map from "./Map/Map";
 import PerformersNearby from "./performersNearby/index.js";
+import Header from './header/header'
 // import API_KEY from '../config';
 
 
@@ -13,6 +14,7 @@ const [loggedInUser, setLoggedInUser] = useState();
   return (
 
       <div>
+        <Header/>
         <Profiles></Profiles>
         <Map
           isMarkerShown

@@ -1,7 +1,7 @@
 const { UserSchema } = require('../../../database');
 const route = require('express').Router();
 const passport = require('passport');
-
+const url = require('url');
 
 route.post('/', (req, res) => {
 
@@ -18,7 +18,7 @@ route.post('/', (req, res) => {
         passport.authenticate('local')(req, res, () => {
           res.status(200);
           res.setHeader('Content-Type', 'application/json');
-          res.json({success: true, status: 'Registration successful!'});
+          res.send();
         })
       }
     })
