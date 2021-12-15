@@ -36,6 +36,10 @@ var convertToArrays = function(naiveDetails) {
   return betterDetails;
 }
 
+var deleteMedia = function(mediaIndex) {
+  console.log('media', mediaIndex, 'clicked')
+}
+
 var splitFields = function(twoFields, val) {
   //returns an object
   var fields = twoFields.split('.')
@@ -143,7 +147,7 @@ useEffect(() => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
             <table><tbody>
               <tr><td>name: </td><td><input type='text' id='name' size='20' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
-              <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr>
+              {/* <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr> */}
 
               {
                 (details.is_performer)
@@ -206,8 +210,21 @@ useEffect(() => {
 
 
               {/* <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' placeholder={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr> */}
-              <tr><td>band: []</td><td><input type='text' id='band' size='20' placeholder={details.band} onChange={saveText.bind(null,'band')}></input></td></tr>
-              <tr><td>media: []</td><td><input type='text' id='media' size='20' placeholder={details.media} onChange={saveText.bind(null,'media')}></input></td></tr>
+              {/* <tr><td>band: []</td><td><input type='text' id='band' size='20' placeholder={details.band} onChange={saveText.bind(null,'band')}></input></td></tr> */}
+              <tr><td>media: </td><td>
+                {
+                  (details.media)
+                  ? details.media.map((medium, index) => {
+                    return (
+                      <>
+                      <input type='button' value='x' onClick={deleteMedia(index)}></input> {medium}
+                      </>
+                    )
+                  })
+                  : null
+                }
+                <input type='text' id='media' size='20' placeholder='new media link' onChange={saveText.bind(null,'media-new')}></input>
+              </td></tr>
 
             </tbody></table>
           </Typography>
@@ -219,3 +236,6 @@ useEffect(() => {
   )
 }
 
+// return (
+//   <input type='text' id={`media-${index}`} size='20' placeholder={medium} onChange={saveText.bind(null,`media-${index}`)}></input>
+// )
