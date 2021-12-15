@@ -14,9 +14,9 @@ function SearchRadius(props) {
   };
 
   return (
-    <div className="PN searchRadius">
+    <div className="PN_searchRadius">
       <Box sx={{ minWidth: 120 }}>
-        <FormControl sx={{ m: 1, minWidth: 90 }}>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="demo-simple-select-label">miles</InputLabel>
           <Select
             labelId="demo-simple-select-label"

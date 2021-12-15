@@ -1,8 +1,24 @@
-.PN_performer {
-  background-color: lightgrey;
-  text-align: center;
+.centered {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
-.PN_filter {
-  display: inline;
+.react-3d-carousel {
+  margin-top: 20px;
+}
+
+.performersNearby {
+  margin-top: 50px;
+  background-color: #e14d48;
+  overflow: auto;
+}
+
+.PN_header {
+  color: ghostwhite;
+  font-family: Arial, Helvetica, sans-serif;
 }

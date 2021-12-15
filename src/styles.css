@@ -2,10 +2,10 @@
   border-radius: 50%;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.active{
+.active {
   display: block;
 }

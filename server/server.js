@@ -12,9 +12,9 @@ const port = process.env.PORT || 3000;
 
 // import your routes below here
 const performersNearby = require("./routes/performersNearby/performersRoute.js");
-const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
-const updateUser = require('./routes/profiles/updateUser.js');
-const getUser = require('./routes/profiles/getUser.js');
+const exampleMap = require("./routes/exampleRoute/exampleMapRoute");
+const updateUser = require("./routes/profiles/updateUser.js");
+const getUser = require("./routes/profiles/getUser.js");
 
 // middleware
 app.use(morgan("dev"));
@@ -22,10 +22,10 @@ app.use(cors());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 // mongo connection
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const config = {
   useNewUrlParser: true,
@@ -41,13 +41,14 @@ const connect = mongoose.connect(remoteUrl, config);
 // const connect = mongoose.connect(localUrl, config);
 
 connect
-  .then(db => console.log('connected to DB'))
-  .catch(err => console.error(err));
+  .then((db) => console.log("connected to DB"))
+  .catch((err) => console.error(err));
 
 // use imported routes here
-app.use('/exampleSchema', exampleMap);
-app.use('/updateUser', updateUser);
-app.use('/getUser', getUser);
+app.use("/exampleSchema", exampleMap);
+app.use("/updateUser", updateUser);
+app.use("/getUser", getUser);
+app.use("/performersNearby", performersNearby);
 
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
