@@ -78,8 +78,8 @@ app.use('/signup', signup);
 app.use('/signout', signout);
 app.use('/getUser', getUser);
 app.use('/updatePerformances', performances);
-app.use('/updateUser', updateUser);
 app.use(auth);
+app.use('/updateUser', updateUser);
 app.use(errorHandler);
 
 
