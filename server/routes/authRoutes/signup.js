@@ -7,11 +7,11 @@ route.post('/', (req, res) => {
 
     let username = req.body.username,
         password = req.body.password;
-  let social_media = {
-    twitter: '',
-    facebook: '',
-    instagram: '',
-  };
+  // let social_media = {
+  //   twitter: '',
+  //   facebook: '',
+  //   instagram: '',
+  // };
 
   UserSchema.register(new UserSchema({ username, social_media }), password, (err, user) => {
       if (err) {

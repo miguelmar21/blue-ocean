@@ -111,6 +111,7 @@ var Signup = () => {
             label="Enter your password."
             name="password1"
             value={values.password1}
+            type="password"
             onChange={handleChange}
             error={errors.password1}
           />
@@ -118,6 +119,7 @@ var Signup = () => {
             label="Re-enter your password."
             name="password2"
             value={values.password2}
+            type="password"
             onChange={handleChange}
             error={errors.password2}
           />

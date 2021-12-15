@@ -28,9 +28,10 @@ var Login = ({ setLoggedInUser}) => {
     if ('username' in formValues) {
       if (!formValues.username) {
         temp.username = "This is a required Field";
-      } else {
-        temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
       }
+      // else {
+      //   temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
+      // }
     }
     if ('password' in formValues) {
       temp.password = formValues.password ? "" : "This is a required Field";
@@ -94,7 +95,7 @@ var Login = ({ setLoggedInUser}) => {
             Enter your username and password.
           </Typography>
           <Input
-            label="Enter your email?"
+            label="Enter your Username?"
             name="username"
             value={values.username}
             onChange={handleChange}
@@ -103,6 +104,7 @@ var Login = ({ setLoggedInUser}) => {
           <Input
             label="Enter your password."
             name="password"
+            type="password"
             value={values.password}
             onChange={handleChange}
             error={errors.password}
