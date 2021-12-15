@@ -25,7 +25,6 @@ const style = {
 };
 
 const [details, setDetails] = useState({username: props.username})
-var is_performer = false;
 
 var convertToArrays = function(naiveDetails) {
   //convert the appropriate fields in naive details to arrays
@@ -48,14 +47,14 @@ var saveText = function(field, e) {
   var val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 
   if(e.target.type === 'checkbox') {
-    console.log(field, val)
+    //console.log(field, val)
     //if (val) {
       if (!details.categories.includes(field)) {
         var clone = JSON.parse(JSON.stringify(details));
         clone.categories.push(field)
         setDetails(clone)
-        console.log('details set to ', clone)
-        var newDetails = Object.assign(details, clone)
+        //console.log('details set to ', clone)
+        //var newDetails = Object.assign(details, clone)
       }
     //} else {
       else if (details.categories.includes(field)) {
@@ -65,11 +64,11 @@ var saveText = function(field, e) {
         if (index > -1) {
           categories.splice(index, 1)
         }
-        console.log('categories is now ', categories);
+        //console.log('categories is now ', categories);
         clone.categories = categories;
         setDetails(clone);
-        var newDetails = Object.assign(details, clone)
-        console.log('details are now set to ', details);
+        //var newDetails = Object.assign(details, clone)
+        //console.log('details are now set to ', details);
       }
     //}
   } else if(field.includes('.')) {
@@ -79,19 +78,19 @@ var saveText = function(field, e) {
     let trashDetails = details;
     let newFirstDot = Object.assign(details[twoFields[0]], nestedProfileElement) //trashdetails[social_media] = {twitter: www.twitter.com}
     //let nestedDetails = Object.assign(details, newFirstDot)
-    console.log('details was', details)
+    //console.log('details was', details)
     //setDetails(nestedDetails);
-    console.log('dot-added ', nestedProfileElement, ' to ', details)
+    //console.log('dot-added ', nestedProfileElement, ' to ', details)
   } else {
     var profileElement = JSON.parse(`{"${field}": "${val}"}`);
     let newDetails = Object.assign(details, profileElement)
     setDetails(newDetails)
-    console.log('added ', profileElement, ' to ', newDetails)
+    //console.log('added ', profileElement, ' to ', newDetails)
   }
 }
 
 var submit = function() {
-  console.log('submitting ', details)
+  //console.log('submitting ', details) //DEBUG
   //operate on array fields and convert to arrays
   let properlyStructuredDetails = convertToArrays(details);
 
@@ -111,8 +110,9 @@ useEffect(() => {
   axios.get(`http://localhost:3000/getUser?username=${props.username}`)
   .then((user) => {
     if (user.data.length > 0 && user.data[0] !== undefined) {
-      console.log('get request:', user.data[0])
+      //console.log('get request:', user.data[0]) //DEBUG
       setDetails(user.data[0])
+
     }
 
   })
@@ -124,13 +124,13 @@ useEffect(() => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [username, setUsername] = useState();
-  const uid = username;
+  // const [username, setUsername] = useState();
+  // const uid = username;
 
   return (
     <div>
 
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Edit Profile</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -147,25 +147,13 @@ useEffect(() => {
             <table><tbody>
               <tr><td>name: </td><td><input type='text' id='name' size='20' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
               <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr>
-              <tr>
-                <td>
-                  is_performer:
-                </td>
-                <td>
-                  <select id='is_performer' onChange={saveText.bind(null,'is_performer')}>
-                    {
-                      (details.is_performer)
-                      ? <option selected value='true'>True</option>
-                      : <option value='true'>True</option>
-                    }
-                    {
-                      (details.is_performer)
-                      ? <option value='false'>False</option>
-                      : <option selected value='false'>False</option>
-                    }
-                  </select>
-                </td>
-              </tr>
+
+              {
+                (details.is_performer)
+                ? <tr><td>performer?</td><td><select id='is_performer' defaultValue='true' onChange={saveText.bind(null,'is_performer')} ><option value='true'>True</option><option value='false'>False</option></select></td></tr>
+                : <tr><td>performer?</td><td><select id='is_performer' defaultValue='false' onChange={saveText.bind(null,'is_performer')} ><option value='true'>True</option><option value='false'>False</option></select></td></tr>
+              }
+
               <tr><td>bio: </td><td><input type='text' id='bio' size='20' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
               <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='20' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
               {
@@ -189,10 +177,12 @@ useEffect(() => {
                   categories:
                 </td>
                 <td>
+                {/* <input type="checkbox" checked id="Music" name="music" onChange={saveText.bind(null,'Music')}></input> Music */}
+
                   {
                     (details.categories && details.categories.includes('Music'))
                     ? <input type="checkbox" checked id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
-                    : <input type="checkbox" id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
+                    : <input type="checkbox" id="Music" name="music" onChange={saveText.bind(null,'Music')}></input>
                   }
                   Music<br></br>
                   {
@@ -213,14 +203,12 @@ useEffect(() => {
                     : <input type="checkbox" id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
                   }
                   Other<br></br>
-                  {/* <input type="checkbox" id="comedy" name="comedy" onChange={saveText.bind(null,'Comedy')}></input>Comedy<br></br>
-                  <input type="checkbox" id="dance" name="dance" onChange={saveText.bind(null,'Dance')}></input>Dance<br></br>
-                  <input type="checkbox" id="other" name="other" onChange={saveText.bind(null,'Other')}></input>Other<br></br> */}
+
                 </td>
               </tr>
 
 
-              <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' placeholder={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr>
+              {/* <tr><td>favorites: [] </td><td><input type='text' id='favorites' size='20' placeholder={details.favorites} onChange={saveText.bind(null,'favorites')}></input></td></tr> */}
               <tr><td>band: []</td><td><input type='text' id='band' size='20' placeholder={details.band} onChange={saveText.bind(null,'band')}></input></td></tr>
               <tr><td>media: []</td><td><input type='text' id='media' size='20' placeholder={details.media} onChange={saveText.bind(null,'media')}></input></td></tr>
 
