@@ -68,7 +68,8 @@ var Login = ({ setLoggedInUser}) => {
     reset
   } = useForm(initialValues, validate, true);
 
-  const handleSubmit = e => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     let noErrors = validate();
     if (noErrors) {
@@ -76,12 +77,13 @@ var Login = ({ setLoggedInUser}) => {
       // database already
       handleClose();
       reset();
+      e.preventDefault();
       axios
-        .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
-        .then(response => {
-          // handleClose();
-          // reset();
-          let user = response.data;
+      .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
+      .then(response => {
+        // handleClose();
+        // reset();
+        let user = response.data;
           setLoggedInUser(user);
           setUsername(user.username);
           setDisplay('Logout');
