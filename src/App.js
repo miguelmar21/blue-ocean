@@ -9,9 +9,6 @@ import Grid from '@mui/material/Grid';
 import Header from './header/header'
 
 export default function App() {
-
-
-
 const [loggedInUser, setLoggedInUser] = useState(
 {user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
 categories: [],
