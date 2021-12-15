@@ -9,7 +9,7 @@
 
 .search{
   position: absolute;
-  top: 6.2rem;
+  top: 4.5rem;
   left: 62.5%;
   transform: translateX(-50%);
   z-index: 10;
