@@ -3,7 +3,7 @@
 }
 
 .left-section{
-  padding-bottom: 200px;
+  /* padding-bottom: 200px; */
   border: 1px solid black;
 }
 
@@ -43,6 +43,11 @@
   display: block;
 }
 
+
+.profiles {
+  height: 600px;
+  border: 1px solid black;
+
 @media screen and (min-width: 1250px) {
   .relocate{
     left: 75%;
@@ -53,4 +58,3 @@
   .time-filter{
     left: 52%
   }
-}

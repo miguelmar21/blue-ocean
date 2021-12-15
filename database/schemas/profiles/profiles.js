@@ -34,18 +34,18 @@ const userSchema = new mongoose.Schema({
 //   var User = mongoose.model("userschema", userSchema);
 
 //   const userDoc = new User({
-//     username: 'Miguelito',
+//     username: 'Jemaine',
 //     password: 'password',
 //     is_performer: true,
-//     name: 'Miguel Regalado',
-//     bio: 'The coolest dude there even is',
-//     user_picture: 'https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/242789158_4545669642164024_85677028077753648_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=KziBUEFsI-QAX-xWa4w&tn=rcDe_YIWfxUX59MO&_nc_ht=scontent-dfw5-1.xx&oh=af06feef93ed522c62543bb74a392467&oe=61B57C1F',
-//     social_media: { facebook: 'https://www.facebook.com/miguel.regalado.75' },
+//     name: 'Jemaine Clement',
+//     bio: 'a New Zealand actor, comedian, director, musician, singer and writer. With Bret McKenzie, as the Grammy Award-winning comedy duo Flight of the Conchords, he has released several albums and created comedy series for both the BBC and HBO. For the comedy series, he received six Primetime Emmy nominations.',
+//     user_picture: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Flight_Of_The_Conchords_-_Soho_Theatre_-_Sunday_25th_February_2018_ConchordsSoho250218-8_%2839861151994%29_%28cropped%29.jpg',
+//     social_media: { twitter:'https://twitter.com/AJemaineClement?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor' },
 //     categories: [ 'Comedy', 'Music' ],
-//     favorites: null,
-//     band: null,
+//     favorites: [],
+//     band: {name: 'Flight of The Conchords'},
 //     media: [
-//       'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley'
+//       'https://www.youtube.com/embed/sOgC8qp_I2Y'
 //     ],
 //   })
 //   try {
