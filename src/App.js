@@ -6,6 +6,7 @@ import PerformersNearby from "./performersNearby/index.js";
 import API_KEY from '../config';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Header from './header/header'
 
 export default function App() {
 
@@ -21,6 +22,7 @@ media: []});
   return (
       <div>
         <Container>
+        <Header />
           <Grid container>
             <Grid item xs={12} className="top-header">
               <div>Hello this is the header</div>
