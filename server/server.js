@@ -9,48 +9,49 @@ const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
 const port = process.env.PORT || 3000;
-const passport = require('passport');
-const authenticate = require('./routes/authRoutes/authHandlers/auth');
-const serverSignature = require('./routes/authRoutes/authHandlers/serverSignature');
-const session = require('express-session');
-const fileStore = require('session-file-store')(session);
+const passport = require("passport");
+const authenticate = require("./routes/authRoutes/authHandlers/auth");
+const serverSignature = require("./routes/authRoutes/authHandlers/serverSignature");
+const session = require("express-session");
+const fileStore = require("session-file-store")(session);
 
 // import your routes below here
 const performersNearby = require("./routes/performersNearby/performersRoute.js");
-const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
+const exampleMap = require("./routes/exampleRoute/exampleMapRoute");
 
 // Profile Routes
-const updateUser = require('./routes/profiles/updateUser.js');
-const getUser = require('./routes/profiles/getUser.js');
-const performances = require('./routes/performances/performances');
+const updateUser = require("./routes/profiles/updateUser.js");
+const getUser = require("./routes/profiles/getUser.js");
+const performances = require("./routes/performances/performances");
 
 // Auth routes
-const errorHandler = require('./routes/authRoutes/authHandlers/errorHandler');
+const errorHandler = require("./routes/authRoutes/authHandlers/errorHandler");
 const auth = require("./routes/authRoutes/authHandlers/authFilter");
-const signout = require('./routes/authRoutes/signout');
-const login = require('./routes/authRoutes/login');
-const signup = require('./routes/authRoutes/signup')
-
+const signout = require("./routes/authRoutes/signout");
+const login = require("./routes/authRoutes/login");
+const signup = require("./routes/authRoutes/signup");
 
 // middleware
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
-app.use(session({
-  name: 'session_id',
-  secret: serverSignature,
-  saveUninitialized: false,
-  resave: false,
-  store: new fileStore()
-}));
+app.use(
+  session({
+    name: "session_id",
+    secret: serverSignature,
+    saveUninitialized: false,
+    resave: false,
+    store: new fileStore(),
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 // mongo connection
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const config = {
   useNewUrlParser: true,
@@ -66,25 +67,22 @@ const connect = mongoose.connect(remoteUrl, config);
 // const connect = mongoose.connect(localUrl, config);
 
 connect
-  .then(db => console.log('connected to DB'))
-  .catch(err => console.error(err));
-
+  .then((db) => console.log("connected to DB"))
+  .catch((err) => console.error(err));
 
 //routes
-app.use(express.static(path.join(__dirname, '../dist')));
-app.use('/exampleSchema', exampleMap);
-app.use('/login', login);
-app.use('/signup', signup);
-app.use('/signout', signout);
+app.use(express.static(path.join(__dirname, "../dist")));
+app.use("/exampleSchema", exampleMap);
+app.use("/login", login);
+app.use("/signup", signup);
+app.use("/signout", signout);
 
-app.use('/getUser', getUser);
-app.use('/updatePerformances', performances);
+app.use("/getUser", getUser);
+app.use("/updatePerformances", performances);
 // app.use(auth);
-app.use('/updateUser', updateUser);
+app.use("/updateUser", updateUser);
 // app.use(errorHandler);
-
-
-
+app.use("/performersNearby", performersNearby);
 
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

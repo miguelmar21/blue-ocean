@@ -1,13 +1,13 @@
-.top-header{
+.top-header {
   background-color: lightblue;
 }
 
-.left-section{
+.left-section {
   /* padding-bottom: 200px; */
   border: 1px solid black;
 }
 
-.search{
+.search {
   position: absolute;
   top: 6.2rem;
   left: 62.5%;
@@ -15,7 +15,7 @@
   z-index: 10;
 }
 
-.relocate{
+.relocate {
   position: absolute;
   top: 6.2rem;
   left: 92%;
@@ -23,7 +23,7 @@
   z-index: 10;
 }
 
-.time-filter{
+.time-filter {
   position: absolute;
   top: 39rem;
   left: 47%;
@@ -35,26 +35,27 @@
   border-radius: 50%;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.active{
+.active {
   display: block;
 }
-
 
 .profiles {
   height: 600px;
   border: 1px solid black;
+}
 
 @media screen and (min-width: 1250px) {
-  .relocate{
+  .relocate {
     left: 75%;
   }
 }
 
 @media screen and (max-width: 1150px) {
-  .time-filter{
-    left: 52%
+  .time-filter {
+    left: 52%;
   }
+}
