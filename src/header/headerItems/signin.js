@@ -54,13 +54,15 @@ var Login = ({ setLoggedInUser}) => {
     reset
   } = useForm(initialValues, validate, true);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    console.log('submitted');
     let noErrors = validate();
     if (noErrors) {
       // handle username existing in
       // database already
       handleClose();
       reset();
+      e.preventDefault();
       axios
         .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
         .then(response => {
@@ -68,6 +70,7 @@ var Login = ({ setLoggedInUser}) => {
           // reset();
           let user = response.data;
           setLoggedInUser(user);
+          console.log(user);
         })
         .catch(err => {
           // setErrors({
@@ -90,7 +93,7 @@ var Login = ({ setLoggedInUser}) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <TemplateForm>
+        <TemplateForm onSubmit={(e) => e.preventDefault()}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Enter your username and password.
           </Typography>
@@ -113,6 +116,7 @@ var Login = ({ setLoggedInUser}) => {
             <Button
               text="Login"
               type="submit"
+              value="Submit"
               onClick={handleSubmit}
             />
           </Stack>
