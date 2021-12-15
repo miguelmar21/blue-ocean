@@ -24,6 +24,7 @@ import MarkerForm from "./MarkerForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { deletePerformance } from "./mapHelpers";
+import TagViewModal from './tagViewModal.jsx';
 
 const options = {
   styles: mapStyle,
