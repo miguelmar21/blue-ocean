@@ -16,7 +16,7 @@ var Login = ({ setLoggedInUser}) => {
   const [open, setOpen] = useState(false);
   const [display, setDisplay] = useState('Login');
   const [username, setUsername] = useState('');
-  // useEffect(() => {}, [display]);
+  useEffect(() => {}, [display]);
 
   var handleOpen = () => {
     if(display === 'Login') {
