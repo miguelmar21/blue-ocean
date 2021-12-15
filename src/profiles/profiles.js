@@ -19,6 +19,7 @@ export default function Profiles(props) {
 
   return (
     <div>
+
     {(user !== null) ?
       <div>
         <Grid container>
@@ -53,6 +54,7 @@ export default function Profiles(props) {
         </Grid>
     </div> : <div></div>}
   </div>
+
   )
 }
 

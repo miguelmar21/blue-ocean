@@ -7,9 +7,6 @@ import API_KEY from '../config';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
-
-
-
 export default function App() {
 const [loggedInUser, setLoggedInUser] = useState();
   return (
