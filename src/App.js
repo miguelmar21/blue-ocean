@@ -9,15 +9,15 @@ import Grid from '@mui/material/Grid';
 
 export default function App() {
 
-/* default user
+
+
+const [loggedInUser, setLoggedInUser] = useState(
 {user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
 categories: [],
 name: '',
 username: 'Guest',
 band: {name: '', members: []},
-media: []}
-*/
-const [loggedInUser, setLoggedInUser] = useState();
+media: []});
   return (
       <div>
         <Container>
