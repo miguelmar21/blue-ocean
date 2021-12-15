@@ -27,7 +27,7 @@ route.post('/', async (req, res) => {
 route.patch('/', async (req, res) => {
   console.log(req.body)
   try {
-    const data = await UserSchema.update({username: req.body.username}, {$pull: {"performances.location.lat": req.body.lat}})
+    const data = await UserSchema.updateOne({username: req.body.username}, {$pull: {"performances.location.lat": req.body.lat}})
     res.status(201).send(data);
   } catch {
     res.status(500).send('Could not patch database')

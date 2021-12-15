@@ -19,7 +19,7 @@ function addToPerformances(tagInfo) {
 function deletePerformance(tagInfo) {
   axios.patch('http://localhost:3000/updatePerformances', {
     username: 'Miguelito',
-    lat: tagInfo.lat
+    lat: tagInfo.location.lat
     //May not be the best way to delete a performance, 
     //but for mvp it will do.
   })

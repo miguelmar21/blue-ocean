@@ -91,9 +91,9 @@ const Map = withScriptjs(
           setSelected(null);
         }
       }
-      // deletePerformance({
-      // lat: marker.location.lat
-      // })
+      deletePerformance({
+      lat: marker.location.lat
+      })
     }
 
     function filterByTime() {
