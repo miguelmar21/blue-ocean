@@ -25,7 +25,6 @@ const style = {
 };
 
 const [details, setDetails] = useState({username: props.username})
-const [user, setUser] = useState({user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg'})
 
 var convertToArrays = function(naiveDetails) {
   //convert the appropriate fields in naive details to arrays
