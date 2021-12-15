@@ -18,14 +18,14 @@ categories: [],
 name: '',
 username: 'Guest',
 band: {name: '', members: []},
-media: []});
+media: [],
+favorites: []});
   return (
       <div>
         <Container>
-        <Header />
           <Grid container>
             <Grid item xs={12} className="top-header">
-              <div>Hello this is the header</div>
+              <Header />
             </Grid>
             <Grid item xs={3} className="left-section">
               <Grid container>
