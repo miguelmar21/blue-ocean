@@ -92,7 +92,8 @@ const Map = withScriptjs(
         }
       }
       deletePerformance({
-      lat: marker.location.lat
+      lat: marker.location.lat,
+      lng: marker.location.lng
       })
     }
 
