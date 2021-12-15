@@ -21,22 +21,20 @@ export default function App() {
     favorites: [],
   });
   return (
-    <div>
-      <Container>
-        <Grid container>
-          <Grid item xs={12} className="top-header">
-            <Header />
-          </Grid>
-          <Grid item xs={3} className="left-section">
-            <Grid container>
-              <Grid item xs={12}>
-                <Profiles
-                  updateUser={setLoggedInUser}
-                  loggedInUser={loggedInUser}
-                ></Profiles>
-              </Grid>
-              <Grid item xs={12}>
-                <PerformersNearby />
+      <div>
+        <Container>
+        <Header setLoggedInUser={setLoggedInUser}/>
+          <Grid container>
+            <Grid item xs={12} className="top-header">
+            </Grid>
+            <Grid item xs={3} className="left-section">
+              <Grid container>
+                <Grid item xs={12}>
+                  <Profiles updateUser={setLoggedInUser} loggedInUser={loggedInUser}></Profiles>
+                </Grid>
+                <Grid item xs={12}>
+                  <PerformersNearby/>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

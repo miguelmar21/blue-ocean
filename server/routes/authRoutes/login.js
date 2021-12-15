@@ -15,9 +15,15 @@ const passport = require('passport');
 
 
 route.post('/', passport.authenticate('local'), (req, res) => {
+  const username = req.body.username;
+  UserSchema.findOne({username})
+    .then(user => {
+      res.status(200).send(user);
+    })
+    .catch(err => console.error(err))
 
-  res.setHeader('Content-Type', 'application/json');
-  res.status(200).json({ success: true, status: 'You are logged in!' });
+  // res.setHeader('Content-Type', 'application/json');
+  // res.status(200).json({ success: true, status: 'You are logged in!' });
 })
 
 module.exports = route;
