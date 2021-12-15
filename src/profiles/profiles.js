@@ -15,6 +15,7 @@ export default function Profiles(props) {
 
   return (
     <div>
+
     {(user !== null) ?
       <div>
         <Grid container>
@@ -49,11 +50,12 @@ export default function Profiles(props) {
             <Video user={user}/>
           </Grid>
           <Grid item xs={12}>
-            <EditProfileModal username='user.username' />
+            <EditProfileModal username={user.username} />
           </Grid>
         </Grid>
     </div> : <div></div>}
   </div>
+
   )
 }
 
