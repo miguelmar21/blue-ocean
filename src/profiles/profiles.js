@@ -5,6 +5,7 @@ import Search from './search';
 import EditProfileModal from './editProfileModal.jsx';
 import Grid from "@mui/material/Grid";
 import FavoriteButton from './favoriteButton';
+// import FavoritesList from './favoritesList';
 
 //import components here
 
@@ -40,6 +41,9 @@ export default function Profiles(props) {
           </Grid>
           <Grid item xs={12}>
             <Band user={user}/>
+          </Grid>
+          <Grid item xs={12}>
+            {/* <FavoritesList loggedInUser={props.loggedInUser}/> */}
           </Grid>
           <Grid item xs={12}>
             <Video user={user}/>
