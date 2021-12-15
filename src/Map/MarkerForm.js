@@ -39,16 +39,16 @@ export default function MarkerForm({
     newMarkerArray.pop();
     newMarkerArray.push(lastMarker);
     setMarkers([...newMarkerArray]);
-    // addToPerformances({
-    //   username: 'Miguelito',
-    //   location: {
-    //     lat: lastMarker.lat,
-    //     lng: lastMarker.lng,
-    //   },
-    //   time: lastMarker.time,
-    //   category: lastMarker.category,
-    //   additionalPerformers: lastMarker.otherPerformers
-    // })
+    addToPerformances({
+      username: 'Miguelito',
+      location: {
+        lat: lastMarker.location.lat,
+        lng: lastMarker.location.lng,
+      },
+      time: lastMarker.time,
+      category: lastMarker.category,
+      additionalPerformers: lastMarker.otherPerformers
+    })
     setFormDisplayed("none");
     setCanSetMarker(true);
     e.preventDefault();
