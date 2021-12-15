@@ -11,13 +11,13 @@ import Signout from './headerItems/signout'
 
 const style = {
   backgroundColor: '#fff',
-  transform: 'translateZ(0)'
+  transform: 'translateZ(0)',
+  elevation: 0
 }
 
 
-const Header = () => {
+const Header = ({ setLoggedInUser}) => {
 
-  const [loggedIn, logIn] = useState(false);
 
   return (
     <AppBar position="static" sx={style}>
@@ -25,13 +25,12 @@ const Header = () => {
         <Grid container alignItems='center'>
           <Grid item style={{}}>
             <Stack direction="row" spacing={2}>
-              <Login />
-              <Signup />
+              <Login setLoggedInUser={setLoggedInUser}/>
+              <Signup setLoggedInUser={setLoggedInUser}/>
             </Stack>
           </Grid>
           <Grid item sm ></Grid>
           <Grid item style={{}}>
-            <Signout />
           </Grid>
         </Grid>
       </Toolbar>

@@ -16,6 +16,10 @@ export default function Profiles(props) {
 
   const [user, setUser] = useState(props.loggedInUser);
 
+  useEffect(() => {
+    setUser(props.loggedInUser)
+  }, [props.loggedInUser]);
+
   return (
     <div>
 
