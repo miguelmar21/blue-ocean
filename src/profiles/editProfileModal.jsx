@@ -112,7 +112,6 @@ useEffect(() => {
     if (user.data.length > 0 && user.data[0] !== undefined) {
       //console.log('get request:', user.data[0]) //DEBUG
       setDetails(user.data[0])
-
     }
 
   })
@@ -177,30 +176,30 @@ useEffect(() => {
                   categories:
                 </td>
                 <td>
-                {/* <input type="checkbox" checked id="Music" name="music" onChange={saveText.bind(null,'Music')}></input> Music */}
+                {/* <input type="checkbox" id="Music" name="music" onChange={saveText.bind(null,'Music')}></input> Music */}
 
                   {
                     (details.categories && details.categories.includes('Music'))
-                    ? <input type="checkbox" checked id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
-                    : <input type="checkbox" id="Music" name="music" onChange={saveText.bind(null,'Music')}></input>
+                    ? <input type="checkbox" checked={true} id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
+                    : <input type="checkbox" checked={false} id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
                   }
                   Music<br></br>
                   {
                     (details.categories && details.categories.includes('Comedy'))
-                    ? <input type="checkbox" checked id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
-                    : <input type="checkbox" id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
+                    ? <input type="checkbox" checked={true} id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
+                    : <input type="checkbox" checked={false} id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
                   }
                   Comedy<br></br>
                   {
                     (details.categories && details.categories.includes('Dance'))
-                    ? <input type="checkbox" checked id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
-                    : <input type="checkbox" id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
+                    ? <input type="checkbox" checked={true} id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
+                    : <input type="checkbox" checked={false} id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
                   }
                   Dance<br></br>
                   {
                     (details.categories && details.categories.includes('Other'))
-                    ? <input type="checkbox" checked id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
-                    : <input type="checkbox" id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
+                    ? <input type="checkbox" checked={true} id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
+                    : <input type="checkbox" checked={false} id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
                   }
                   Other<br></br>
 
