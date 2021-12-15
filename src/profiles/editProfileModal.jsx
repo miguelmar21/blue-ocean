@@ -102,20 +102,20 @@ var submit = function() {
   })
 }
 
-// useEffect(() => {
+useEffect(() => {
+  console.log('username is', props.username);
+  //query the db for user details and populate
+  //use Adam's endpoint to populate
+  axios.get(`http://localhost:3000/getUser?username=${props.username}`)
+  .then((user) => {
+    if (user.data.length > 0 && user.data[0] !== undefined) {
+      //console.log('get request:', user.data[0]) //DEBUG
+      setDetails(user.data[0])
+    }
 
-//   //query the db for user details and populate
-//   //use Adam's endpoint to populate
-//   axios.get(`http://localhost:3000/getUser?username=${props.username}`)
-//   .then((user) => {
-//     if (user.data.length > 0 && user.data[0] !== undefined) {
-//       //console.log('get request:', user.data[0]) //DEBUG
-//       setDetails(user.data[0])
-//     }
+  })
 
-//   })
-
-// }, [] );
+}, [props.username] );
 
 
 

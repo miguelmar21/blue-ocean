@@ -16,7 +16,7 @@ var Login = ({ setLoggedInUser}) => {
   const [open, setOpen] = useState(false);
   const [display, setDisplay] = useState('Login');
   const [username, setUsername] = useState('');
-  useEffect(() => {}, [display]);
+  // useEffect(() => {}, [display]);
 
   var handleOpen = () => {
     if(display === 'Login') {
@@ -72,7 +72,7 @@ var Login = ({ setLoggedInUser}) => {
 
 
   const handleSubmit = (e) => {
-    console.log('submitted');
+    e.preventDefault();
     let noErrors = validate();
     if (noErrors) {
       // handle username existing in
@@ -81,11 +81,11 @@ var Login = ({ setLoggedInUser}) => {
       reset();
       e.preventDefault();
       axios
-        .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
-        .then(response => {
-          // handleClose();
-          // reset();
-          let user = response.data;
+      .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
+      .then(response => {
+        // handleClose();
+        // reset();
+        let user = response.data;
           setLoggedInUser(user);
           setUsername(user.username);
           setDisplay('Logout');
@@ -111,7 +111,7 @@ var Login = ({ setLoggedInUser}) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <TemplateForm onSubmit={(e) => e.preventDefault()}>
+        <TemplateForm>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Enter your username and password.
           </Typography>
@@ -133,8 +133,6 @@ var Login = ({ setLoggedInUser}) => {
           <Stack direction="row" spacing={2}>
             <Button
               text="Login"
-              type="submit"
-              value="Submit"
               onClick={handleSubmit}
             />
           </Stack>

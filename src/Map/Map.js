@@ -44,23 +44,23 @@ const Map = withScriptjs(
     const [panTo, setPanTo] = useState(null);
     const [formDisplayed, setFormDisplayed] = useState("none");
 
-    // useEffect(() => {
-    //   axios
-    //     .get("http://localhost:3000/updatePerformances")
-    //     .then((response) => {
-    //       let performances = [];
-    //       for (const setOfPerformances of response.data) {
-    //         for (const performance of setOfPerformances.performances) {
-    //           performances.push(performance);
-    //         }
-    //       }
-    //       console.log(performances);
-    //       setMarkers(performances);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }, []);
+    useEffect(() => {
+      axios
+        .get("http://localhost:3000/updatePerformances")
+        .then((response) => {
+          let performances = [];
+          for (const setOfPerformances of response.data) {
+            for (const performance of setOfPerformances.performances) {
+              performances.push(performance);
+            }
+          }
+          console.log(performances);
+          setMarkers(performances);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
 
     let displayedMarkers = filteredMarkers !== null ? filteredMarkers : markers;
 
