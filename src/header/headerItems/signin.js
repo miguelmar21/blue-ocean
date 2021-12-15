@@ -131,7 +131,6 @@ var Login = ({ setLoggedInUser}) => {
           <Stack direction="row" spacing={2}>
             <Button
               text="Login"
-              type="submit"
               onClick={handleSubmit}
             />
           </Stack>
