@@ -1,28 +1,26 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Band from './band';
 import Video from './videos';
 import Search from './search';
 import EditProfileModal from './editProfileModal.jsx';
 import Grid from "@mui/material/Grid";
+import FavoriteButton from './favoriteButton';
+// import FavoritesList from './favoritesList';
 
 //import components here
 
 export default function Profiles(props) {
 
-  const [user, setUser] = useState({user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
-  categories: [],
-  name: '',
-  username: 'Guest',
-  band: {name: '', members: []},
-  media: []});
+  const [user, setUser] = useState(props.loggedInUser);
 
   return (
     <div>
     {(user !== null) ?
       <div>
         <Grid container>
-          <Grid item xs={4}/>
+          <Grid item xs={4}>
+            {(props.loggedInUser.username !== user.username) ? <FavoriteButton updateUser={props.updateUser} displayedUser={user} loggedInUser={props.loggedInUser}/> : <React.Fragment/>}
+          </Grid>
           <Grid item xs={8}>
             <Search setUser={setUser}/>
           </Grid>
@@ -43,6 +41,9 @@ export default function Profiles(props) {
           </Grid>
           <Grid item xs={12}>
             <Band user={user}/>
+          </Grid>
+          <Grid item xs={12}>
+            {/* <FavoritesList loggedInUser={props.loggedInUser}/> */}
           </Grid>
           <Grid item xs={12}>
             <Video user={user}/>

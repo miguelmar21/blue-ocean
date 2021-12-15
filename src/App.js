@@ -8,6 +8,15 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 export default function App() {
+
+/* default user
+{user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
+categories: [],
+name: '',
+username: 'Guest',
+band: {name: '', members: []},
+media: []}
+*/
 const [loggedInUser, setLoggedInUser] = useState();
   return (
       <div>
@@ -19,7 +28,7 @@ const [loggedInUser, setLoggedInUser] = useState();
             <Grid item xs={3} className="left-section">
               <Grid container>
                 <Grid item xs={12}>
-                  <Profiles></Profiles>
+                  <Profiles updateUser={setLoggedInUser} loggedInUser={loggedInUser}></Profiles>
                 </Grid>
                 <Grid item xs={12}>
                   <PerformersNearby/>
