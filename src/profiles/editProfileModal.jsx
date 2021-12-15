@@ -39,7 +39,7 @@ var convertToArrays = function(naiveDetails) {
 var splitFields = function(twoFields, val) {
   //returns an object
   var fields = twoFields.split('.')
-  //return JSON.parse(`{"${fields[0]}": {"${fields[1]}": "${val}"}}`)
+
   return fields;
 }
 
@@ -47,8 +47,7 @@ var saveText = function(field, e) {
   var val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 
   if(e.target.type === 'checkbox') {
-    //console.log(field, val)
-    //if (val) {
+
       if (!details.categories.includes(field)) {
         var clone = JSON.parse(JSON.stringify(details));
         clone.categories.push(field)
@@ -56,7 +55,7 @@ var saveText = function(field, e) {
         //console.log('details set to ', clone)
         //var newDetails = Object.assign(details, clone)
       }
-    //} else {
+
       else if (details.categories.includes(field)) {
         var clone = JSON.parse(JSON.stringify(details));
         var categories = clone.categories;
@@ -70,22 +69,21 @@ var saveText = function(field, e) {
         //var newDetails = Object.assign(details, clone)
         //console.log('details are now set to ', details);
       }
-    //}
+
   } else if(field.includes('.')) {
     var twoFields = splitFields(field)
-    //var nestedProfileElement = splitFields(field, val);
+          //var nestedProfileElement = splitFields(field, val);
     var nestedProfileElement = JSON.parse(`{"${twoFields[1]}": "${val}"}`); //{twitter: www.twitter.com}
     let trashDetails = details;
     let newFirstDot = Object.assign(details[twoFields[0]], nestedProfileElement) //trashdetails[social_media] = {twitter: www.twitter.com}
-    //let nestedDetails = Object.assign(details, newFirstDot)
-    //console.log('details was', details)
-    //setDetails(nestedDetails);
-    //console.log('dot-added ', nestedProfileElement, ' to ', details)
+          //let nestedDetails = Object.assign(details, newFirstDot)
+          //console.log('details was', details)
+          //setDetails(nestedDetails);
+          //console.log('dot-added ', nestedProfileElement, ' to ', details)
   } else {
     var profileElement = JSON.parse(`{"${field}": "${val}"}`);
     let newDetails = Object.assign(details, profileElement)
     setDetails(newDetails)
-    //console.log('added ', profileElement, ' to ', newDetails)
   }
 }
 
@@ -123,8 +121,6 @@ useEffect(() => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // const [username, setUsername] = useState();
-  // const uid = username;
 
   return (
     <div>
