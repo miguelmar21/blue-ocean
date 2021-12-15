@@ -209,7 +209,7 @@ useEffect(() => {
 
             </tbody></table>
           </Typography>
-          <Button onClick={submit}>Submit</Button>
+          <Button onClick={submit} id='submit'>Submit</Button>
         </Box>
       </Modal>
 
