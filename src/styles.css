@@ -45,12 +45,12 @@
 
 @media screen and (min-width: 1250px) {
   .relocate{
-    left: 80%;
+    left: 75%;
   }
 }
 
 @media screen and (max-width: 1150px) {
   .time-filter{
-    left: 50%
+    left: 52%
   }
 }
