@@ -3,7 +3,7 @@
 }
 
 .left-section{
-  padding-bottom: 200px;
+  /* padding-bottom: 200px; */
   border: 1px solid black;
 }
 
@@ -17,4 +17,9 @@
 
 .active{
   display: block;
+}
+
+.profiles {
+  height: 600px;
+  border: 1px solid black;
 }
