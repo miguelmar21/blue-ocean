@@ -8,7 +8,16 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 export default function App() {
-const [loggedInUser, setLoggedInUser] = useState();
+
+
+
+const [loggedInUser, setLoggedInUser] = useState(
+{user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
+categories: [],
+name: '',
+username: 'Guest',
+band: {name: '', members: []},
+media: []});
   return (
       <div>
         <Container>
@@ -19,7 +28,7 @@ const [loggedInUser, setLoggedInUser] = useState();
             <Grid item xs={3} className="left-section">
               <Grid container>
                 <Grid item xs={12}>
-                  <Profiles></Profiles>
+                  <Profiles updateUser={setLoggedInUser} loggedInUser={loggedInUser}></Profiles>
                 </Grid>
                 <Grid item xs={12}>
                   <PerformersNearby/>
