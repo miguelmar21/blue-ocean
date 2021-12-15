@@ -24,6 +24,7 @@ import MarkerForm from "./MarkerForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { deletePerformance } from "./mapHelpers";
+import TagViewModal from "./tagViewModal.jsx";
 
 const options = {
   styles: mapStyle,
@@ -31,10 +32,10 @@ const options = {
   zoomControl: true,
 };
 
-const defaultCenter = { lat: 27.522628, lng: -99.489061 };
+const defaultCenter = { lat: 30.267153, lng: -97.743057 };
 
 const Map = withScriptjs(
-  withGoogleMap(() => {
+  withGoogleMap(({ setCurrentLocation }) => {
     const [markers, setMarkers] = useState([]);
     const [filteredMarkers, setFilteredMarkers] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
@@ -62,6 +63,10 @@ const Map = withScriptjs(
         });
     }, []);
 
+    useEffect(() => {
+      if (panTo !== null) setCurrentLocation(panTo)
+    }, [panTo])
+    
     let displayedMarkers = filteredMarkers !== null ? filteredMarkers : markers;
 
     const onMapClick = React.useCallback((event) => {
@@ -202,7 +207,8 @@ export default Map;
 
 function Locate({ setPanTo }) {
   return (
-    <button className='relocate'
+    <button
+      className="relocate"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -229,7 +235,7 @@ function Search({ setPanTo }) {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
-      location: { lat: () => 27.522628, lng: () => -99.489061 },
+      location: { lat: () => 30.267153, lng: () => -97.743057 },
       radius: 200 * 1000,
     },
   });

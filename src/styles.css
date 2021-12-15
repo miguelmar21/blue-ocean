@@ -9,7 +9,7 @@
 
 .search {
   position: absolute;
-  top: 6.2rem;
+  top: 4.5rem;
   left: 62.5%;
   transform: translateX(-50%);
   z-index: 10;
@@ -25,7 +25,7 @@
 
 .time-filter {
   position: absolute;
-  top: 39rem;
+  top: 6.2rem;
   left: 47%;
   transform: translateX(-50%);
   z-index: 10;
