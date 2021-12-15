@@ -101,7 +101,7 @@ var Signup = () => {
             Enter your username and password.
           </Typography>
           <Input
-            label="What's your username?"
+            label="Enter your username"
             name="username"
             value={values.username}
             onChange={handleChange}

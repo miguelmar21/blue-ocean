@@ -16,7 +16,7 @@ const style = {
 }
 
 
-const Header = () => {
+const Header = ({ setLoggedInUser}) => {
 
   const [loggedIn, logIn] = useState(false);
 
@@ -26,8 +26,8 @@ const Header = () => {
         <Grid container alignItems='center'>
           <Grid item style={{}}>
             <Stack direction="row" spacing={2}>
-              <Login />
-              <Signup />
+              <Login setLoggedInUser={setLoggedInUser}/>
+              <Signup setLoggedInUser={setLoggedInUser}/>
             </Stack>
           </Grid>
           <Grid item sm ></Grid>

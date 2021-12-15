@@ -4,8 +4,12 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Grid from '@mui/material/Grid';
 
+
+
 export default function Search(props) {
+
   const [searchText, setSearchText] = useState('');
+
   const handleChange = e => {
     //possibly refactor to one line
     var inputText = e.target.value;
@@ -17,6 +21,7 @@ export default function Search(props) {
         username: searchText
       }
     })
+
       .then((queriedUser) => {
         if (queriedUser.data[0] === undefined) {
           alert(`${searchText} is not registered on Buskamove`);
@@ -29,6 +34,7 @@ export default function Search(props) {
       .catch((err) => {
         console.error(err);
       });
+
   }
   return (
     <React.Fragment>
