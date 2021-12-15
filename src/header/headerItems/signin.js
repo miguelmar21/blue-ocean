@@ -53,8 +53,6 @@ var Login = ({ setLoggedInUser}) => {
       temp.password = formValues.password ? "" : "This is a required Field";
     }
 
-
-
     setErrors({
       ...temp
     })
