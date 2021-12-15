@@ -23,9 +23,9 @@ favorites: []});
   return (
       <div>
         <Container>
+        <Header setLoggedInUser={setLoggedInUser}/>
           <Grid container>
             <Grid item xs={12} className="top-header">
-              <Header />
             </Grid>
             <Grid item xs={3} className="left-section">
               <Grid container>
