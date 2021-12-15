@@ -14,10 +14,26 @@ const initialValues = {
 
 var Login = ({ setLoggedInUser}) => {
   const [open, setOpen] = useState(false);
+  const [display, setDisplay] = useState('Login');
+  const [username, setUsername] = useState('');
+  useEffect(() => {}, [display]);
 
   var handleOpen = () => {
-    reset();
-    setOpen(true);
+    if(display === 'Login') {
+      reset();
+      setOpen(true);
+    } else {
+      axios
+        .get(`http://localhost:3000/signout`, { username})
+        .then(response => {
+          console.log('success');
+          setDisplay('Login');
+          setUsername('');
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
   };
   var handleClose = () => { setOpen(false) };
 
@@ -54,6 +70,7 @@ var Login = ({ setLoggedInUser}) => {
     reset
   } = useForm(initialValues, validate, true);
 
+
   const handleSubmit = (e) => {
     console.log('submitted');
     let noErrors = validate();
@@ -70,7 +87,8 @@ var Login = ({ setLoggedInUser}) => {
           // reset();
           let user = response.data;
           setLoggedInUser(user);
-          console.log(user);
+          setUsername(user.username);
+          setDisplay('Logout');
         })
         .catch(err => {
           // setErrors({
@@ -84,7 +102,7 @@ var Login = ({ setLoggedInUser}) => {
   return (
     <div className="aq">
       <Button
-        text="Login"
+        text={display}
         variant="outlined"
         onClick={handleOpen}
       />

@@ -18,7 +18,6 @@ const style = {
 
 const Header = ({ setLoggedInUser}) => {
 
-  const [loggedIn, logIn] = useState(false);
 
   return (
     <AppBar position="static" sx={style}>
@@ -32,7 +31,6 @@ const Header = ({ setLoggedInUser}) => {
           </Grid>
           <Grid item sm ></Grid>
           <Grid item style={{}}>
-            <Signout />
           </Grid>
         </Grid>
       </Toolbar>

@@ -7,11 +7,11 @@ route.post('/', (req, res) => {
 
     let username = req.body.username,
         password = req.body.password;
-  // let social_media = {
-  //   twitter: '',
-  //   facebook: '',
-  //   instagram: '',
-  // };
+    let social_media = {
+      twitter: '',
+      facebook: '',
+      instagram: '',
+    };
 
   UserSchema.register(new UserSchema({ username, social_media }), password, (err, user) => {
       if (err) {
@@ -22,9 +22,9 @@ route.post('/', (req, res) => {
       } else {
         // redirect to profile page
         passport.authenticate('local')(req, res, () => {
-          res.status(200);
-          res.setHeader('Content-Type', 'application/json');
-          res.send();
+          UserSchema.find({username})
+                    .then(user => res.status(200).send(user))
+                    .catch(err => console.log(err))
         })
       }
     })
