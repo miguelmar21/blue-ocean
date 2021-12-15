@@ -5,8 +5,9 @@ route.get('/', async (req, res) => {
   try {
     const data = await UserSchema.find({performances: { $exists: true, $ne: []}}, {performances: 1,_id: 0})
     res.status(200).send(data);
-  } catch{
-    res.status(500).send('Could not fetch from database');
+  } catch(error){
+    res.status(500).send('Could not fetch from database')
+    console.log(error);
   }
 })
 

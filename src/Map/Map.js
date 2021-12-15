@@ -62,8 +62,7 @@ const Map = withScriptjs(
         });
     }, []);
 
-    let displayedMarkers =
-      filteredMarkers !== null ? filteredMarkers : markers;
+    let displayedMarkers = filteredMarkers !== null ? filteredMarkers : markers;
 
     const onMapClick = React.useCallback((event) => {
       setMarkers((currentMarkers) => [
@@ -92,22 +91,22 @@ const Map = withScriptjs(
         }
       }
       deletePerformance({
-      lat: marker.location.lat,
-      lng: marker.location.lng
-      })
+        lat: marker.location.lat,
+        lng: marker.location.lng,
+      });
     }
 
     function filterByTime() {
       function isBetweenDates(markers) {
         let date = new Date(markers.time);
-        console.log(startDate.getTime(), date.getTime(), endDate.getTime())
+        console.log(startDate.getTime(), date.getTime(), endDate.getTime());
         if (
           date.getTime() <= endDate.getTime() &&
           date.getTime() >= startDate.getTime()
         ) {
           return true;
         } else {
-          console.log('false!')
+          console.log("false!");
           return false;
         }
       }
@@ -121,7 +120,7 @@ const Map = withScriptjs(
     }
 
     return (
-      <div>
+      <div className="google-maps">
         <Search setPanTo={setPanTo} />
         <Locate setPanTo={setPanTo} />
         <GoogleMap
@@ -173,26 +172,27 @@ const Map = withScriptjs(
           markers={markers}
           setMarkers={setMarkers}
         />
-        <div>Filter here</div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => {
-            setStartDate(date);
-            setEndDate(date);
-          }}
-          showTimeSelect
-          dateFormat="Pp"
-          minDate={new Date()}
-        />
-        <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          showTimeSelect
-          dateFormat="Pp"
-          minDate={startDate}
-        />
-        <button onClick={filterByTime}>Filter</button>
-        <button onClick={deleteFilter}>Delete filter</button>
+        <div className="time-filter">
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => {
+              setStartDate(date);
+              setEndDate(date);
+            }}
+            showTimeSelect
+            dateFormat="Pp"
+            minDate={new Date()}
+          />
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            showTimeSelect
+            dateFormat="Pp"
+            minDate={startDate}
+          />
+          <button onClick={filterByTime}>Filter by dates</button>
+          <button onClick={deleteFilter}>Reset</button>
+        </div>
       </div>
     );
   })
@@ -202,7 +202,7 @@ export default Map;
 
 function Locate({ setPanTo }) {
   return (
-    <button
+    <button className='relocate'
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -215,7 +215,7 @@ function Locate({ setPanTo }) {
         );
       }}
     >
-      Click here to relocate to your position!
+      🧭
     </button>
   );
 }
@@ -235,38 +235,40 @@ function Search({ setPanTo }) {
   });
 
   return (
-    <Combobox
-      onSelect={(address) => {
-        setValue(address, false);
-        clearSuggestions();
+    <div className="search">
+      <Combobox
+        onSelect={(address) => {
+          setValue(address, false);
+          clearSuggestions();
 
-        getGeocode({ address })
-          .then((geocode) => {
-            return getLatLng(geocode[0]);
-          })
-          .then((LatLng) => {
-            const { lat, lng } = LatLng;
-            setPanTo({ lat, lng });
-          })
-          .catch((error) => console.log(error));
-      }}
-    >
-      <ComboboxInput
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
+          getGeocode({ address })
+            .then((geocode) => {
+              return getLatLng(geocode[0]);
+            })
+            .then((LatLng) => {
+              const { lat, lng } = LatLng;
+              setPanTo({ lat, lng });
+            })
+            .catch((error) => console.log(error));
         }}
-        disabled={!ready}
-        placeholder="Enter an address"
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === "OK" &&
-            data.map(({ id, description }) => (
-              <ComboboxOption key={id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+      >
+        <ComboboxInput
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          disabled={!ready}
+          placeholder="Enter an address"
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === "OK" &&
+              data.map(({ id, description }) => (
+                <ComboboxOption key={id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+    </div>
   );
 }
