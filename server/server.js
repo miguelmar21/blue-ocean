@@ -2,7 +2,6 @@
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "./config.env") });
 
-
 //server
 const express = require("express");
 const { urlencoded } = require("body-parser");
@@ -16,7 +15,6 @@ const serverSignature = require('./routes/authRoutes/authHandlers/serverSignatur
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);
 
-
 // import your routes below here
 const performersNearby = require("./routes/performersNearby/performersRoute.js");
 const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
@@ -24,6 +22,7 @@ const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
 // Profile Routes
 const updateUser = require('./routes/profiles/updateUser.js');
 const getUser = require('./routes/profiles/getUser.js');
+const performances = require('./routes/performances/performances');
 
 // Auth routes
 const errorHandler = require('./routes/authRoutes/authHandlers/errorHandler');
@@ -48,6 +47,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // mongo connection
 const mongoose = require('mongoose');
@@ -80,6 +80,8 @@ app.use(auth);
 app.use('/updateUser', updateUser);
 app.use('/getUser', getUser);
 app.use(errorHandler);
+app.use('/updatePerformances', performances);
+
 
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

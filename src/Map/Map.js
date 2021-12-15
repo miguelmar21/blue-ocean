@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   withScriptjs,
   withGoogleMap,
@@ -17,8 +18,12 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
+import "@reach/combobox/styles.css";
 import mapStyle from "./mapStyle";
 import MarkerForm from "./MarkerForm";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { deletePerformance } from "./mapHelpers";
 
 const options = {
   styles: mapStyle,
@@ -29,21 +34,48 @@ const options = {
 const defaultCenter = { lat: 27.522628, lng: -99.489061 };
 
 const Map = withScriptjs(
-  withGoogleMap((props) => {
+  withGoogleMap(() => {
     const [markers, setMarkers] = useState([]);
+    const [filteredMarkers, setFilteredMarkers] = useState(null);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     const [canSetMarker, setCanSetMarker] = useState(true);
     const [selected, setSelected] = useState(null);
     const [panTo, setPanTo] = useState(null);
     const [formDisplayed, setFormDisplayed] = useState("none");
 
+    useEffect(() => {
+      axios
+        .get("http://localhost:3000/updatePerformances")
+        .then((response) => {
+          let performances = [];
+          for (const setOfPerformances of response.data) {
+            for (const performance of setOfPerformances.performances) {
+              performances.push(performance);
+            }
+          }
+          console.log(performances);
+          setMarkers(performances);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+
+    let displayedMarkers =
+      filteredMarkers !== null ? filteredMarkers : markers;
+
     const onMapClick = React.useCallback((event) => {
       setMarkers((currentMarkers) => [
         ...currentMarkers,
         {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
+          location: {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+          },
           time: "",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png",
+          category:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png",
           otherPerformers: null,
         },
       ]);
@@ -52,16 +84,40 @@ const Map = withScriptjs(
     }, []);
 
     function deletePerfomance(marker) {
-      console.log("Looking for marker...");
       for (var i = 0; i < markers.length; i++) {
-        if (markers[i].lng === marker.lng) {
-          console.log("found!");
+        if (markers[i].location.lng === marker.location.lng) {
           markers.splice(i, 1);
           setMarkers([...markers]);
           setSelected(null);
-          return;
         }
       }
+      deletePerformance({
+      lat: marker.location.lat,
+      lng: marker.location.lng
+      })
+    }
+
+    function filterByTime() {
+      function isBetweenDates(markers) {
+        let date = new Date(markers.time);
+        console.log(startDate.getTime(), date.getTime(), endDate.getTime())
+        if (
+          date.getTime() <= endDate.getTime() &&
+          date.getTime() >= startDate.getTime()
+        ) {
+          return true;
+        } else {
+          console.log('false!')
+          return false;
+        }
+      }
+
+      let filteredMarkers = markers.filter(isBetweenDates);
+      setFilteredMarkers([...filteredMarkers]);
+    }
+
+    function deleteFilter() {
+      setFilteredMarkers(null);
     }
 
     return (
@@ -75,11 +131,11 @@ const Map = withScriptjs(
           onClick={canSetMarker && onMapClick}
           ref={(map) => map && panTo !== null && map.panTo(panTo)}
         >
-          {markers.map((marker) => (
+          {displayedMarkers.map((marker) => (
             <Marker
-              position={{ lat: marker.lat, lng: marker.lng }}
+              position={{ lat: marker.location.lat, lng: marker.location.lng }}
               icon={{
-                url: marker.icon,
+                url: marker.category,
                 scaledSize: new window.google.maps.Size(30, 30),
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
@@ -89,7 +145,10 @@ const Map = withScriptjs(
           ))}
           {selected ? (
             <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
+              position={{
+                lat: selected.location.lat,
+                lng: selected.location.lng,
+              }}
               onCloseClick={() => {
                 setSelected(null);
               }}
@@ -97,7 +156,6 @@ const Map = withScriptjs(
               <div>
                 <p>**Performer name here**</p>
                 <p>{selected.time}</p>
-                <p>With: {selected.otherPerformers}</p>
                 {canSetMarker && (
                   <button onClick={() => deletePerfomance(selected)}>
                     Delete performance
@@ -115,6 +173,26 @@ const Map = withScriptjs(
           markers={markers}
           setMarkers={setMarkers}
         />
+        <div>Filter here</div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => {
+            setStartDate(date);
+            setEndDate(date);
+          }}
+          showTimeSelect
+          dateFormat="Pp"
+          minDate={new Date()}
+        />
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
+          showTimeSelect
+          dateFormat="Pp"
+          minDate={startDate}
+        />
+        <button onClick={filterByTime}>Filter</button>
+        <button onClick={deleteFilter}>Delete filter</button>
       </div>
     );
   })
@@ -192,5 +270,3 @@ function Search({ setPanTo }) {
     </Combobox>
   );
 }
-
-//event OnClick gives you the longitude latitude
