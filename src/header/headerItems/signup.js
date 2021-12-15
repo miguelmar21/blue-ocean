@@ -13,7 +13,7 @@ const initialValues = {
   password2: ''
 }
 
-var Signup = () => {
+var Signup = ({ setLoggedInUser }) => {
   const [open, setOpen] = useState(false);
 
   var handleOpen = () => {
@@ -74,6 +74,8 @@ var Signup = () => {
         .then(response => {
           // handleClose();
           // reset();
+          let user = response.data;
+          setLoggedInUser(user);
         })
         .catch(err => {
           // setErrors({
