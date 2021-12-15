@@ -58,12 +58,12 @@ const config = {
 };
 
 //USE REMOTE DATABASE
-// const remoteUrl = process.env.MONGO_URI;
-// const connect = mongoose.connect(remoteUrl, config);
+const remoteUrl = process.env.MONGO_URI;
+const connect = mongoose.connect(remoteUrl, config);
 
 //USE LOCAL DATABASE
-const localUrl = 'mongodb://127.0.0.1:27017/blueOcean';
-const connect = mongoose.connect(localUrl, config);
+// const localUrl = 'mongodb://127.0.0.1:27017/blueOcean';
+// const connect = mongoose.connect(localUrl, config);
 
 connect
   .then(db => console.log('connected to DB'))
@@ -76,11 +76,11 @@ app.use('/exampleSchema', exampleMap);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/signout', signout);
+app.use('/updatePerformances', performances);
 app.use(auth);
 app.use('/updateUser', updateUser);
 app.use('/getUser', getUser);
 app.use(errorHandler);
-app.use('/updatePerformances', performances);
 
 
 // listening
