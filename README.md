@@ -10,21 +10,26 @@
 ---
 
 ## INTRODUCTION
-Have you ever needed to keep track of where your favorite street performers are posting up for the weekend? Or perhaps there's an underground comedian whose last-minute shows are hard to keep track of.  Or you want to let your fans know where your next dance performance is.  Sounds like you need Buskamove!<br><br>
+Have you ever needed to keep track of where your favorite street performers are posting up for the weekend?  Or perhaps, you want to let your fans know where your next underground comedy show is.
 
-### FEATURES
-Buskamove is a social networking app that allows performers and their audiences locate and schedule performances.
+Sounds like you need Buskamove: a social networking app that helps performers and their audiences locate and schedule performances.
 
 ## AUTHORS
-Adam Rakla - Project Manager
-Prince Addai -
+* Project Manager
+  * Adam Rakla
+* UI Design
+  * Miguel Regalado
+  * Max Zhao
+* Architecture
+  * Prince Addai
+  * Jeff DeSouza
 
 
 
-
+---
 
 ## API DOCUMENTATION
----
+
 
 //MIGUEL
 Performance API
