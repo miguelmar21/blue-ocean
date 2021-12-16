@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import API_KEY from "../../config";
@@ -9,7 +8,12 @@ import Geocode from "react-geocode";
 
 Geocode.setApiKey(API_KEY);
 
-export default function TagViewModal({ location, selected, setSelected }) {
+export default function TagViewModal({
+  selected,
+  setSelected,
+  loggedInUser,
+  deletePerfomanceFrontEnd,
+}) {
   const [address, setAddress] = useState(null);
   const style = {
     position: "absolute",
@@ -59,9 +63,6 @@ export default function TagViewModal({ location, selected, setSelected }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            Performance View
-          </Typography> */}
           <Typography
             id="modal-modal-description"
             sx={{ mt: 2 }}
@@ -101,24 +102,30 @@ export default function TagViewModal({ location, selected, setSelected }) {
                   </td>
                 </tr>
                 <tr>
-                  <td colspan="2" align="center">
+                  <td colSpan="2" align="center">
                     {selected.time}
                   </td>
                 </tr>
                 <tr>
-                  <td colspan="2" align="center">
+                  <td colSpan="2" align="center">
                     {address}
                   </td>
                 </tr>
                 <tr>
-                  <td colspan="2" align="center">
+                  <td colSpan="2" align="center">
                     <button>See Profile</button>
                   </td>
                 </tr>
+                {loggedInUser.username === selected.username && (
+                  <tr>
+                    <td colSpan="2" align="center">
+                      <button onClick={() => deletePerfomanceFrontEnd(selected)}>Delete performance</button>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </Typography>
-          {/* <Button onClick={submit}>Submit</Button> */}
         </Box>
       </Modal>
     </div>

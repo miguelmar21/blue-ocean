@@ -19,6 +19,7 @@ export default function App() {
     categories: [],
     name: "",
     username: "Guest",
+    is_performer: false,
     band: { name: "", members: [] },
     media: [],
     favorites: [],
@@ -50,6 +51,7 @@ export default function App() {
               containerElement={<div style={{ height: `100%` }} />}
               mapElement={<div style={{ height: `100%` }} />}
               setCurrentLocation={setCurrentLocation}
+              loggedInUser={loggedInUser}
             />
           </Grid>
         </Grid>
