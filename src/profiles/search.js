@@ -22,6 +22,7 @@ export default function Search(props) {
         }
       })
       .then((queriedUser) => {
+        console.log(JSON.stringify(queriedUser));
         if (queriedUser.data[0] === undefined) {
           alert(`${searchText} is not registered on Buskamove`);
           setSearchText('');

@@ -143,7 +143,7 @@ const Map = withScriptjs(
         <GoogleMap
           defaultZoom={8}
           defaultCenter={defaultCenter}
-          options={options}
+          // options={options}
           onClick={canSetMarker && onMapClick}
           ref={(map) => map && panTo !== null && map.panTo(panTo)}
         >
