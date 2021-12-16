@@ -73,18 +73,17 @@ connect
   .catch((err) => console.error(err));
 
 //routes
-app.use(express.static(path.join(__dirname, "../dist")));
-app.use("/exampleSchema", exampleMap);
-app.use("/login", login);
-app.use("/signup", signup);
-app.use("/signout", signout);
-
-app.use("/getUser", getUser);
-app.use("/updatePerformances", performances);
-// app.use(auth);
-app.use("/updateUser", updateUser);
-// app.use(errorHandler);
+app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/exampleSchema', exampleMap);
+app.use('/login', login);
+app.use('/signup', signup);
+app.use('/signout', signout);
+app.use('/getUser', getUser);
+app.use('/updatePerformances', performances);
 app.use("/performersNearby", performersNearby);
+app.use(auth);
+app.use('/updateUser', updateUser);
+app.use(errorHandler);
 
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

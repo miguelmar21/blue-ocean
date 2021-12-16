@@ -19,6 +19,7 @@ export default function App() {
     categories: [],
     name: "",
     username: "Guest",
+    is_performer: false,
     band: { name: "", members: [] },
     media: [],
     favorites: [],
@@ -26,10 +27,9 @@ export default function App() {
   return (
     <div>
       <Container>
+        <Header setLoggedInUser={setLoggedInUser} />
         <Grid container>
-          <Grid item xs={12} className="top-header">
-            <Header />
-          </Grid>
+          <Grid item xs={12} className="top-header"></Grid>
           <Grid item xs={3} className="left-section">
             <Grid container>
               <Grid item xs={12}>
@@ -51,6 +51,7 @@ export default function App() {
               containerElement={<div style={{ height: `100%` }} />}
               mapElement={<div style={{ height: `100%` }} />}
               setCurrentLocation={setCurrentLocation}
+              loggedInUser={loggedInUser}
             />
           </Grid>
         </Grid>

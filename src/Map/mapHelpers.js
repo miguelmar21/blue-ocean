@@ -21,8 +21,6 @@ function deletePerformance(tagInfo) {
     username: 'Miguelito',
     lat: tagInfo.lat,
     lng: tagInfo.lng
-    //May not be the best way to delete a performance, 
-    //but for mvp it will do.
   })
   .then(response => {
     console.log('patched!')

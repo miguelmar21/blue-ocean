@@ -12,12 +12,28 @@ const initialValues = {
   password: '',
 }
 
-var Login = () => {
+var Login = ({ setLoggedInUser}) => {
   const [open, setOpen] = useState(false);
+  const [display, setDisplay] = useState('Login');
+  const [username, setUsername] = useState('');
+  // useEffect(() => {}, [display]);
 
   var handleOpen = () => {
-    reset();
-    setOpen(true);
+    if(display === 'Login') {
+      reset();
+      setOpen(true);
+    } else {
+      axios
+        .get(`http://localhost:3000/signout`, { username})
+        .then(response => {
+          console.log('success');
+          setDisplay('Login');
+          setUsername('');
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
   };
   var handleClose = () => { setOpen(false) };
 
@@ -28,9 +44,10 @@ var Login = () => {
     if ('username' in formValues) {
       if (!formValues.username) {
         temp.username = "This is a required Field";
-      } else {
-        temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
       }
+      // else {
+      //   temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
+      // }
     }
     if ('password' in formValues) {
       temp.password = formValues.password ? "" : "This is a required Field";
@@ -53,18 +70,25 @@ var Login = () => {
     reset
   } = useForm(initialValues, validate, true);
 
-  const handleSubmit = () => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let noErrors = validate();
     if (noErrors) {
       // handle username existing in
       // database already
       handleClose();
       reset();
+      e.preventDefault();
       axios
-        .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
-        .then(response => {
-          // handleClose();
-          // reset();
+      .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
+      .then(response => {
+        // handleClose();
+        // reset();
+        let user = response.data;
+          setLoggedInUser(user);
+          setUsername(user.username);
+          setDisplay('Logout');
         })
         .catch(err => {
           // setErrors({
@@ -78,7 +102,7 @@ var Login = () => {
   return (
     <div className="aq">
       <Button
-        text="Login"
+        text={display}
         variant="outlined"
         onClick={handleOpen}
       />
@@ -92,7 +116,7 @@ var Login = () => {
             Enter your username and password.
           </Typography>
           <Input
-            label="Enter your email?"
+            label="Enter your Username?"
             name="username"
             value={values.username}
             onChange={handleChange}
@@ -101,6 +125,7 @@ var Login = () => {
           <Input
             label="Enter your password."
             name="password"
+            type="password"
             value={values.password}
             onChange={handleChange}
             error={errors.password}
@@ -108,7 +133,6 @@ var Login = () => {
           <Stack direction="row" spacing={2}>
             <Button
               text="Login"
-              type="submit"
               onClick={handleSubmit}
             />
           </Stack>

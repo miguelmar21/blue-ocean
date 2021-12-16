@@ -7,18 +7,24 @@ route.post('/', (req, res) => {
 
     let username = req.body.username,
         password = req.body.password;
+    let social_media = {
+      twitter: '',
+      facebook: '',
+      instagram: '',
+    };
 
-    UserSchema.register(new UserSchema({ username }), password, (err, user) => {
+  UserSchema.register(new UserSchema({ username, social_media }), password, (err, user) => {
       if (err) {
         res.statusCode = 500;
+        console.log(err)
         res.setHeader('Content-Type', 'application/json');
         res.json({ err });
       } else {
         // redirect to profile page
         passport.authenticate('local')(req, res, () => {
-          res.status(200);
-          res.setHeader('Content-Type', 'application/json');
-          res.send();
+          UserSchema.find({username})
+                    .then(user => res.status(200).send(user))
+                    .catch(err => console.log(err))
         })
       }
     })

@@ -13,7 +13,7 @@ const initialValues = {
   password2: ''
 }
 
-var Signup = () => {
+var Signup = ({ setLoggedInUser }) => {
   const [open, setOpen] = useState(false);
 
   var handleOpen = () => {
@@ -29,9 +29,10 @@ var Signup = () => {
     if ('username' in formValues) {
       if (!formValues.username) {
         temp.username = "This is a required Field";
-      } else {
-        temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
       }
+      // else {
+      //   temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
+      // }
     }
     if ('password1' in formValues) {
       temp.password1 = formValues.password1 ? "" : "This is a required Field";
@@ -73,6 +74,8 @@ var Signup = () => {
         .then(response => {
           // handleClose();
           // reset();
+          let user = response.data;
+          setLoggedInUser(user);
         })
         .catch(err => {
           // setErrors({
@@ -100,7 +103,7 @@ var Signup = () => {
             Enter your username and password.
           </Typography>
           <Input
-            label="What's your email?"
+            label="Enter your username"
             name="username"
             value={values.username}
             onChange={handleChange}
@@ -110,6 +113,7 @@ var Signup = () => {
             label="Enter your password."
             name="password1"
             value={values.password1}
+            type="password"
             onChange={handleChange}
             error={errors.password1}
           />
@@ -117,6 +121,7 @@ var Signup = () => {
             label="Re-enter your password."
             name="password2"
             value={values.password2}
+            type="password"
             onChange={handleChange}
             error={errors.password2}
           />

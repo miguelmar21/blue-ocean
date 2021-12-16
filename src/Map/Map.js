@@ -35,7 +35,7 @@ const options = {
 const defaultCenter = { lat: 30.267153, lng: -97.743057 };
 
 const Map = withScriptjs(
-  withGoogleMap(({ setCurrentLocation }) => {
+  withGoogleMap(({ setCurrentLocation, loggedInUser }) => {
     const [markers, setMarkers] = useState([]);
     const [filteredMarkers, setFilteredMarkers] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
@@ -46,12 +46,23 @@ const Map = withScriptjs(
     const [formDisplayed, setFormDisplayed] = useState("none");
 
     useEffect(() => {
+      if (loggedInUser.is_performer === false) {
+        setCanSetMarker(false)
+      } else {
+        setCanSetMarker(true)
+      }
+    }, [loggedInUser])
+
+    useEffect(() => {
       axios
         .get("http://localhost:3000/updatePerformances")
         .then((response) => {
           let performances = [];
           for (const setOfPerformances of response.data) {
             for (const performance of setOfPerformances.performances) {
+              performance.username = setOfPerformances.username;
+              performance.name = setOfPerformances.name;
+              performance.user_picture = setOfPerformances.user_picture;
               performances.push(performance);
             }
           }
@@ -64,9 +75,9 @@ const Map = withScriptjs(
     }, []);
 
     useEffect(() => {
-      if (panTo !== null) setCurrentLocation(panTo)
-    }, [panTo])
-    
+      if (panTo !== null) setCurrentLocation(panTo);
+    }, [panTo]);
+
     let displayedMarkers = filteredMarkers !== null ? filteredMarkers : markers;
 
     const onMapClick = React.useCallback((event) => {
@@ -87,7 +98,7 @@ const Map = withScriptjs(
       setFormDisplayed("marker-form");
     }, []);
 
-    function deletePerfomance(marker) {
+    function deletePerfomanceFrontEnd(marker) {
       for (var i = 0; i < markers.length; i++) {
         if (markers[i].location.lng === marker.location.lng) {
           markers.splice(i, 1);
@@ -96,6 +107,7 @@ const Map = withScriptjs(
         }
       }
       deletePerformance({
+        username: marker.username,
         lat: marker.location.lat,
         lng: marker.location.lng,
       });
@@ -157,16 +169,12 @@ const Map = withScriptjs(
                 setSelected(null);
               }}
             >
-              <div>
-                <p>**Performer name here**</p>
-                <p>{selected.time}</p>
-                {canSetMarker && (
-                  <button onClick={() => deletePerfomance(selected)}>
-                    Delete performance
-                  </button>
-                )}
-                {/* Fix this to delete by performer, not lng */}
-              </div>
+              <TagViewModal
+                selected={selected}
+                setSelected={setSelected}
+                deletePerfomanceFrontEnd={deletePerfomanceFrontEnd}
+                loggedInUser={loggedInUser}
+              />
             </InfoWindow>
           ) : null}
         </GoogleMap>
@@ -176,28 +184,52 @@ const Map = withScriptjs(
           setCanSetMarker={setCanSetMarker}
           markers={markers}
           setMarkers={setMarkers}
+          loggedInUser={loggedInUser}
         />
-        <div className="time-filter">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              setStartDate(date);
-              setEndDate(date);
-            }}
-            showTimeSelect
-            dateFormat="Pp"
-            minDate={new Date()}
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            showTimeSelect
-            dateFormat="Pp"
-            minDate={startDate}
-          />
-          <button onClick={filterByTime}>Filter by dates</button>
-          <button onClick={deleteFilter}>Reset</button>
-        </div>
+        <button
+          className="time-filter"
+          onClick={() => setFormDisplayed("filter")}
+          disabled={formDisplayed === "marker-form" ? true : false}
+        >
+          Filter by dates
+        </button>
+        {formDisplayed === "filter" && (
+          <div className="time-filter-form">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                setStartDate(date);
+                setEndDate(date);
+              }}
+              showTimeSelect
+              dateFormat="Pp"
+              minDate={new Date()}
+            />
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              showTimeSelect
+              dateFormat="Pp"
+              minDate={startDate}
+            />
+            <button
+              onClick={() => {
+                filterByTime();
+                setFormDisplayed("none");
+              }}
+            >
+              Search
+            </button>
+            <button
+              onClick={() => {
+                deleteFilter();
+                setFormDisplayed("none");
+              }}
+            >
+              Reset
+            </button>
+          </div>
+        )}
       </div>
     );
   })
