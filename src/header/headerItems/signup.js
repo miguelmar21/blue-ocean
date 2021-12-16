@@ -65,7 +65,6 @@ var Signup = ({ setLoggedInUser, display, setDisplay }) => {
       axios
         .post(`http://localhost:3000/signup`, { username: values.username, password: values.password1})
         .then(({data}) => {
-          console.log('success')
           let user = data;
           setLoggedInUser(user);
           setUsername(user.username);
