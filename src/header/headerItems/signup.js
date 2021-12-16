@@ -28,12 +28,7 @@ var Signup = ({ setLoggedInUser, display, setDisplay }) => {
     const temp = { ...errors };
 
     if ('username' in formValues) {
-      if (!formValues.username) {
-        temp.username = "This is a required Field";
-      }
-      // else {
-      //   temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
-      // }
+      temp.username = !formValues.username ? "This is a required Field" : "";
     }
     if ('password1' in formValues) {
       temp.password1 = formValues.password1 ? "" : "This is a required Field";
@@ -70,7 +65,7 @@ var Signup = ({ setLoggedInUser, display, setDisplay }) => {
       axios
         .post(`http://localhost:3000/signup`, { username: values.username, password: values.password1})
         .then(({data}) => {
-
+          console.log('success')
           let user = data;
           console.log(data);
           setLoggedInUser(user);
@@ -80,7 +75,7 @@ var Signup = ({ setLoggedInUser, display, setDisplay }) => {
           reset();
         })
         .catch(err => {
-          setError('You already have an account. Please login.');
+          setError(err.response.data.message);
         })
     }
   }
