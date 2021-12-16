@@ -62,12 +62,11 @@ const config = {
 
 //USE REMOTE DATABASE
 const remoteUrl = process.env.MONGO_URI;
-console.log(remoteUrl);
 const connect = mongoose.connect(remoteUrl, config);
 
 //USE LOCAL DATABASE
-// const localUrl = 'mongodb://127.0.0.1:27017/blueOcean';
-// const connect = mongoose.connect(localUrl, config);
+//const localUrl = 'mongodb://127.0.0.1:27017/blueOcean';
+//const connect = mongoose.connect(localUrl, config);
 
 connect
   .then((db) => console.log("connected to DB"))
@@ -86,6 +85,5 @@ app.use("/performersNearby", performersNearby);
 app.use(auth);
 app.use('/updateUser', updateUser);
 app.use(errorHandler);
-
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
