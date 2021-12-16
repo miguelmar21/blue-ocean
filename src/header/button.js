@@ -14,8 +14,8 @@ const Button = props => {
 
   return (
     <MuiButton
-      color={color || "secondary"}
-      variant={variant || "contained"}
+      color={color || "primary"}
+      variant={variant || "text"}
       size={size || "large"}
       onClick={onClick}
       {...others}

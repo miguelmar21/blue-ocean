@@ -13,8 +13,9 @@ const initialValues = {
   password2: ''
 }
 
-var Signup = ({ setLoggedInUser }) => {
+var Signup = ({ setLoggedInUser, display, setDisplay }) => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState('');
 
   var handleOpen = () => {
     reset();
@@ -65,23 +66,20 @@ var Signup = ({ setLoggedInUser }) => {
   const handleSubmit = () => {
     let noErrors = validate();
     if (noErrors) {
-      // handle username existing in
-      // database already
-      handleClose();
-      reset();
+
       axios
         .post(`http://localhost:3000/signup`, { username: values.username, password: values.password1})
-        .then(response => {
-          // handleClose();
-          // reset();
-          let user = response.data;
+        .then(({data}) => {
+
+          let user = data;
           setLoggedInUser(user);
+          setUsername(user.username);
+          setDisplay('Logout');
+          handleClose();
+          reset();
         })
         .catch(err => {
-          // setErrors({
-          //   ...temp,
-          //   'username': 'Email already has account. Please login.'
-          // })
+          setError('You already have an account. Please login.');
         })
     }
   }
@@ -102,6 +100,10 @@ var Signup = ({ setLoggedInUser }) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Enter your username and password.
           </Typography>
+          {error &&
+            <Typography id="modal-modal-title" component="h2" color="error">
+              {error}
+            </Typography>}
           <Input
             label="Enter your username"
             name="username"

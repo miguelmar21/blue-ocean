@@ -17,6 +17,7 @@ const style = {
 
 
 const Header = ({ setLoggedInUser}) => {
+  const [display, setDisplay] = useState('Login');
 
 
   return (
@@ -25,8 +26,8 @@ const Header = ({ setLoggedInUser}) => {
         <Grid container alignItems='center'>
           <Grid item style={{}}>
             <Stack direction="row" spacing={2}>
-              <Login setLoggedInUser={setLoggedInUser}/>
-              <Signup setLoggedInUser={setLoggedInUser}/>
+              <Login setLoggedInUser={setLoggedInUser} display={display} setDisplay={setDisplay}/>
+              <Signup setLoggedInUser={setLoggedInUser} display={display} setDisplay={setDisplay}/>
             </Stack>
           </Grid>
           <Grid item sm ></Grid>

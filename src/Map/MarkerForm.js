@@ -9,6 +9,7 @@ export default function MarkerForm({
   setCanSetMarker,
   markers,
   setMarkers,
+  loggedInUser
 }) {
   const [categoryValue, setCategoryValue] = useState("music");
   const [otherPerformers, setOtherPerformers] = useState("");
@@ -21,18 +22,17 @@ export default function MarkerForm({
 
   function handleSubmit(e) {
     let lastMarker = markers[markers.length - 1];
-    let lastMarkerFix =
-      categoryValue === "music"
-        ? (lastMarker.category =
-            "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg")
-        : categoryValue === "comedy"
-        ? (lastMarker.category =
-            "https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg")
-        : categoryValue === "dance"
-        ? (lastMarker.category =
-            "https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg")
-        : (lastMarker.category =
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png");
+    categoryValue === "music"
+      ? (lastMarker.category =
+          "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg")
+      : categoryValue === "comedy"
+      ? (lastMarker.category =
+          "https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg")
+      : categoryValue === "dance"
+      ? (lastMarker.category =
+          "https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg")
+      : (lastMarker.category =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png");
     lastMarker.time = startDate.toString();
     lastMarker.otherPerformers = otherPerformers;
     let newMarkerArray = markers;
@@ -40,7 +40,7 @@ export default function MarkerForm({
     newMarkerArray.push(lastMarker);
     setMarkers([...newMarkerArray]);
     addToPerformances({
-      username: 'Miguelito',
+      username: loggedInUser.username,
       location: {
         lat: lastMarker.location.lat,
         lng: lastMarker.location.lng,
@@ -51,7 +51,6 @@ export default function MarkerForm({
     })
     setFormDisplayed("none");
     setCanSetMarker(true);
-    e.preventDefault();
   }
 
   let className = "marker-form";
