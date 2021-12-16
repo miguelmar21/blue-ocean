@@ -1,21 +1,37 @@
-.top-header{
+.top-header {
   background-color: lightblue;
 }
 
-.left-section{
+.left-section {
   /* padding-bottom: 200px; */
   border: 1px solid black;
 }
 
-.search{
+.marker-form{
   position: absolute;
-  top: 6.2rem;
+  top: 40%;
+  left: 48%;
+  background-color: #ffd700;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.search{
+  border-radius: 25px;
+  position: absolute;
+  top: 4.5rem;
   left: 62.5%;
   transform: translateX(-50%);
   z-index: 10;
 }
 
 .relocate{
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
   position: absolute;
   top: 6.2rem;
   left: 92%;
@@ -23,40 +39,81 @@
   z-index: 10;
 }
 
-.time-filter{
+.time-filter {
   position: absolute;
-  top: 6.2rem;
-  left: 47%;
+  top: 8.5rem;
+  left: 88%;
   transform: translateX(-50%);
+  background-color: #ffd700;
   z-index: 10;
+  cursor: pointer;
+}
+
+.time-filter-form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #ffd700;
+  border-radius: 25px;
+  text-align: center;
+  width: 250px;
+}
+
+.time-filter-form button{
+  cursor: pointer;
 }
 
 .profilePic {
   border-radius: 50%;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.active{
+.active {
   display: block;
 }
-
 
 .profiles {
   height: 600px;
   border: 1px solid black;
 }
 
-@media screen and (min-width: 1250px) {
-  .relocate{
-    left: 75%;
+.tag-modal-img{
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 1150px) {
+  .time-filter{
+    left: 84%
   }
 }
 
 @media screen and (max-width: 1150px) {
   .time-filter{
-    left: 52%
+    left: 84%
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  .relocate{
+    left: 88%;
+  }
+}
+
+
+@media screen and (min-width: 1350px) {
+  .relocate{
+    left: 78%;
+  }
+  
+  .time-filter{
+    left: 76%;
+  }
+
+  .search{
+    left: 55%;
   }
 }
