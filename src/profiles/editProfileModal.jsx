@@ -52,6 +52,7 @@ var addMedia = function() {
   var clone = Object.assign(details, mediaObj)
   // console.log('clone is', clone)
   setDetails(clone)
+  submit(true);
 
   // console.log('details is now', details)
   // var clone = JSON.parse(JSON.stringify(details));
@@ -69,6 +70,7 @@ var deleteMedia = function(mediaIndex) {
   // console.log('media is now ', newMedia)
   var mediaObj = {media: newMedia}
   var clone = Object.assign(details, mediaObj)
+  submit(true);
   // console.log('clone is', clone)
 
   // console.log('after deleting medium, details is now', details)
@@ -129,7 +131,7 @@ var saveText = function(field, e) {
 
 }
 
-  var submit = function() {
+  var submit = function(closeOnSubmit) {
     console.log('submitting ', details) //DEBUG
     //operate on array fields and convert to arrays
   let properlyStructuredDetails = convertToArrays(details);
@@ -139,6 +141,10 @@ var saveText = function(field, e) {
   .then((success)=> {
     console.log('success!', success);
     setSubmitted(true);
+    console.log('closeOnSubmit is', closeOnSubmit)
+    if(closeOnSubmit) {
+      handleClose();
+    }
   })
   .catch((err)=> {
     console.error('error!', err);
@@ -160,10 +166,11 @@ useEffect(() => {
 
 }, [props.username] );
 
-useEffect(()=> {
-  submit();
-  setOpen(false);
-}, [details.media]);
+// useEffect(()=> {
+//   console.log('media has changed!')
+//   submit();
+//   setOpen(false);
+// }, [details]);
 
 // useEffect(()=>{
 //   //props.setUser(details)
@@ -277,7 +284,7 @@ useEffect(()=> {
 
             </tbody></table>
           </Typography>
-          <Button onClick={submit} id='submit'>Submit</Button>
+          <Button onClick={submit.bind(null,true)} id='submit'>Submit</Button>
         </Box>
       </Modal>
 
