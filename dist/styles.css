@@ -1,8 +1,14 @@
-.PN_performer {
-  background-color: lightgrey;
-  text-align: center;
+.PN_header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
+  margin-top: 0px;
 }
 
-.PN_filter {
-  display: inline;
+.performersNearby {
+  background-color: #e14d48;
+  overflow: auto;
+}
+
+.react-3d-carousel {
+  margin-top: 10px;
 }

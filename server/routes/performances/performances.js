@@ -14,6 +14,7 @@ route.get('/', async (req, res) => {
 route.post('/', async (req, res) => {
   try {
     const data = await UserSchema.updateOne({username: req.body.username}, {$push: {performances: {
+      username: req.body.username,
       location: req.body.location,
       time: req.body.time,
       category: req.body.category,
@@ -31,7 +32,7 @@ route.patch('/', async (req, res) => {
   console.log(req.body)
   try {
     const data = await UserSchema.updateOne( {username: req.body.username}, {$pull: {performances: {location: {lat: req.body.lat, lng: req.body.lng}}}})
-    res.status(201).send(data);
+    res.status(200).send(data);
   } catch {
     res.status(500).send('Could not patch database')
   }
