@@ -26,7 +26,7 @@ export default function App() {
   });
   return (
     <div>
-      <Container>
+      <Container maxWidth="xl">
         <Header setLoggedInUser={setLoggedInUser} />
         <Grid container>
           <Grid item xs={12} className="top-header"></Grid>
@@ -55,7 +55,7 @@ export default function App() {
             />
           </Grid>
         </Grid>
-      </Container>
+      </Container >
     </div>
   );
 }
