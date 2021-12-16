@@ -21,9 +21,10 @@ const performersNearby = require("./routes/performersNearby/performersRoute.js")
 const exampleMap = require("./routes/exampleRoute/exampleMapRoute");
 
 // Profile Routes
-const updateUser = require("./routes/profiles/updateUser.js");
-const getUser = require("./routes/profiles/getUser.js");
-const performances = require("./routes/performances/performances");
+const updateUser = require('./routes/profiles/updateUser.js');
+const getUser = require('./routes/profiles/getUser.js');
+const performances = require('./routes/performances/performances');
+const getFavorites = require('./routes/profiles/getFavorites.js');
 
 // Auth routes
 const errorHandler = require("./routes/authRoutes/authHandlers/errorHandler");
@@ -79,6 +80,7 @@ app.use('/login', login);
 app.use('/signup', signup);
 app.use('/signout', signout);
 app.use('/getUser', getUser);
+app.use('/getFavorites', getFavorites);
 app.use('/updatePerformances', performances);
 app.use("/performersNearby", performersNearby);
 app.use(auth);
