@@ -12,10 +12,9 @@ const initialValues = {
   password: '',
 }
 
-var Login = ({ setLoggedInUser, display, setDisplay}) => {
+var Login = ({ username, setUsername,setLoggedInUser, display, setDisplay}) => {
   const [open, setOpen] = useState(false);
 
-  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   useEffect(() => {}, [display]);
 
