@@ -1,11 +1,23 @@
-# BUSKAMOVE DOCUMENTATION
+# [BUSKAMOVE](https://www.github.com/HR-Spaghetti-20/blue-ocean "Buskamove")<br> <sup>By Spaghetti 2.0</sup>
 
 ## CONTENTS
 1. Introduction
 1. Authors
+1. Installation
 1. API Documentation
+1.
 
+---
 
+## INTRODUCTION
+Have you ever needed to keep track of where your favorite street performers are posting up for the weekend? Or perhaps there's an underground comedian whose last-minute shows are hard to keep track of.  Or you want to let your fans know where your next dance performance is.  Sounds like you need Buskamove!<br><br>
+
+### FEATURES
+Buskamove is a social networking app that allows performers and their audiences locate and schedule performances.
+
+## AUTHORS
+Adam Rakla - Project Manager
+Prince Addai -
 
 
 
