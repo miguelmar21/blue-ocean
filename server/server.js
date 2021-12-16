@@ -81,12 +81,5 @@ app.use('/updatePerformances', performances);
 app.use(auth);
 app.use('/updateUser', updateUser);
 app.use(errorHandler);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a1591f15cd662906127e12d1f8966677d5973bd1
-
-
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
