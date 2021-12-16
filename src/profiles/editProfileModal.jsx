@@ -52,6 +52,7 @@ var addMedia = function() {
   var clone = Object.assign(details, mediaObj)
   // console.log('clone is', clone)
   setDetails(clone)
+  submit();
 
   // console.log('details is now', details)
   // var clone = JSON.parse(JSON.stringify(details));
@@ -69,6 +70,7 @@ var deleteMedia = function(mediaIndex) {
   // console.log('media is now ', newMedia)
   var mediaObj = {media: newMedia}
   var clone = Object.assign(details, mediaObj)
+  submit();
   // console.log('clone is', clone)
 
   // console.log('after deleting medium, details is now', details)
@@ -139,6 +141,7 @@ var saveText = function(field, e) {
   .then((success)=> {
     console.log('success!', success);
     setSubmitted(true);
+    handleClose();
   })
   .catch((err)=> {
     console.error('error!', err);
@@ -161,9 +164,10 @@ useEffect(() => {
 }, [props.username] );
 
 useEffect(()=> {
+  console.log('media has changed!')
   submit();
   setOpen(false);
-}, [details.media]);
+}, [details]);
 
 // useEffect(()=>{
 //   //props.setUser(details)
