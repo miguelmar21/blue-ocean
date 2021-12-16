@@ -20,7 +20,6 @@ export default function Profiles(props) {
 
   return (
     <div>
-
     {(user !== null) ?
       <div className="profiles">
         <Container>
@@ -61,14 +60,12 @@ export default function Profiles(props) {
               <Video user={user}/>
             </Grid>
             <Grid item xs={12}>
-              {props.loggedInUser.username === user.username && user.username !== 'Guest' ? <EditProfileModal username={user.username} /> :<></>
-              }
+              {props.loggedInUser.username === user.username && user.username !== 'Guest' ? <EditProfileModal username={user.username} setUser={setUser}/> :<></>}
             </Grid>
           </Grid>
         </Container>
     </div> : <div></div>}
   </div>
-
   )
 }
 
