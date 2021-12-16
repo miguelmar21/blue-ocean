@@ -8,9 +8,8 @@ import FavoriteButton from './favoriteButton';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import SocialMedia from './socialMedia';
-// import FavoritesList from './favoritesList';
+import FavoritesList from './favoritesList';
 
-//import components here
 
 export default function Profiles(props) {
 
@@ -49,10 +48,6 @@ export default function Profiles(props) {
                 {(user.categories.indexOf('Dance') !== -1)  ?
                   <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg" width="35" height="35"/>:<React.Fragment/>}
               </Stack>
-              {/* {(user.categories !== undefined) ? user.categories.map((type) => {
-                //update map to include icons for different types of performers
-                return (<p key={type}>{type}</p>)
-              }): <div></div>} */}
             </Grid>
             <Grid item xs={12}>
               <p>{user.bio}</p>
@@ -64,7 +59,7 @@ export default function Profiles(props) {
               <Band user={user}/>
             </Grid>
             <Grid item xs={12}>
-              {/* <FavoritesList loggedInUser={props.loggedInUser}/> */}
+              <FavoritesList user={user}/>
             </Grid>
             <Grid item xs={12}>
               <Video user={user}/>

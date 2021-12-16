@@ -7,18 +7,32 @@ import IconButton from '@mui/material/IconButton';
 
 
 export default function Profiles(props) {
+  const onTwitter = (event) =>  {
+    event.preventDefault();
+    window.open(props.user.social_media.twitter,'_blank');
+  }
+
+  const onFacebook = (event) => {
+    event.preventDefault();
+    window.open(props.user.social_media.facebook,'_blank');
+  }
+
+  const onInstagram = (event) => {
+    event.preventDefault();
+    window.open(props.user.social_media.instagram,'_blank');
+  }
   return (
     <Stack direction="row" spacing={3}>
       {props.user.social_media.twitter ?
-      <IconButton aria-label="twitter">
+      <IconButton aria-label="twitter" onClick={onTwitter}>
         <TwitterIcon/>
       </IconButton>: <React.Fragment/>}
       {props.user.social_media.facebook ?
-      <IconButton aria-label="facebook">
+      <IconButton aria-label="facebook" onClick={onFacebook}>
         <FacebookIcon/>
       </IconButton>: <React.Fragment/>}
       {props.user.social_media.instagram ?
-      <IconButton aria-label="instagram">
+      <IconButton aria-label="instagram" onClick={onInstagram}>
         <InstagramIcon/>
       </IconButton>: <React.Fragment/>}
     </Stack>

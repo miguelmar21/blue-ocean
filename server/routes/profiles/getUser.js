@@ -16,7 +16,7 @@ route.get('/', async (req, res) => {
   const username = req.query.username;
   try {
     var queriedUser = await getUser(username);
-    res.status(200).send(queriedUser)
+    res.status(200).send(queriedUser);
   } catch (err) {
     console.error(`getting user information failed for ${username}`,err);
     res.status(500).send(err);
