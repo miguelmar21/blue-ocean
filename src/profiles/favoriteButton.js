@@ -41,13 +41,16 @@ export default function FavoriteButton(props) {
 
   return (
     <div>
-      {(props.loggedInUser.favorites === null || props.loggedInUser.favorites.indexOf(props.displayedUser._id) === -1) ?
-      <IconButton aria-label="favorite" onClick={addFavorite}>
-        <FavoriteBorderIcon/>
-      </IconButton>:
-      <IconButton aria-label="un-favorite" onClick={removeFavorite}>
-        <FavoriteIcon/>
-      </IconButton>}
+      {(props.loggedInUser.favorites !== undefined) ?
+      <>
+        {(props.loggedInUser.favorites.indexOf(props.displayedUser._id) !== -1) ?
+          <IconButton aria-label="favorite" onClick={addFavorite}>
+            <FavoriteBorderIcon/>
+          </IconButton>
+          :<IconButton aria-label="un-favorite" onClick={removeFavorite}>
+            <FavoriteIcon/>
+          </IconButton>}}
+      </> : <></>}
     </div>
   )
 }

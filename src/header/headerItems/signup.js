@@ -13,7 +13,7 @@ const initialValues = {
   password2: ''
 }
 
-var Signup = ({ setLoggedInUser, display, setDisplay }) => {
+var Signup = ({ username, setUsername, setLoggedInUser, display, setDisplay }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
 
@@ -65,15 +65,18 @@ var Signup = ({ setLoggedInUser, display, setDisplay }) => {
       axios
         .post(`http://localhost:3000/signup`, { username: values.username, password: values.password1})
         .then(({data}) => {
-          let user = data;
+          console.log('success')
+          let user = data[0];
+          console.log(data);
           setLoggedInUser(user);
           setUsername(user.username);
           setDisplay('Logout');
           handleClose();
           reset();
+          return;
         })
         .catch(err => {
-          setError(err.response.data.message);
+          err && setError(err.response.data.message);
         })
     }
   }
