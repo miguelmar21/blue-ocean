@@ -16,7 +16,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 500,
   bgcolor: 'background.paper',
   border: '2px solid #ff0',
   boxShadow: 12,
@@ -25,6 +25,8 @@ const style = {
 };
 
 const [details, setDetails] = useState({username: props.username})
+const [newMediaURL, setNewMediaURL] = useState('')
+const [submitted, setSubmitted] = useState(false);
 
 var convertToArrays = function(naiveDetails) {
   //convert the appropriate fields in naive details to arrays
@@ -36,8 +38,42 @@ var convertToArrays = function(naiveDetails) {
   return betterDetails;
 }
 
+var setMedia = function(e) {
+  var val = e.target.value;
+  setNewMediaURL(val);
+}
+
+var addMedia = function() {
+  var newMedia = details.media.slice();
+  newMedia.push(newMediaURL);
+  // console.log('new media val is', newMedia)
+  var mediaObj = {media: newMedia}
+  // console.log('mediaObj is ', mediaObj)
+  var clone = Object.assign(details, mediaObj)
+  // console.log('clone is', clone)
+  setDetails(clone)
+
+  // console.log('details is now', details)
+  // var clone = JSON.parse(JSON.stringify(details));
+  // clone.media = newMedia;
+  // setDetails(clone);
+
+  //saveText('media', newMedia)
+}
+
 var deleteMedia = function(mediaIndex) {
-  console.log('media', mediaIndex, 'clicked')
+  // console.log('media', mediaIndex, 'clicked')
+  // console.log('must delete ', details.media[mediaIndex])
+  var newMedia = details.media.slice();
+  newMedia.splice(mediaIndex)
+  // console.log('media is now ', newMedia)
+  var mediaObj = {media: newMedia}
+  var clone = Object.assign(details, mediaObj)
+  // console.log('clone is', clone)
+
+  // console.log('after deleting medium, details is now', details)
+  // saveText('media', newMedia)
+  // console.log('after saving text, details is now: ', details)
 }
 
 var splitFields = function(twoFields, val) {
@@ -48,9 +84,10 @@ var splitFields = function(twoFields, val) {
 }
 
 var saveText = function(field, e) {
-  var val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 
-  if(e.target.type === 'checkbox') {
+    var val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+    if(e.target.type === 'checkbox') {
 
       if (!details.categories.includes(field)) {
         var clone = JSON.parse(JSON.stringify(details));
@@ -74,32 +111,34 @@ var saveText = function(field, e) {
         //console.log('details are now set to ', details);
       }
 
-  } else if(field.includes('.')) {
-    var twoFields = splitFields(field)
-          //var nestedProfileElement = splitFields(field, val);
-    var nestedProfileElement = JSON.parse(`{"${twoFields[1]}": "${val}"}`); //{twitter: www.twitter.com}
-    let trashDetails = details;
-    let newFirstDot = Object.assign(details[twoFields[0]], nestedProfileElement) //trashdetails[social_media] = {twitter: www.twitter.com}
-          //let nestedDetails = Object.assign(details, newFirstDot)
-          //console.log('details was', details)
-          //setDetails(nestedDetails);
-          //console.log('dot-added ', nestedProfileElement, ' to ', details)
-  } else {
-    var profileElement = JSON.parse(`{"${field}": "${val}"}`);
-    let newDetails = Object.assign(details, profileElement)
-    setDetails(newDetails)
-  }
+    } else if(field.includes('.')) {
+      var twoFields = splitFields(field)
+      //var nestedProfileElement = splitFields(field, val);
+      var nestedProfileElement = JSON.parse(`{"${twoFields[1]}": "${val}"}`); //{twitter: www.twitter.com}
+      let trashDetails = details;
+      let newFirstDot = Object.assign(details[twoFields[0]], nestedProfileElement) //trashdetails[social_media] = {twitter: www.twitter.com}
+      //let nestedDetails = Object.assign(details, newFirstDot)
+      //console.log('details was', details)
+      //setDetails(nestedDetails);
+      //console.log('dot-added ', nestedProfileElement, ' to ', details)
+    } else {
+      var profileElement = JSON.parse(`{"${field}": "${val}"}`);
+      let newDetails = Object.assign(details, profileElement)
+      setDetails(newDetails)
+    }
+
 }
 
-var submit = function() {
-  //console.log('submitting ', details) //DEBUG
-  //operate on array fields and convert to arrays
+  var submit = function() {
+    console.log('submitting ', details) //DEBUG
+    //operate on array fields and convert to arrays
   let properlyStructuredDetails = convertToArrays(details);
 
   //update this to a PUT request after deployment works the first time
   axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
   .then((success)=> {
     console.log('success!', success);
+    setSubmitted(true);
   })
   .catch((err)=> {
     console.error('error!', err);
@@ -121,6 +160,15 @@ useEffect(() => {
 
 }, [props.username]);
 
+useEffect(()=> {
+  submit();
+  setOpen(false);
+}, [details.media]);
+
+// useEffect(()=>{
+//   //props.setUser(details)
+//   console.log('re-render now!')
+// }, [submitted])
 
 
   const [open, setOpen] = React.useState(false);
@@ -146,31 +194,31 @@ useEffect(() => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
             <table><tbody>
-              <tr><td>name: </td><td><input type='text' id='name' size='20' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
+              <tr><td width='120'>name: </td><td><input type='text' id='name' size='40' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
               {/* <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr> */}
 
               {
                 (details.is_performer)
-                ? <tr><td>performer?</td><td><select id='is_performer' defaultValue='true' onChange={saveText.bind(null,'is_performer')} ><option value='true'>True</option><option value='false'>False</option></select></td></tr>
+                ? <tr><td>performer?</td><td><select id='is_performer' defaultValue='true' onChange={saveText.bind(null,'is_performer')} ><option key='true' value='true'>True</option><option key='false' value='false'>False</option></select></td></tr>
                 : <tr><td>performer?</td><td><select id='is_performer' defaultValue='false' onChange={saveText.bind(null,'is_performer')} ><option value='true'>True</option><option value='false'>False</option></select></td></tr>
               }
 
-              <tr><td>bio: </td><td><input type='text' id='bio' size='20' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
-              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='20' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
+              <tr><td>bio: </td><td><input type='text' id='bio' size='40' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
+              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='40' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
               {
                 (details.social_media)
-                ? <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='20' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
-                : <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='20' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                ? <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='40' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                : <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='40' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='20' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
-                : <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='20' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                ? <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='40' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                : <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='40' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='20' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
-                : <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='20' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                ? <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='40' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                : <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='40' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
               }
 
               <tr>
@@ -182,26 +230,26 @@ useEffect(() => {
 
                   {
                     (details.categories && details.categories.includes('Music'))
-                    ? <input type="checkbox" checked={true} id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
-                    : <input type="checkbox" checked={false} id="music" name="music" onChange={saveText.bind(null,'Music')}></input>
+                    ? <input type="checkbox" checked={true} id="music" key='music' name="music" onChange={saveText.bind(null,'Music')}></input>
+                    : <input type="checkbox" checked={false} id="music" key='music' name="music" onChange={saveText.bind(null,'Music')}></input>
                   }
                   Music<br></br>
                   {
                     (details.categories && details.categories.includes('Comedy'))
-                    ? <input type="checkbox" checked={true} id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
-                    : <input type="checkbox" checked={false} id="Comedy" name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
+                    ? <input type="checkbox" checked={true} id="Comedy" key='comedy' name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
+                    : <input type="checkbox" checked={false} id="Comedy" key='comedy' name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
                   }
                   Comedy<br></br>
                   {
                     (details.categories && details.categories.includes('Dance'))
-                    ? <input type="checkbox" checked={true} id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
-                    : <input type="checkbox" checked={false} id="Dance" name="Dance" onChange={saveText.bind(null,'Dance')}></input>
+                    ? <input type="checkbox" checked={true} id="Dance" key='dance' name="Dance" onChange={saveText.bind(null,'Dance')}></input>
+                    : <input type="checkbox" checked={false} id="Dance" key='dance' name="Dance" onChange={saveText.bind(null,'Dance')}></input>
                   }
                   Dance<br></br>
                   {
                     (details.categories && details.categories.includes('Other'))
-                    ? <input type="checkbox" checked={true} id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
-                    : <input type="checkbox" checked={false} id="Other" name="Other" onChange={saveText.bind(null,'Other')}></input>
+                    ? <input type="checkbox" checked={true} id="Other" key='other' name="Other" onChange={saveText.bind(null,'Other')}></input>
+                    : <input type="checkbox" checked={false} id="Other" key='other' name="Other" onChange={saveText.bind(null,'Other')}></input>
                   }
                   Other<br></br>
 
@@ -213,17 +261,18 @@ useEffect(() => {
               {/* <tr><td>band: []</td><td><input type='text' id='band' size='20' placeholder={details.band} onChange={saveText.bind(null,'band')}></input></td></tr> */}
               <tr><td>media: </td><td>
                 {
-                  (details.media)
+                  (Array.isArray(details.media))
                   ? details.media.map((medium, index) => {
-                    return (
-                      <>
-                      <input type='button' value='x' onClick={deleteMedia(index)}></input> {medium}
-                      </>
-                    )
-                  })
+                      return (
+                        <div key={index}>
+                        <input type='button' value='x' id={`media-${index}`} key={index} onClick={deleteMedia.bind(null, index)}></input> {medium}
+                        </div>
+                      )
+                    })
                   : null
                 }
-                <input type='text' id='media' size='20' placeholder='new media link' onChange={saveText.bind(null,'media-new')}></input>
+                <input type='button' id='media+' key='+' value='+' onClick={addMedia}></input>
+                <input type='text' id='newMediaURLVal' key='nm+' size='40' placeholder='new media link' onChange={setMedia}></input>
               </td></tr>
 
             </tbody></table>
