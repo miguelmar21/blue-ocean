@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Band from './band';
 import Video from './videos';
 import Search from './search';
 import EditProfileModal from './editProfileModal.jsx';
@@ -21,7 +20,6 @@ export default function Profiles(props) {
 
   return (
     <div>
-
     {(user !== null) ?
       <div className="profiles">
         <Container>
@@ -56,22 +54,18 @@ export default function Profiles(props) {
               {user.social_media? <SocialMedia user={user}/> : <React.Fragment/>}
             </Grid>
             <Grid item xs={12}>
-              <Band user={user}/>
-            </Grid>
-            <Grid item xs={12}>
               <FavoritesList user={user}/>
             </Grid>
             <Grid item xs={12}>
               <Video user={user}/>
             </Grid>
             <Grid item xs={12}>
-              <EditProfileModal username={user.username} setUser={setUser}/>
+              {props.loggedInUser.username === user.username && user.username !== 'Guest' ? <EditProfileModal username={user.username} setUser={setUser}/> :<></>}
             </Grid>
           </Grid>
         </Container>
     </div> : <div></div>}
   </div>
-
   )
 }
 

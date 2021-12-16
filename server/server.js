@@ -85,6 +85,5 @@ app.use("/performersNearby", performersNearby);
 app.use(auth);
 app.use('/updateUser', updateUser);
 app.use(errorHandler);
-
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
