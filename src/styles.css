@@ -1,8 +1,8 @@
-.top-header{
+.top-header {
   background-color: lightblue;
 }
 
-.left-section{
+.left-section {
   /* padding-bottom: 200px; */
   border: 1px solid black;
 }
@@ -39,7 +39,7 @@
   z-index: 10;
 }
 
-.time-filter{
+.time-filter {
   position: absolute;
   top: 8.5rem;
   left: 88%;
@@ -67,11 +67,11 @@
   border-radius: 50%;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.active{
+.active {
   display: block;
 }
 
@@ -83,6 +83,12 @@
 .tag-modal-img{
   height: 100%;
   width: 100%;
+}
+
+@media screen and (max-width: 1150px) {
+  .time-filter{
+    left: 84%
+  }
 }
 
 @media screen and (max-width: 1150px) {

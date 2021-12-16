@@ -39,7 +39,7 @@ export default function App() {
                 ></Profiles>
               </Grid>
               <Grid item xs={12}>
-                <PerformersNearby />
+                <PerformersNearby location={currentLocation} />
               </Grid>
             </Grid>
           </Grid>
