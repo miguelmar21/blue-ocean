@@ -33,7 +33,7 @@
   overflow: hidden;
   outline: none;
   position: absolute;
-  top: 6.2rem;
+  top: 8.2rem;
   left: 92%;
   transform: translateX(-50%);
   z-index: 10;
@@ -41,7 +41,7 @@
 
 .time-filter {
   position: absolute;
-  top: 8.5rem;
+  top: 10.5rem;
   left: 88%;
   transform: translateX(-50%);
   background-color: #ffd700;
