@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Band from './band';
 import Video from './videos';
 import Search from './search';
 import EditProfileModal from './editProfileModal.jsx';
@@ -54,9 +53,6 @@ export default function Profiles(props) {
             </Grid>
             <Grid item xs={12}>
               {user.social_media? <SocialMedia user={user}/> : <React.Fragment/>}
-            </Grid>
-            <Grid item xs={12}>
-              <Band user={user}/>
             </Grid>
             <Grid item xs={12}>
               <FavoritesList user={user}/>
