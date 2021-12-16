@@ -25,11 +25,14 @@ const Header = ({ setLoggedInUser}) => {
     <AppBar position="static" sx={style}>
       <Toolbar>
         <Grid container alignItems='center'>
-          <Grid item style={{}}>
+          <Grid item sm={11} style={{}}>
             <Stack direction="row" spacing={2}>
               <Login setLoggedInUser={setLoggedInUser} display={display} setDisplay={setDisplay} username={username} setUsername={setUsername}/>
               <Signup setLoggedInUser={setLoggedInUser} display={display} setDisplay={setDisplay} username={username} setUsername={setUsername}/>
             </Stack>
+          </Grid>
+          <Grid item sm={1}>
+            <div className="logo"></div>
           </Grid>
           <Grid item sm ></Grid>
           <Grid item style={{}}>
