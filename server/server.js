@@ -1,6 +1,7 @@
 //environment
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "./config.env") });
+//require("dotenv").config({ path: path.join(__dirname, "./config.env") });
 
 //server
 const express = require("express");
@@ -60,6 +61,7 @@ const config = {
 
 //USE REMOTE DATABASE
 const remoteUrl = process.env.MONGO_URI;
+console.log(remoteUrl);
 const connect = mongoose.connect(remoteUrl, config);
 
 //USE LOCAL DATABASE

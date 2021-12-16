@@ -9,7 +9,10 @@ import Grid from "@mui/material/Grid";
 import Header from "./header/header";
 
 export default function App() {
-  const [currentLocation, setCurrentLocation] = useState({ lat: 30.267153, lng: -97.743057 })
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: 30.267153,
+    lng: -97.743057,
+  });
   const [loggedInUser, setLoggedInUser] = useState({
     user_picture:
       "https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg",
@@ -36,7 +39,7 @@ export default function App() {
                 ></Profiles>
               </Grid>
               <Grid item xs={12}>
-                <PerformersNearby />
+                <PerformersNearby location={currentLocation} />
               </Grid>
             </Grid>
           </Grid>
