@@ -80,8 +80,8 @@ app.use('/signout', signout);
 app.use('/getUser', getUser);
 app.use('/getFavorites', getFavorites);
 app.use('/updatePerformances', performances);
-// app.use(auth);
+app.use(auth);
 app.use('/updateUser', updateUser);
-// app.use(errorHandler);
+app.use(errorHandler);
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
