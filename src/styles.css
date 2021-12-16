@@ -7,6 +7,15 @@
   border: 1px solid black;
 }
 
+.logo{
+  width: 200px;
+  height: 118px;
+  background-image: url('./../dist/logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  float: right;
+}
+
 .marker-form{
   position: absolute;
   top: 40%;
@@ -19,7 +28,7 @@
 .search{
   border-radius: 25px;
   position: absolute;
-  top: 4.5rem;
+  top: 8.5rem;
   left: 62.5%;
   transform: translateX(-50%);
   z-index: 10;
@@ -33,7 +42,7 @@
   overflow: hidden;
   outline: none;
   position: absolute;
-  top: 8.2rem;
+  top: 11.5rem;
   left: 92%;
   transform: translateX(-50%);
   z-index: 10;
@@ -41,7 +50,7 @@
 
 .time-filter {
   position: absolute;
-  top: 10.5rem;
+  top: 13.5rem;
   left: 88%;
   transform: translateX(-50%);
   background-color: #ffd700;
