@@ -72,6 +72,7 @@ var Signup = ({ setLoggedInUser, display, setDisplay }) => {
         .then(({data}) => {
 
           let user = data;
+          console.log(data);
           setLoggedInUser(user);
           setUsername(user.username);
           setDisplay('Logout');

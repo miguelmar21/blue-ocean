@@ -39,12 +39,24 @@ export default function Profiles(props) {
             </Grid>
             <Grid item xs={12}>
               <Stack direction="row" spacing={3}>
-                {(user.categories.indexOf('Music') !== -1)  ?
-                  <img src="https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg" width="35" height="35"/>:<React.Fragment/>}
-                {(user.categories.indexOf('Comedy') !== -1)  ?
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg" width="35" height="35"/>:<React.Fragment/>}
-                {(user.categories.indexOf('Dance') !== -1)  ?
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg" width="35" height="35"/>:<React.Fragment/>}
+                {user.categories !== undefined
+                ? <>
+                  {(user.categories.indexOf('Music') !== -1)  ?
+                    <img src="https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg" width="35" height="35"/>:<></>}
+                  </>
+                : <></>}
+                {props.loggedInUser.categories !== undefined
+                ? <>
+                  {(user.categories.indexOf('Comedy') !== -1)  ?
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg" width="35" height="35"/>:<></>}
+                  </>
+                : <></>}
+                {props.loggedInUser.categories !== undefined
+                ? <>
+                  {(user.categories.indexOf('Dance') !== -1)  ?
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg" width="35" height="35"/>:<></>}
+                  </>
+                : <></>}
               </Stack>
             </Grid>
             <Grid item xs={12}>
@@ -56,9 +68,10 @@ export default function Profiles(props) {
             <Grid item xs={12}>
               <FavoritesList user={user}/>
             </Grid>
-            <Grid item xs={12}>
-              <Video user={user}/>
-            </Grid>
+            {user.media !== undefined ?
+              <Grid item xs={12}>
+                <Video user={user}/>
+              </Grid> : <></>}
             <Grid item xs={12}>
               {props.loggedInUser.username === user.username && user.username !== 'Guest' ? <EditProfileModal username={user.username} setUser={setUser}/> :<></>}
             </Grid>
