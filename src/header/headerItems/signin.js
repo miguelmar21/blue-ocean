@@ -12,11 +12,12 @@ const initialValues = {
   password: '',
 }
 
-var Login = ({ setLoggedInUser}) => {
+var Login = ({ setLoggedInUser, display, setDisplay}) => {
   const [open, setOpen] = useState(false);
-  const [display, setDisplay] = useState('Login');
+
   const [username, setUsername] = useState('');
-  // useEffect(() => {}, [display]);
+  const [error, setError] = useState('');
+  useEffect(() => {}, [display]);
 
   var handleOpen = () => {
     if(display === 'Login') {
@@ -26,12 +27,21 @@ var Login = ({ setLoggedInUser}) => {
       axios
         .get(`http://localhost:3000/signout`, { username})
         .then(response => {
-          console.log('success');
           setDisplay('Login');
           setUsername('');
+          setError('');
+          setLoggedInUser({
+            user_picture: 'https://northaustinurology.com/app/uploads/2017/01/profile-silhouette.jpg',
+            categories: [],
+            name: '',
+            username: 'Guest',
+            band: { name: '', members: [] },
+            media: [],
+            favorites: []
+          });
         })
         .catch(err => {
-          console.error(err)
+          console.log(err)
         })
     }
   };
@@ -53,8 +63,6 @@ var Login = ({ setLoggedInUser}) => {
       temp.password = formValues.password ? "" : "This is a required Field";
     }
 
-
-
     setErrors({
       ...temp
     })
@@ -75,26 +83,20 @@ var Login = ({ setLoggedInUser}) => {
     e.preventDefault();
     let noErrors = validate();
     if (noErrors) {
-      // handle username existing in
-      // database already
-      handleClose();
-      reset();
+
       e.preventDefault();
       axios
       .post(`http://localhost:3000/login`, { username: values.username, password: values.password })
-      .then(response => {
-        // handleClose();
-        // reset();
-        let user = response.data;
+      .then(({data}) => {
+          let user = data;
           setLoggedInUser(user);
           setUsername(user.username);
           setDisplay('Logout');
+          handleClose();
+          reset();
         })
         .catch(err => {
-          // setErrors({
-          //   ...temp,
-          //   'username': 'Email already has account. Please login.'
-          // })
+          setError('Invalid username or password');
         })
     }
   }
@@ -115,6 +117,10 @@ var Login = ({ setLoggedInUser}) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Enter your username and password.
           </Typography>
+          {error &&
+          <Typography id="modal-modal-title"  component="h2" color="error">
+            {error}
+          </Typography>}
           <Input
             label="Enter your Username?"
             name="username"
