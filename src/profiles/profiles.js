@@ -65,7 +65,7 @@ export default function Profiles(props) {
               <Video user={user}/>
             </Grid>
             <Grid item xs={12}>
-              <EditProfileModal username={user.username} />
+              <EditProfileModal username={user.username} setUser={setUser}/>
             </Grid>
           </Grid>
         </Container>
