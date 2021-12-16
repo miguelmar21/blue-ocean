@@ -23,6 +23,7 @@ const exampleMap = require('./routes/exampleRoute/exampleMapRoute');
 const updateUser = require('./routes/profiles/updateUser.js');
 const getUser = require('./routes/profiles/getUser.js');
 const performances = require('./routes/performances/performances');
+const getFavorites = require('./routes/profiles/getFavorites.js');
 
 // Auth routes
 const errorHandler = require('./routes/authRoutes/authHandlers/errorHandler');
@@ -77,11 +78,10 @@ app.use('/login', login);
 app.use('/signup', signup);
 app.use('/signout', signout);
 app.use('/getUser', getUser);
+app.use('/getFavorites', getFavorites);
 app.use('/updatePerformances', performances);
-app.use(auth);
+// app.use(auth);
 app.use('/updateUser', updateUser);
-app.use(errorHandler);
-
-
+// app.use(errorHandler);
 // listening
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
