@@ -146,7 +146,7 @@ var saveText = function(field, e) {
 }
 
 useEffect(() => {
-
+  console.log('username is', props.username);
   //query the db for user details and populate
   //use Adam's endpoint to populate
   axios.get(`http://localhost:3000/getUser?username=${props.username}`)
@@ -158,7 +158,7 @@ useEffect(() => {
 
   })
 
-}, [props.username]);
+}, [props.username] );
 
 useEffect(()=> {
   submit();
