@@ -21,7 +21,7 @@ const Input = props => {
       name={name}
       value={value}
       onChange={onChange}
-      color={color || "secondary"}
+      color={color || "primary"}
       helperText={error || helperText}
       error={error ? true : false}
       {...others}
