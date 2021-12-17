@@ -87,7 +87,7 @@ body{
 .profilePic {
   border-radius: 50%;
   border: 3px solid #f9d44f;
-  margin-left: 10px
+  margin-left: 10px;
 }
 
 .hidden {
@@ -154,4 +154,8 @@ body{
 
 .bio {
   margin:20px 10px 10px;
+}
+
+.profilePicContainer {
+  vertical-align: middle
 }

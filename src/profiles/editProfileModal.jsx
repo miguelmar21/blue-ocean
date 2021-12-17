@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Grid from "@mui/material/Grid";
 
 import axios from 'axios'
 
@@ -199,8 +200,9 @@ useEffect(() => {
 
   return (
     <div>
-
-      <Button onClick={handleOpen}>Edit Profile</Button>
+      <Grid xs={12}>
+        <Button onClick={handleOpen}>Edit Profile</Button>
+      </Grid>
       <Modal
         open={open}
         onClose={handleClose}
