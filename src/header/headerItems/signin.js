@@ -14,7 +14,7 @@ const initialValues = {
 
 const style = {
   '& .css-xlxjzz-MuiStack-root': {
-    height: '37%',
+    height: '36%',
   },
 }
 
