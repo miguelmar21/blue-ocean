@@ -247,32 +247,30 @@ useEffect(() => {
                   categories:
                 </td>
                 <td>
-                {/* <input type="checkbox" id="Music" name="music" onChange={saveText.bind(null,'Music')}></input> Music */}
-
                   {
                     (details.categories && details.categories.includes('Music'))
                     ? <input type="checkbox" checked={true} id="music" key='music' name="music" onChange={saveText.bind(null,'Music')}></input>
                     : <input type="checkbox" checked={false} id="music" key='music' name="music" onChange={saveText.bind(null,'Music')}></input>
                   }
-                  Music<br></br>
+                  &nbsp; Music<br></br>
                   {
                     (details.categories && details.categories.includes('Comedy'))
                     ? <input type="checkbox" checked={true} id="Comedy" key='comedy' name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
                     : <input type="checkbox" checked={false} id="Comedy" key='comedy' name="Comedy" onChange={saveText.bind(null,'Comedy')}></input>
                   }
-                  Comedy<br></br>
+                  &nbsp; Comedy<br></br>
                   {
                     (details.categories && details.categories.includes('Dance'))
                     ? <input type="checkbox" checked={true} id="Dance" key='dance' name="Dance" onChange={saveText.bind(null,'Dance')}></input>
                     : <input type="checkbox" checked={false} id="Dance" key='dance' name="Dance" onChange={saveText.bind(null,'Dance')}></input>
                   }
-                  Dance<br></br>
+                  &nbsp; Dance<br></br>
                   {
                     (details.categories && details.categories.includes('Other'))
                     ? <input type="checkbox" checked={true} id="Other" key='other' name="Other" onChange={saveText.bind(null,'Other')}></input>
                     : <input type="checkbox" checked={false} id="Other" key='other' name="Other" onChange={saveText.bind(null,'Other')}></input>
                   }
-                  Other<br></br>
+                  &nbsp; Other<br></br>
 
                 </td>
               </tr>
@@ -288,7 +286,7 @@ useEffect(() => {
                         <div key={index}>
                         <input type='button' value='x' id={`media-${index}`} key={index} onClick={deleteMedia.bind(null, index)}></input> {
                         (medium.length > 50)
-                        ? medium.substring(0, 25).concat(' ... '.concat(medium.substring(medium.length-25, medium.length)))
+                        ? medium.substring(0, 30).concat(' ... '.concat(medium.substring(medium.length-30, medium.length)))
                         : medium
                         }
                         </div>
@@ -296,8 +294,8 @@ useEffect(() => {
                     })
                   : null
                 }
-                <input type='button' id='media+' key='+' value='+' onClick={addMedia}></input>
-                <input type='text' id='newMediaURLVal' key='nm+' size='60' placeholder='new media link' onChange={setMedia}></input>
+                <input type='button' id='media+' key='+' value='+' onClick={addMedia}></input> &nbsp;
+                <input type='text' id='newMediaURLVal' key='nm+' size='50' placeholder='new media link' onChange={setMedia}></input>
               </td></tr>
 
             </tbody></table>
