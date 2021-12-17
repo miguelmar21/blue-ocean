@@ -136,7 +136,7 @@ GET /updatePerformances response example
 Adds a new performance to performer specified.
 |Request| Name | Type | Description
 |-------|----|-----|---------|
-|PARAMS | - - -| | |
+|PARAMS | none| | |
 | BODY |  username | String | Username of the performer
 | BODY | location | Object | Latitude & longitude of a location
 | BODY | time | String (Date) | Date of performance
