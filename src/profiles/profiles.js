@@ -32,13 +32,15 @@ export default function Profiles(props) {
           <Grid item xs={12}>
             <Search setUser={setUser}/>
           </Grid>
-          <Grid item xs={4}>
-            <img className="profilePic" src={user.user_picture} width="70px" height="70px"/>
+          <Grid item xs={4} display='flex' alignItems='center'>
+            <div className="profilePicContainer" >
+              <img className="profilePic" src={user.user_picture} width="70px" height="70px"/>
+            </div>
           </Grid>
           <Grid item xs={6}>
             <p className="name">{user.name}</p>
             <p className="username">@{user.username}</p>
-            <Stack direction="row" spacing={3} sx={{mt: "15px"}}>
+            <Stack direction="row" spacing={5} sx={{mt: "15px"}}>
               {user.categories !== undefined
               ? <>
                 {(user.categories.indexOf('Music') !== -1)  ?
@@ -67,17 +69,19 @@ export default function Profiles(props) {
           <Grid item xs={12} justifyContent="center">
             <p className="bio">{user.bio}</p>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} justifyContent='center' display="flex">
             {user.social_media? <SocialMedia user={user}/> : <React.Fragment/>}
           </Grid>
           <Grid item xs={12}>
             <FavoritesList user={user}/>
           </Grid>
           {user.media !== undefined ?
-            <Grid item xs={12}>
-              <Video user={user}/>
+            <Grid item xs={12} overflow="auto">
+              <div style={{height: "200px"}}>
+                <Video user={user}/>
+              </div>
             </Grid> : <></>}
-          <Grid item xs={12}>
+          <Grid item xs={12} display="flex" justifyContent='center'>
             {props.loggedInUser.username === user.username && user.username !== 'Guest' ? <EditProfileModal username={user.username} setUser={setUser}/> :<></>}
           </Grid>
         </Grid>

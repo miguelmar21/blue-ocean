@@ -8,6 +8,10 @@ export default function Video(props) {
   }
 
   return (
-    <Carousel slides={slides}/>
+    <div>
+      <Carousel slides={slides}/>
+    </div>
   )
 }
+
+//width='300px' height='175px'
