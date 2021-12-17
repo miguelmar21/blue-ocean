@@ -85,6 +85,7 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 
     which includes the API key needed for google maps:
     >API_KEY = '0123456DEFGhijklmnopqrSTUV'
+    module.exports = API_KEY
 
   Note: Please be sure that your config.env file's values are NOT in quotes, and that your config.js file's value IS in quotes.
 
