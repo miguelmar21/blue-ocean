@@ -139,7 +139,7 @@ Adds a new performance to performer specified.
 |PARAMS | - - -| | |
 | BODY |  username | String | Username of the performer
 | BODY | location | Object | Latitude & longitude of a location
-| BODY | time | String (format) | Date of performance
+| BODY | time | String (Date) | Date of performance
 | BODY | category | String | URL of category icon
 | BODY | additionalPerformers | Array | Any other performers that will be present at performance.
 
