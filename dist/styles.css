@@ -10,6 +10,7 @@
 .performersNearby {
   background-color: #e14d48;
   overflow: auto;
+  height: 330px;
 }
 
 .react-3d-carousel {
@@ -30,7 +31,7 @@
 
 .searchRadius {
   margin: auto;
-  width: 35%;
+  width: 28%;
 }
 
 #demo-simple-select-label {
@@ -44,4 +45,9 @@
 
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border-color: white !important;
+}
+
+.slideImages {
+  width: 180px;
+  height: 200px;
 }
