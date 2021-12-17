@@ -12,6 +12,12 @@ const initialValues = {
   password: '',
 }
 
+const style = {
+  '& .css-xlxjzz-MuiStack-root': {
+    height: '37%',
+  },
+}
+
 var Login = ({ username, setUsername,setLoggedInUser, display, setDisplay}) => {
   const [open, setOpen] = useState(false);
 
@@ -106,8 +112,8 @@ var Login = ({ username, setUsername,setLoggedInUser, display, setDisplay}) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-        <TemplateForm>
+        aria-describedby="modal-modal-description" sx={style}>
+        <TemplateForm >
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Enter your username and password.
           </Typography>

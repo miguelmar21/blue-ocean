@@ -12,7 +12,7 @@ var style = {
   p: 3.5,
   transform: 'translate(-50%, -50%)',
   width: '40%',
-  height: '45%',
+  height: '47%%',
   border: '2px solid #fff',
   // boxShadow: 24,
   alignItems: "center",
