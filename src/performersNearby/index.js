@@ -28,7 +28,7 @@ function PerformersNearby(props) {
               <div className="centered">
                 <p>{performer.name}</p>
               </div>
-              <img src={performer.user_picture} />
+              <img className="slideImages" src={performer.user_picture} />
             </div>
           );
           container.push(chunk);

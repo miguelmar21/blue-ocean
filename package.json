@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "webpack --mode development -w",
-    "run": "nodemon server/server.js",
+    "start": "nodemon server/server.js",
     "test": "jest"
   },
   "repository": {
@@ -20,9 +20,9 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.2.4",
     "@mui/material": "^5.2.3",
+    "@mui/styles": "^5.2.3",
     "@reach/combobox": "^0.16.5",
     "3d-react-carousal": "^4.0.2",
     "axios": "^0.24.0",
