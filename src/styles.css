@@ -18,7 +18,7 @@ body{
   border: 1px solid black;
 }
 
-.logo{
+.logo {
   width: 200px;
   height: 118px;
   background-image: url('./../dist/logo-orange-small.png');
@@ -27,7 +27,7 @@ body{
   float: right;
 }
 
-.marker-form{
+.marker-form {
   position: absolute;
   top: 40%;
   left: 48%;
@@ -36,7 +36,7 @@ body{
   text-align: center;
 }
 
-.search{
+.search {
   border-radius: 25px;
   position: absolute;
   top: 8.5rem;
@@ -45,7 +45,7 @@ body{
   z-index: 10;
 }
 
-.relocate{
+.relocate {
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
@@ -70,7 +70,7 @@ body{
   cursor: pointer;
 }
 
-.time-filter-form{
+.time-filter-form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -80,7 +80,7 @@ body{
   width: 250px;
 }
 
-.time-filter-form button{
+.time-filter-form button {
   cursor: pointer;
 }
 
@@ -102,7 +102,7 @@ body{
   background-color: whitesmoke;
 }
 
-.tag-modal-img{
+.tag-modal-img {
   height: 100%;
   width: 100%;
 }
@@ -112,8 +112,8 @@ body{
 }
 
 @media screen and (max-width: 1150px) {
-  .time-filter{
-    left: 84%
+  .time-filter {
+    left: 84%;
   }
 }
 
@@ -124,7 +124,7 @@ body{
 }
 
 @media screen and (min-width: 1250px) {
-  .relocate{
+  .relocate {
     left: 88%;
   }
 }
