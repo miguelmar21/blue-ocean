@@ -1,3 +1,14 @@
+body{
+  background-image: url('https://cdn.pixabay.com/photo/2017/10/23/20/47/background-2882485_960_720.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.css-5wk909-MuiPaper-root-MuiAppBar-root{
+  background-color: #ffd700 !important;
+  border: 1px solid black !important;
+}
+
 .top-header {
   background-color: lightblue;
 }
@@ -7,16 +18,16 @@
   border: 1px solid black;
 }
 
-.logo{
+.logo {
   width: 200px;
   height: 118px;
-  background-image: url('./../dist/logo.png');
+  background-image: url('./../dist/logo-orange-small.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   float: right;
 }
 
-.marker-form{
+.marker-form {
   position: absolute;
   top: 40%;
   left: 48%;
@@ -25,7 +36,7 @@
   text-align: center;
 }
 
-.search{
+.search {
   border-radius: 25px;
   position: absolute;
   top: 8.5rem;
@@ -34,7 +45,7 @@
   z-index: 10;
 }
 
-.relocate{
+.relocate {
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
@@ -42,15 +53,16 @@
   overflow: hidden;
   outline: none;
   position: absolute;
-  top: 11.5rem;
+  top: 11rem;
   left: 92%;
   transform: translateX(-50%);
   z-index: 10;
+  font-size: xx-large;
 }
 
 .time-filter {
   position: absolute;
-  top: 13.5rem;
+  top: 14.2rem;
   left: 88%;
   transform: translateX(-50%);
   background-color: #ffd700;
@@ -58,7 +70,7 @@
   cursor: pointer;
 }
 
-.time-filter-form{
+.time-filter-form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -68,7 +80,7 @@
   width: 250px;
 }
 
-.time-filter-form button{
+.time-filter-form button {
   cursor: pointer;
 }
 
@@ -87,42 +99,42 @@
 .profiles {
   height: 600px;
   border: 1px solid black;
+  background-color: whitesmoke;
 }
 
-.tag-modal-img{
+.tag-modal-img {
   height: 100%;
   width: 100%;
 }
 
+.name-and-category{
+  text-align: center;
+}
+
 @media screen and (max-width: 1150px) {
-  .time-filter{
-    left: 84%
+  .time-filter {
+    left: 84%;
   }
 }
 
 @media screen and (max-width: 1150px) {
   .time-filter{
-    left: 84%
+    left: 86%
   }
 }
 
 @media screen and (min-width: 1250px) {
-  .relocate{
+  .relocate {
     left: 88%;
   }
 }
 
-
-@media screen and (min-width: 1350px) {
+@media screen and (min-width: 1800px) {
   .relocate{
-    left: 78%;
-  }
-  
-  .time-filter{
-    left: 76%;
+    left: 87%
   }
 
-  .search{
-    left: 55%;
+  .time-filter{
+    left: 85%
   }
 }
