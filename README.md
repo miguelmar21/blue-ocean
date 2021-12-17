@@ -11,6 +11,9 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 1. [API Documentation](#api-documentation)
     * [/updatePerformances](#get-updateperformances)
     * [/performersNearby](#get-performersnearby)
+    * [/getUser](#get-getuser)
+    * [/updateUser](#post-updateuser)
+    * [auth routes](#post-login)
 
 
 <BR>
@@ -86,6 +89,10 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 | GET |  [/performersNearby](#get-performersnearby) |
 | GET |  [/getUser](#get-getuser) |
 | POST |  [/updateUser](#post-updateuser) |
+| POST | [/login](#post-login) |
+| POST | [/signup](#post-signup) |
+| GET | [/signout](#get-signout) |
+
 
 
 
@@ -355,48 +362,66 @@ POST /updateUser request body example
 <br>
 
 
-Auth Routes
- post /login
- post /signup
- get  /signout
+### POST /login
+Log in by providing your username and password
+|Request| Name | Type | Description
+|-------|----|-----|---------|
+| BODY |  username | String | username of the user
+| BODY |  password | String | secret string known only to the user
 
 
-Auth Routes
-
-POST /login
-Description: Log in by providing your username and password
-Status:
- 200 OK: Logged In
- 403 Not Registered: User instructed to signup
-
- Parameter Type  Description
- username  String  user's name that'll be used to login
- password  String  Secret String known only to user
-
- Request Body Example:
+```
+POST /login request body example
  {
    username: 'spaghetti',
    password: 'password'
  }
 
-POST /signup
-Description: Signup by providing username and password
-Status:
- 200 OK: Logged In
- 403 User already Registered: User instructed to login
+```
 
- Parameter Type  Description
- username  String  user's name that'll be used to sign up
- password  String  Secret String known only to user
+|Response|
+|--------|
+|200 OK|
+|403 Not Registered: User instructed to signup
 
- Request Body Example:
+<br>
+
+
+
+### POST /signup
+Signup by providing username and password
+|Request| Name | Type | Description
+|-------|----|-----|---------|
+| BODY |  username | String | username of the user
+| BODY |  password | String | secret string known only to the user
+
+
+```
+POST /signup request body example
  {
    username: 'spaghetti',
    password: 'password'
  }
 
-GET /signout
-Description: Log out
-Status:
- 200 OK: User logged out
+```
+
+|Response|
+|--------|
+|200 OK|
+|403 Not Registered: User instructed to signup
+
+<br>
+
+
+
+### GET /signout
+Log out of the application.
+|Request| Name | Type | Description
+|-------|----|-----|---------|
+| PARAMS |  none
+| BODY |  none
+
+|Response|
+|--------|
+|200 OK: User logged out
 
