@@ -91,7 +91,7 @@ export default function MarkerForm({
           minDate={new Date()}
         /><br></br>
 
-        <label htmlFor="performers">
+        {/* <label htmlFor="performers">
           What other performers are performing here?
         </label><br></br>
         <input
@@ -99,7 +99,7 @@ export default function MarkerForm({
           id="performers"
           name="performers"
           onChange={(e) => handleChange(e, "otherPerformers")}
-        ></input>
+        ></input> */}
 
         <input type="submit" value="Submit" />
       </form>
