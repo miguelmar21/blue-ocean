@@ -11,15 +11,17 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     display: 'flex',
     paddingRight: "20px",
+    paddingLeft: "10px",
     marginTop: "5px",
-    marginBottom: "5px"
+    marginBottom: "5px",
+    width:"100%",
   },
   searchIcon: {
     alignSelf: "flex-end",
-    marginBottom: "5px"
+    marginBottom: "10px",
   },
   searchInput: {
-    width:"250px",
+    width:"100%",
     margin: "5px"
   }
 }));
@@ -58,7 +60,6 @@ export default function Search(props) {
     }
   return (
     <React.Fragment>
-      <Toolbar>
         <div className={classes.searchContainer}>
           <SearchIcon className={classes.searchIcon}/>
           <TextField
@@ -70,7 +71,6 @@ export default function Search(props) {
             onKeyPress={handleSearch}
           />
         </div>
-      </Toolbar>
     </React.Fragment>
   )
 }
