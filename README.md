@@ -416,8 +416,8 @@ POST /signup request body example
 
 ### GET /signout
 Log out of the application.
-|Request| Name | Type | Description
-|-------|----|-----|---------|
+|Request| Name |
+|-------|----|
 | PARAMS |  none
 | BODY |  none
 
