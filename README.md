@@ -126,7 +126,6 @@ GET /updatePerformances response example
     "_id": "61bac4d78f161867d810b4b8",
     "username": "adamrakla@gmail.com"
   }
-
 ```
 
 <br>
@@ -212,7 +211,6 @@ GET /performersNearby request params example
     },
     "searchRadius": 5
   }
-
 ```
 
 |Response|
@@ -258,7 +256,6 @@ GET /performersNearby response example
       }
     ]
   }
-
 ```
 <br>
 
@@ -317,7 +314,6 @@ GET /getUser response example
       }
     ]
   }
-
 ```
 <br>
 
@@ -352,7 +348,6 @@ POST /updateUser request body example
     media: ['https://www.youtube.com/embed/sOgC8qp_I2Y'
     ]
   }
-
 ```
 
 |Response|
@@ -376,7 +371,6 @@ POST /login request body example
    username: 'spaghetti',
    password: 'password'
  }
-
 ```
 
 |Response|
@@ -402,7 +396,6 @@ POST /signup request body example
    username: 'spaghetti',
    password: 'password'
  }
-
 ```
 
 |Response|
