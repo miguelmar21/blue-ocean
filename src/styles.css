@@ -7,16 +7,16 @@
   border: 1px solid black;
 }
 
-.logo{
+.logo {
   width: 200px;
   height: 118px;
-  background-image: url('./../dist/logo.png');
+  background-image: url("./../dist/logo.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   float: right;
 }
 
-.marker-form{
+.marker-form {
   position: absolute;
   top: 40%;
   left: 48%;
@@ -25,7 +25,7 @@
   text-align: center;
 }
 
-.search{
+.search {
   border-radius: 25px;
   position: absolute;
   top: 8.5rem;
@@ -34,7 +34,7 @@
   z-index: 10;
 }
 
-.relocate{
+.relocate {
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
@@ -58,7 +58,7 @@
   cursor: pointer;
 }
 
-.time-filter-form{
+.time-filter-form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -68,7 +68,7 @@
   width: 250px;
 }
 
-.time-filter-form button{
+.time-filter-form button {
   cursor: pointer;
 }
 
@@ -89,40 +89,39 @@
   border: 1px solid black;
 }
 
-.tag-modal-img{
+.tag-modal-img {
   height: 100%;
   width: 100%;
 }
 
 @media screen and (max-width: 1150px) {
-  .time-filter{
-    left: 84%
+  .time-filter {
+    left: 84%;
   }
 }
 
 @media screen and (max-width: 1150px) {
-  .time-filter{
-    left: 84%
+  .time-filter {
+    left: 84%;
   }
 }
 
 @media screen and (min-width: 1250px) {
-  .relocate{
+  .relocate {
     left: 88%;
   }
 }
 
-
 @media screen and (min-width: 1350px) {
-  .relocate{
+  .relocate {
     left: 78%;
   }
-  
-  .time-filter{
+
+  .time-filter {
     left: 76%;
   }
 
-  .search{
+  .search {
     left: 55%;
   }
 }

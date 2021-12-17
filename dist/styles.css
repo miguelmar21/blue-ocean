@@ -9,7 +9,6 @@
 
 .performersNearby {
   background-color: #e14d48;
-  background-image: url("../buskamoveBackground.png");
   overflow: auto;
 }
 
