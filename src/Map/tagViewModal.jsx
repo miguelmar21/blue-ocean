@@ -28,6 +28,10 @@ export default function TagViewModal({
     borderRadius: 15,
   };
 
+  var handleProfileClick = function() {
+    console.log('see profile clicked')
+  }
+
   useEffect(() => {
     if (selected !== null) {
       let lat = selected.location.lat;
@@ -114,7 +118,7 @@ export default function TagViewModal({
                 </tr>
                 <tr>
                   <td colSpan="2" align="center">
-                    <button>See Profile</button>
+                    <button onClick={handleProfileClick}>See Profile</button>
                   </td>
                 </tr>
                 {loggedInUser.username === selected.username && (

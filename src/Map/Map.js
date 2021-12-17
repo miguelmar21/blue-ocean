@@ -178,6 +178,7 @@ const Map = withScriptjs(
                 setSelected={setSelected}
                 deletePerfomanceFrontEnd={deletePerfomanceFrontEnd}
                 loggedInUser={loggedInUser}
+                setProfileView={props.setProfileView}
               />
             </InfoWindow>
           ) : null}

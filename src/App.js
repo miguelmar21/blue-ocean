@@ -24,6 +24,7 @@ export default function App() {
     media: [],
     favorites: [],
   });
+  const [profileView, setProfileView] = useState(loggedInUser);
   return (
     <div>
       <Container maxWidth="xl">
@@ -36,6 +37,7 @@ export default function App() {
                 <Profiles
                   updateUser={setLoggedInUser}
                   loggedInUser={loggedInUser}
+                  setProfileView={profileView}
                 ></Profiles>
               </Grid>
               <Grid item xs={12}>
@@ -52,6 +54,7 @@ export default function App() {
               mapElement={<div style={{ height: `100%` }} />}
               setCurrentLocation={setCurrentLocation}
               loggedInUser={loggedInUser}
+              setProfileView={setProfileView}
             />
           </Grid>
         </Grid>

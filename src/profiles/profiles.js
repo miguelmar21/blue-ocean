@@ -20,6 +20,10 @@ export default function Profiles(props) {
     }
   }, [props.loggedInUser]);
 
+  useEffect(()=> {
+    setUser(props.profileView)
+  }, [props.profileView])
+
   return (
     <div>
     {(user !== null) ?
