@@ -9,6 +9,9 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 1. [Authors](#authors)
 1. [Installation](#installation)
 1. [API Documentation](#api-documentation)
+    * [/updatePerformances](#get-updateperformances)
+    * [/performersNearby](#get-performersnearby)
+
 
 <BR>
 
@@ -81,6 +84,10 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 | POST | [/updatePerformances](#post-updateperformances) |
 | PATCH | [/updatePerformances](#patch-updateperformances)
 | GET |  [/performersNearby](#get-performersnearby) |
+| GET |  [/getUser](#get-getuser) |
+| POST |  [/updateUser](#post-updateuser) |
+
+
 
 
 
@@ -252,63 +259,101 @@ GET /performersNearby response example
 
 
 
-
-
-
-//ADAM
-GET  /getUser
+### GET /getUser
 Retrieves all user information for indicated user
+|Request| Name | Type | Description
+|-------|----|-----|---------|
+| PARAMS | username | String | username for the profile you are looking for.
+| BODY | none
 
-Response 200 OK
 
-{"data":
-[{"social_media":
-{"twitter":"https://twitter.com/?lang=en","facebook":"https://www.facebook.com/","instagram":"https://www.instagram.com/"},
-"_id":"61bb75e2491ad7a99cf4ed06",
-"username":"test@test.com",
-"Is_performer":false,
-"categories":["Music","Comedy","Dance"],
-"Favorites":["61b5245688f5c61b8993cdbb"],
-"media":["https://www.youtube.com/embed/e3EqY5gPrcU"],
-"Performances":[],
-"__v":0,
-"bio":"This is to test the functionality of getUser API",
-"name":"Tester",
-"user_picture":"https://testenvironmentmanagement.com/wp-content/uploads/2015/10/wiki.png"}],
-"Status":200,
-"statusText":"OK",
-"headers":{"access-control-allow-origin":"*",
-"Connection":"keep-alive","content-length":"569",
-"content-type":"application/json; charset=utf-8",
-"date":"Thu, 16 Dec 2021 17:33:44 GMT",
-"etag":"W/\"239-xKdwm9Ei3+XrZ72ZmsXOQgR1ouU\"",
-"keep-alive":"timeout=5",
-"x-powered-by":"Express"},
-"config":
-{"transitional":
-{"silentJSONParsing":true,
-"forcedJSONParsing":true,
-"clarifyTimeoutError":false},
-"transformRequest":[null],
-"transformResponse":[null],
-"Timeout":0,
-"xsrfCookieName":"XSRF-TOKEN",
-"xsrfHeaderName":"X-XSRF-TOKEN",
-"maxContentLength":-1,
-"maxBodyLength":-1,
-"headers":
-{"Accept":"application/json, text/plain, */*"},
-"Params":
-{"username":"test@test.com"},
-"Method":"get",
-"url":"http://localhost:3000/getUser"},
-"Request":{}
-}
+|Response|
+|--------|
+|200 OK|
 
-//PRINCE
-API Documentation
+```
+GET /getUser response example
+ {
+    username: 'Jemaine',
+    password: 'password',
+    is_performer: true,
+    name: 'Jemaine Clement',
+    bio: 'a New Zealand actor.',
+    user_picture: 'https://upload.wikimedia.org/cropped%29.jpg',
+    social_media: { twitter:'https://twitter.com/AJemaineClement' },
+    categories: [ 'Comedy', 'Music' ],
+    favorites: [],
+    band: {name: 'Flight of The Conchords'},
+    media: ['https://www.youtube.com/embed/sOgC8qp_I2Y'
+    ],
+    performances:
+    [
+      {
+       "location": {
+          "lat": 29.506480007607525,
+          "lng": -98.45167516406251
+        },
+        "time": "Thu Dec 16 2021 22:00:00 GMT-0600 (Central Standard Time)",
+        "category": "laughing-1.svg",
+        "additionalPerformers": null,
+        "_id": "61bac4d78f161867d810b4b8",
+      },
+      {
+       "location": {
+          "lat": 25.34584932325,
+          "lng": -87.43583854343
+        },
+        "time": "Thu Dec 17 2021 12:00:00 GMT-0600 (Central Standard Time)",
+        "category": "laughing-1.svg",
+        "additionalPerformers": null,
+        "_id": "867d810b4b861bac4d78f161",
+      }
+    ]
+  }
 
-Summary
+```
+<br>
+
+
+
+### POST /updateUser
+Updates the given user's information
+|Request| Name | Type | Description
+|-------|----|-----|---------|
+| PARAMS | none
+| BODY |  username | String | username of the user
+| BODY | name | String | full name of user
+| BODY | is_performer | Boolean | set whether user is a performer
+| BODY | bio | String | bio information for user
+| BODY | user_picture | String | URL of user's profile picture.
+| BODY | social_media | Object | Object with key/value pairs for social media sites like Facebook.
+| BODY | categories | Array (Strings) | Music / Dance / Comedy / Other.
+| BODY | media | Array (Strings) | URLs for images or videos to display on profile
+
+
+```
+POST /updateUser request body example
+ {
+    username: 'Jemaine',
+    is_performer: true,
+    name: 'Jemaine Clement',
+    bio: 'a New Zealand actor.',
+    user_picture: 'https://upload.wikimedia.org/cropped%29.jpg',
+    social_media: { twitter:'https://twitter.com/AJemaineClement' },
+    categories: [ 'Comedy', 'Music' ],
+    band: {name: 'Flight of The Conchords'},
+    media: ['https://www.youtube.com/embed/sOgC8qp_I2Y'
+    ]
+  }
+
+```
+
+|Response|
+|--------|
+|200 OK|
+
+<br>
+
 
 Auth Routes
  post /login
