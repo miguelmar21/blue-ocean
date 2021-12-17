@@ -36,12 +36,14 @@ export default function MarkerForm({
           "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Red_dot.svg/2048px-Red_dot.svg.png");
     lastMarker.time = startDate.toString();
     lastMarker.otherPerformers = otherPerformers;
+    lastMarker.username = loggedInUser.username;
+    lastMarker.name = loggedInUser.name;
+    lastMarker.user_picture = loggedInUser.user_picture;
     let newMarkerArray = markers;
     newMarkerArray.pop();
     newMarkerArray.push(lastMarker);
     setMarkers([...newMarkerArray]);
     addToPerformances({
-      username: loggedInUser.username,
       username: loggedInUser.username,
       name: loggedInUser.name,
       user_picture: loggedInUser.user_picture,
@@ -55,7 +57,7 @@ export default function MarkerForm({
     })
     setFormDisplayed("none");
     setCanSetMarker(true);
-    getPerformancesFromDB();
+    // getPerformancesFromDB();
     e.preventDefault();
   }
 

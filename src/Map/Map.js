@@ -47,35 +47,35 @@ const Map = withScriptjs(
 
     useEffect(() => {
       if (loggedInUser.is_performer === false) {
-        setCanSetMarker(false)
+        setCanSetMarker(false);
       } else {
-        setCanSetMarker(true)
+        setCanSetMarker(true);
       }
-    }, [loggedInUser])
+    }, [loggedInUser]);
 
-    function getPerformancesFromDB(){
+    function getPerformancesFromDB() {
       axios
-      .get("http://localhost:3000/updatePerformances")
-      .then((response) => {
-        let performances = [];
-        for (const setOfPerformances of response.data) {
-          for (const performance of setOfPerformances.performances) {
-            performance.username = setOfPerformances.username;
-            performance.name = setOfPerformances.name;
-            performance.user_picture = setOfPerformances.user_picture;
-            performances.push(performance);
+        .get("http://localhost:3000/updatePerformances")
+        .then((response) => {
+          let performances = [];
+          for (const setOfPerformances of response.data) {
+            for (const performance of setOfPerformances.performances) {
+              performance.username = setOfPerformances.username;
+              performance.name = setOfPerformances.name;
+              performance.user_picture = setOfPerformances.user_picture;
+              performances.push(performance);
+            }
           }
-        }
-        console.log(performances);
-        setMarkers(performances);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          console.log(performances);
+          setMarkers(performances);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
 
     useEffect(() => {
-      getPerformancesFromDB()
+      getPerformancesFromDB();
     }, []);
 
     useEffect(() => {
@@ -156,7 +156,7 @@ const Map = withScriptjs(
               position={{ lat: marker.location.lat, lng: marker.location.lng }}
               icon={{
                 url: marker.category,
-                scaledSize: new window.google.maps.Size(30, 30),
+                scaledSize: new window.google.maps.Size(40, 40),
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
               }}

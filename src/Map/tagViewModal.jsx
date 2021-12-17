@@ -112,11 +112,6 @@ export default function TagViewModal({
                     {address}
                   </td>
                 </tr>
-                <tr>
-                  <td colSpan="2" align="center">
-                    <button>See Profile</button>
-                  </td>
-                </tr>
                 {loggedInUser.username === selected.username && (
                   <tr>
                     <td colSpan="2" align="center">
