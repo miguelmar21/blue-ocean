@@ -168,7 +168,7 @@ POST /updatePerformance body example
 
 ### PATCH /updatePerformances
 Removes a performance based on username and location.
-|Request| | Type | Description
+|Request| Name | Type | Description
 |-------|----|-----|---------|
 |PARAMS | none | | |
 | BODY |  username | String | Username of the performer
