@@ -1,0 +1,161 @@
+body{
+  background-image: url('https://cdn.pixabay.com/photo/2017/10/23/20/47/background-2882485_960_720.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.css-5wk909-MuiPaper-root-MuiAppBar-root{
+  background-color: #ffd700 !important;
+  border: 1px solid black !important;
+}
+
+.top-header {
+  background-color: lightblue;
+}
+
+.left-section {
+  /* padding-bottom: 200px; */
+  border: 1px solid black;
+}
+
+.logo {
+  width: 200px;
+  height: 118px;
+  background-image: url('./../dist/logo-orange-small.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  float: right;
+}
+
+.marker-form {
+  position: absolute;
+  top: 40%;
+  left: 48%;
+  background-color: #ffd700;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.search {
+  border-radius: 25px;
+  position: absolute;
+  top: 8.5rem;
+  left: 62.5%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.relocate {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  position: absolute;
+  top: 11rem;
+  left: 92%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: xx-large;
+}
+
+.time-filter {
+  position: absolute;
+  top: 14.2rem;
+  left: 88%;
+  transform: translateX(-50%);
+  background-color: #ffd700;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.time-filter-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #ffd700;
+  border-radius: 25px;
+  text-align: center;
+  width: 250px;
+}
+
+.time-filter-form button {
+  cursor: pointer;
+}
+
+.profilePic {
+  border-radius: 50%;
+  border: 3px solid #f9d44f;
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.profiles {
+  height: 600px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+}
+
+.tag-modal-img {
+  height: 100%;
+  width: 100%;
+}
+
+.name-and-category{
+  text-align: center;
+}
+
+@media screen and (max-width: 1150px) {
+  .time-filter {
+    left: 84%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .time-filter{
+    left: 86%
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  .relocate {
+    left: 88%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .relocate{
+    left: 87%
+  }
+
+  .time-filter{
+    left: 85%
+  }
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom:0px;
+  margin-left:5px
+}
+.username {
+  margin:5px
+}
+
+.bio {
+  margin:20px 10px 10px;
+}
+
+.profilePicContainer {
+  vertical-align: middle
+}

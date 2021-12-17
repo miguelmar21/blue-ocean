@@ -1,53 +1,62 @@
 const mongoose = require("mongoose");
-const db = require('../index.js')
+const Schema = mongoose.Schema;
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
-  //add min length validator for username
   username: {index: true, unique: true, type: String, minLength: 7},
   password: String,
-  is_performer: {type: Boolean, default: false},
+  is_performer: { type: Boolean, default: false },
   name: String,
   bio: String,
   user_picture: String,
-  social_media: [String],
+  social_media: {twitter: String,
+                 facebook: String,
+                 instagram: String,
+                },
   categories: [String],
   favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  band: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  band: {name: String,
+        members: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]},
   media: [String],
   performances: [{
-    performance_id: {type: Number, unique: true},
-    location: String,
+    performance_id: {type: Number, unique: true, sparse:true},
+    location: {
+      lat: Number,
+      lng: Number
+    },
     time: String,
-    additionalPerformers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+    category: String,
+    additionalPerformers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   }]
-})
+});
+// add additional users with the function below
+// async function testUser() {
+//   var User = mongoose.model("userschema", userSchema);
 
-var User = mongoose.model("User", userSchema);
-
-// async function addUser() {
-
-//       User.create({
-//       username: 'Miguelito',
-//       password: 'password',
-//       is_performer: true,
-//       name: 'Miguel Regalado',
-//       bio: 'I like music :D',
-//       user_picture: 'https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/242789158_4545669642164024_85677028077753648_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=KziBUEFsI-QAX-xWa4w&tn=rcDe_YIWfxUX59MO&_nc_ht=scontent-dfw5-1.xx&oh=af06feef93ed522c62543bb74a392467&oe=61B57C1F',
-//       social_media: ['https://www.facebook.com/miguel.regalado.75'],
-//       categories: ['Comedy', 'Music'],
-//       favorites: null,
-//       band: null,
-//       media: ['https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley'],
-//       performances: null
-
-
+//   const userDoc = new User({
+//     username: 'Jemaine',
+//     password: 'password',
+//     is_performer: true,
+//     name: 'Jemaine Clement',
+//     bio: 'a New Zealand actor, comedian, director, musician, singer and writer. With Bret McKenzie, as the Grammy Award-winning comedy duo Flight of the Conchords, he has released several albums and created comedy series for both the BBC and HBO. For the comedy series, he received six Primetime Emmy nominations.',
+//     user_picture: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Flight_Of_The_Conchords_-_Soho_Theatre_-_Sunday_25th_February_2018_ConchordsSoho250218-8_%2839861151994%29_%28cropped%29.jpg',
+//     social_media: { twitter:'https://twitter.com/AJemaineClement?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor' },
+//     categories: [ 'Comedy', 'Music' ],
+//     favorites: [],
+//     band: {name: 'Flight of The Conchords'},
+//     media: [
+//       'https://www.youtube.com/embed/sOgC8qp_I2Y'
+//     ],
 //   })
-//   .then ((result) => {
-//     console.log('success!', result);
-//   })
-//   .catch( (e)=> {
-//     console.log('Didnt work!', e.message)
-//   })
+//   try {
+//     const data = await userDoc.save();
+//     console.log('insert worked!', data)
+//   } catch(err) {
+//     console.log('error Saving Answer!', err)
+//   }
 // }
+// testUser();
+userSchema.plugin(passportLocalMongoose);
 
-// //performance location may need to be changed to longitude, latitude
+module.exports = mongoose.model('userSchema', userSchema);
+
