@@ -25,8 +25,10 @@ function PerformersNearby(props) {
         performers.data.map((performer) => {
           let chunk = (
             <div className="PN_performer">
-              <img src={performer.user_picture} />
-              <h1>{performer.name}</h1>
+              <div className="centered">
+                <p>{performer.name}</p>
+              </div>
+              <img className="slideImages" src={performer.user_picture} />
             </div>
           );
           container.push(chunk);
@@ -45,11 +47,7 @@ function PerformersNearby(props) {
 
   return (
     <div className="performersNearby">
-      <Stack
-        direction="row"
-        spacing={2}
-        divider={<Divider orientation="vertical" flexItem />}
-      >
+      <Stack spacing={0} divider={<Divider orientation="vertical" flexItem />}>
         <h1 className="PN_header">Performers Nearby</h1>
         <SearchRadius setSearchRadius={setSearchRadius} />
       </Stack>

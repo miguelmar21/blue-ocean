@@ -13,12 +13,10 @@ export default function FavoriteButton(props) {
     } else {
       clone.favorites = [...clone.favorites, props.displayedUser._id];
     }
-    console.log(JSON.stringify(clone));
     axios.post('http://localhost:3000/updateUser', clone)
       .then((data) => {
-        console.log(data)
+        console.log('favorited');
         props.updateUser(clone);
-        console.log('success');
       })
       .catch((err) => {
         console.error(err);
@@ -27,12 +25,12 @@ export default function FavoriteButton(props) {
 
   const removeFavorite = function() {
     var clone = JSON.parse(JSON.stringify(props.loggedInUser));
+    console.log(clone);
     clone.favorites.splice(clone.favorites.indexOf(props.loggedInUser._id),1);
     axios.post('http://localhost:3000/updateUser', clone)
     .then((data) => {
-      console.log(data);
+      console.log('unfavorited');
       props.updateUser(clone);
-
     })
     .catch((err) => {
       console.error(err);
@@ -43,13 +41,13 @@ export default function FavoriteButton(props) {
     <div>
       {(props.loggedInUser.favorites !== undefined) ?
       <>
-        {(props.loggedInUser.favorites.indexOf(props.displayedUser._id) !== -1) ?
+        {(props.loggedInUser.favorites.indexOf(props.displayedUser._id) === -1) ?
           <IconButton aria-label="favorite" onClick={addFavorite}>
             <FavoriteBorderIcon/>
           </IconButton>
           :<IconButton aria-label="un-favorite" onClick={removeFavorite}>
             <FavoriteIcon/>
-          </IconButton>}}
+          </IconButton>}
       </> : <></>}
     </div>
   )

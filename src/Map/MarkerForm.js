@@ -9,7 +9,8 @@ export default function MarkerForm({
   setCanSetMarker,
   markers,
   setMarkers,
-  loggedInUser
+  loggedInUser,
+  getPerformancesFromDB
 }) {
   const [categoryValue, setCategoryValue] = useState("music");
   const [otherPerformers, setOtherPerformers] = useState("");
@@ -41,6 +42,9 @@ export default function MarkerForm({
     setMarkers([...newMarkerArray]);
     addToPerformances({
       username: loggedInUser.username,
+      username: loggedInUser.username,
+      name: loggedInUser.name,
+      user_picture: loggedInUser.user_picture,
       location: {
         lat: lastMarker.location.lat,
         lng: lastMarker.location.lng,
@@ -51,6 +55,8 @@ export default function MarkerForm({
     })
     setFormDisplayed("none");
     setCanSetMarker(true);
+    getPerformancesFromDB();
+    e.preventDefault();
   }
 
   let className = "marker-form";

@@ -18,7 +18,7 @@ function addToPerformances(tagInfo) {
 
 function deletePerformance(tagInfo) {
   axios.patch('http://localhost:3000/updatePerformances', {
-    username: 'Miguelito',
+    username: tagInfo.username,
     lat: tagInfo.lat,
     lng: tagInfo.lng
   })

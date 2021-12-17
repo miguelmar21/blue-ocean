@@ -1,14 +1,53 @@
 .PN_header {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: larger;
+  font-family: "Montserrat", sans-serif;
+  font-size: x-large;
+  color: white;
   margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
 }
 
 .performersNearby {
   background-color: #e14d48;
   overflow: auto;
+  height: 330px;
 }
 
 .react-3d-carousel {
   margin-top: 10px;
+}
+
+.centered {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  white-space: nowrap;
+  margin-top: 10px;
+}
+
+.searchRadius {
+  margin: auto;
+  width: 28%;
+}
+
+#demo-simple-select-label {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
+
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+  color: white !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
+
+.slideImages {
+  width: 180px;
+  height: 200px;
 }
