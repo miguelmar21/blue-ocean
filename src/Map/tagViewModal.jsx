@@ -77,23 +77,24 @@ export default function TagViewModal({
                       src={selected.user_picture}
                     ></img>
                   </td>
-                  <td bgcolor="FFFFAA">
-                    <table>
+                  <td bgcolor="ffd700">
+                    <table className="name-and-category">
                       <tbody>
                         <tr>
                           <td>{selected.name}</td>
                         </tr>
+                        <hr></hr>
                         <tr>
-                          <td align="right">
+                          <td align="center">
                             {selected.category ===
                             "https://svg-clipart.com/svg/color/oLsCLwr-blue-musical-note-vector.svg"
-                              ? "Music"
+                              ? "Music show"
                               : selected.category ===
                                 "https://upload.wikimedia.org/wikipedia/commons/e/e7/004-rolling-on-the-floor-laughing-1.svg"
-                              ? "Comedy"
+                              ? "Comedy show"
                               : selected.category ===
                                 "https://upload.wikimedia.org/wikipedia/commons/9/97/Emoji_u1f483.svg"
-                              ? "Dance"
+                              ? "Dance show"
                               : "Miscellaneous"}
                           </td>
                         </tr>
