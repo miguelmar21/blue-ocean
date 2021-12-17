@@ -37,7 +37,7 @@ export default function App() {
                 <Profiles
                   updateUser={setLoggedInUser}
                   loggedInUser={loggedInUser}
-                  setProfileView={profileView}
+                  profileView={profileView}
                 ></Profiles>
               </Grid>
               <Grid item xs={12}>

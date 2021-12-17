@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import API_KEY from "../../config";
 import Geocode from "react-geocode";
+import axios from 'axios'
 
 Geocode.setApiKey(API_KEY);
 
@@ -13,6 +14,7 @@ export default function TagViewModal({
   setSelected,
   loggedInUser,
   deletePerfomanceFrontEnd,
+  setProfileView
 }) {
   const [address, setAddress] = useState(null);
   const style = {
@@ -28,8 +30,25 @@ export default function TagViewModal({
     borderRadius: 15,
   };
 
-  var handleProfileClick = function() {
-    console.log('see profile clicked')
+  var handleProfileClick = function(profUsername) {
+    console.log('see profile clicked', profUsername)
+
+    axios
+    .get('http://localhost:3000/getUser', {
+      params: {
+        username: profUsername
+      }
+    })
+    .then((queriedUser) => {
+      console.log(JSON.stringify(queriedUser));
+      if (queriedUser.data[0] !== undefined) {
+        setProfileView(queriedUser.data[0])
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
   }
 
   useEffect(() => {
@@ -118,7 +137,7 @@ export default function TagViewModal({
                 </tr>
                 <tr>
                   <td colSpan="2" align="center">
-                    <button onClick={handleProfileClick}>See Profile</button>
+                    <button onClick={handleProfileClick.bind(null,selected.username)}>See Profile</button>
                   </td>
                 </tr>
                 {loggedInUser.username === selected.username && (

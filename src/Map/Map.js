@@ -35,7 +35,7 @@ const options = {
 const defaultCenter = { lat: 30.267153, lng: -97.743057 };
 
 const Map = withScriptjs(
-  withGoogleMap(({ setCurrentLocation, loggedInUser }) => {
+  withGoogleMap(({ setCurrentLocation, loggedInUser, setProfileView }) => {
     const [markers, setMarkers] = useState([]);
     const [filteredMarkers, setFilteredMarkers] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
@@ -178,7 +178,7 @@ const Map = withScriptjs(
                 setSelected={setSelected}
                 deletePerfomanceFrontEnd={deletePerfomanceFrontEnd}
                 loggedInUser={loggedInUser}
-                setProfileView={props.setProfileView}
+                setProfileView={setProfileView}
               />
             </InfoWindow>
           ) : null}
