@@ -70,7 +70,28 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 
 <br>
 
-**STEP SIX:**
+**STEP SIX:** Environment variables!  You need to create two files:
+1. /server/config.env
+
+    which includes three variables:
+    >PORT = 3000
+
+    >MONGO_URI = mongodb+srv://[username]:[password]@spaghetti-cluster.p5ovz.mongodb.net/buskamove
+
+    Please use your MongoDB Atlas username and password for the MONGO_URI
+    >NODE_ENV = development
+
+2. /config.js (root folder)
+
+    which includes the API key needed for google maps:
+    >API_KEY = '0123456DEFGhijklmnopqrSTUV'
+
+  Note: Please be sure that your config.env file's values are NOT in quotes, and that your config.js file's value IS in quotes.
+
+<br>
+
+
+**STEP SEVEN:**
   > profit.
 
 <br>
