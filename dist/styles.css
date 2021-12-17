@@ -31,7 +31,6 @@
 
 .searchRadius {
   margin: auto;
-  width: 28%;
 }
 
 #demo-simple-select-label {
@@ -45,6 +44,10 @@
 
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border-color: white !important;
+}
+
+.css-1dbmgye-MuiStack-root{
+  height: auto !important;
 }
 
 .slideImages {
