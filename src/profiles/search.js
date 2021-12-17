@@ -10,10 +10,17 @@ import SearchIcon from '@mui/icons-material/Search';
 const useStyles = makeStyles((theme) => ({
   searchContainer: {
     display: 'flex',
-    paddingLeft: "20px",
     paddingRight: "20px",
     marginTop: "5px",
     marginBottom: "5px"
+  },
+  searchIcon: {
+    alignSelf: "flex-end",
+    marginBottom: "5px"
+  },
+  searchInput: {
+    width:"250px",
+    margin: "5px"
   }
 }));
 
@@ -27,47 +34,43 @@ export default function Search(props) {
     setSearchText(inputText)
   }
   const handleSearch = e => {
-    axios
-      .get('http://localhost:3000/getUser', {
-        params: {
-          username: searchText
-        }
-      })
-      .then((queriedUser) => {
-        console.log(JSON.stringify(queriedUser));
-        if (queriedUser.data[0] === undefined) {
-          alert(`${searchText} is not registered on Buskamove`);
-          setSearchText('');
-        } else {
-          props.setUser(queriedUser.data[0]);
-          setSearchText('');
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+    if (e.key === 'Enter') {
+      axios
+        .get('http://localhost:3000/getUser', {
+          params: {
+            username: searchText
+          }
+        })
+        .then((queriedUser) => {
+          console.log(JSON.stringify(queriedUser));
+          if (queriedUser.data[0] === undefined) {
+            alert(`${searchText} is not registered on Buskamove`);
+            setSearchText('');
+          } else {
+            props.setUser(queriedUser.data[0]);
+            setSearchText('');
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+    }
   return (
     <React.Fragment>
-      <Grid container>
-        <Grid item xs={8}>
-          <Toolbar>
-            <div className={classes.searchContainer}>
-              <SearchIcon/>
-              <TextField
-                variant='outlined'
-                label='Search for a performer'
-                onChange={handleChange}
-                value={searchText}
-                size='small'
-              />
-            </div>
-          </Toolbar>
-        </Grid>
-        <Grid item xs={4}>
-          <button onClick={handleSearch}>Search</button>
-        </Grid>
-      </Grid>
+      <Toolbar>
+        <div className={classes.searchContainer}>
+          <SearchIcon className={classes.searchIcon}/>
+          <TextField
+            className={classes.searchInput}
+            label='Search for a performer'
+            onChange={handleChange}
+            value={searchText}
+            size='small'
+            onKeyPress={handleSearch}
+          />
+        </div>
+      </Toolbar>
     </React.Fragment>
   )
 }
