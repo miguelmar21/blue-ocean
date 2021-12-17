@@ -22,9 +22,16 @@ const style = {
   borderRadius: 15
 };
 
+useEffect(() => {
+  getUser()
+}, [props.username] );
+
 const [details, setDetails] = useState({username: props.username})
 const [newMediaURL, setNewMediaURL] = useState('')
 const [submitted, setSubmitted] = useState(false);
+const [open, setOpen] = React.useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
 
 var convertToArrays = function(naiveDetails) {
   let betterDetails = naiveDetails;
@@ -101,9 +108,7 @@ var saveText = function(field, e) {
   //update this to a PUT request after deployment works the first time
   axios.post('http://localhost:3000/updateUser', properlyStructuredDetails)
   .then((success)=> {
-    console.log('success!', success);
     setSubmitted(true);
-    console.log('closeOnSubmit is', closeOnSubmit)
     if(closeOnSubmit) {
       handleClose();
       getUser()
@@ -131,16 +136,6 @@ var getUser = function() {
     })
   })
 }
-
-
-useEffect(() => {
-  getUser()
-}, [props.username] );
-
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
 
   return (
