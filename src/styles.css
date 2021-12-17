@@ -86,6 +86,8 @@ body{
 
 .profilePic {
   border-radius: 50%;
+  border: 3px solid #f9d44f;
+  margin-left: 10px
 }
 
 .hidden {
@@ -137,4 +139,19 @@ body{
   .time-filter{
     left: 85%
   }
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom:0px;
+  margin-left:5px
+}
+.username {
+  margin:5px
+}
+
+.bio {
+  margin:20px 10px 10px;
 }
