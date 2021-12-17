@@ -77,9 +77,12 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 
 | Endpoints |                  |
 | ----| ---------------------|
-| GET |  [/updatePerformances](#get-/updateperformances) |
-| POST | [/updatePerformances](#post-/updateperformances) |
-| PATCH | [/updatePerformances](#patch-/updateperformances)
+| GET |  [/updatePerformances](#get-updateperformances) |
+| POST | [/updatePerformances](#post-updateperformances) |
+| PATCH | [/updatePerformances](#patch-updateperformances)
+| GET |  [/performersNearby](#get-performersnearby) |
+
+
 
 <br>
 
@@ -98,7 +101,6 @@ Retrieves a list of performances from each performer.
 
 ```
 GET /updatePerformances response example
-[
  {
     "location": {
         "lat": 29.506480007607525,
@@ -110,7 +112,7 @@ GET /updatePerformances response example
     "_id": "61bac4d78f161867d810b4b8",
     "username": "adamrakla@gmail.com"
   }
-]
+
 ```
 
 <br>
@@ -118,9 +120,9 @@ GET /updatePerformances response example
 
 ### POST /updatePerformances
 Adds a new performance to performer specified.
-|Request| | Type | Description
+|Request| Name | Type | Description
 |-------|----|-----|---------|
-|PARAMS | none | | |
+|PARAMS | - - -| | |
 | BODY |  username | String | Username of the performer
 | BODY | location | Object | Latitude & longitude of a location
 | BODY | time | String (format) | Date of performance
@@ -162,7 +164,7 @@ Removes a performance based on username and location.
 
 
 ```
-PATCH /updatePerformance body example
+PATCH /updatePerformance request body example
   {
     "username": "adamrakla@gmail.com",
     "lat": 29.506480007607525,
@@ -179,31 +181,78 @@ PATCH /updatePerformance body example
 
 <br>
 
+### GET /performersNearby
+Retrieves a list of performances from each performer.
+|Request| Name | Type | Description
+|-------|----|-----|---------|
+| PARAMS | location | Object | latitude and longitude of location selected on the map.
+| PARAMS | searchRadius | Number (Integer) | Maximum number of miles a performer can be to be included in results.
 
 
-//MAX
-Performers Nearby API
-Performers Nearby
-GET /performersNearby Retrieves a list of performers relative to the current location of the map.
-Parameters
-Parameter
-Type
-Description
-location
-object
-Contains the latitude and longitude values of the current location selected on the map.
-Search Radius
-integer
-The maximum number of miles a performer can be from the location to get included inside of Performers Nearby.
+```
+GET /performersNearby request params example
+ {
+    "location": {
+        "lat": 29.506480007607525,
+        "lng": -98.45167516406251
+    },
+    "searchRadius": 5
+  }
+
+```
+
+|Response|
+|--------|
+|200 OK|
+
+```
+GET /performersNearby response example
+ {
+    username: 'Jemaine',
+    password: 'password',
+    is_performer: true,
+    name: 'Jemaine Clement',
+    bio: 'a New Zealand actor.',
+    user_picture: 'https://upload.wikimedia.org/cropped%29.jpg',
+    social_media: { twitter:'https://twitter.com/AJemaineClement' },
+    categories: [ 'Comedy', 'Music' ],
+    favorites: [],
+    band: {name: 'Flight of The Conchords'},
+    media: ['https://www.youtube.com/embed/sOgC8qp_I2Y'
+    ],
+    performances:
+    [
+      {
+       "location": {
+          "lat": 29.506480007607525,
+          "lng": -98.45167516406251
+        },
+        "time": "Thu Dec 16 2021 22:00:00 GMT-0600 (Central Standard Time)",
+        "category": "laughing-1.svg",
+        "additionalPerformers": null,
+        "_id": "61bac4d78f161867d810b4b8",
+      },
+      {
+       "location": {
+          "lat": 25.34584932325,
+          "lng": -87.43583854343
+        },
+        "time": "Thu Dec 17 2021 12:00:00 GMT-0600 (Central Standard Time)",
+        "category": "laughing-1.svg",
+        "additionalPerformers": null,
+        "_id": "867d810b4b861bac4d78f161",
+      }
+    ]
+  }
+
+```
+<br>
 
 
 
 
 
 
-
-Response
-Status: 200 OK
 
 
 //ADAM
