@@ -38,7 +38,12 @@ var setMedia = function(e) {
 
 var addMedia = function() {
   var newMedia = details.media.slice();
-  newMedia.push(newMediaURL);
+  var improvedMediaURL = newMediaURL;
+  if (improvedMediaURL.substring(0,17) === 'https://youtu.be/') {
+    var yID = improvedMediaURL.substring(17, improvedMediaURL.length)
+    improvedMediaURL = 'https://www.youtube.com/embed/' + yID;
+  }
+  newMedia.push(improvedMediaURL);
   var mediaObj = {media: newMedia}
   var clone = Object.assign(details, mediaObj)
   setDetails(clone)
