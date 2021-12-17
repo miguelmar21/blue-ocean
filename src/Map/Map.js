@@ -53,25 +53,29 @@ const Map = withScriptjs(
       }
     }, [loggedInUser])
 
-    useEffect(() => {
+    function getPerformancesFromDB(){
       axios
-        .get("http://localhost:3000/updatePerformances")
-        .then((response) => {
-          let performances = [];
-          for (const setOfPerformances of response.data) {
-            for (const performance of setOfPerformances.performances) {
-              performance.username = setOfPerformances.username;
-              performance.name = setOfPerformances.name;
-              performance.user_picture = setOfPerformances.user_picture;
-              performances.push(performance);
-            }
+      .get("http://localhost:3000/updatePerformances")
+      .then((response) => {
+        let performances = [];
+        for (const setOfPerformances of response.data) {
+          for (const performance of setOfPerformances.performances) {
+            performance.username = setOfPerformances.username;
+            performance.name = setOfPerformances.name;
+            performance.user_picture = setOfPerformances.user_picture;
+            performances.push(performance);
           }
-          console.log(performances);
-          setMarkers(performances);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        }
+        console.log(performances);
+        setMarkers(performances);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+    useEffect(() => {
+      getPerformancesFromDB()
     }, []);
 
     useEffect(() => {
@@ -185,6 +189,7 @@ const Map = withScriptjs(
           markers={markers}
           setMarkers={setMarkers}
           loggedInUser={loggedInUser}
+          getPerformancesFromDB={getPerformancesFromDB}
         />
         <button
           className="time-filter"

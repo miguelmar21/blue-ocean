@@ -12,10 +12,9 @@ const initialValues = {
   password: '',
 }
 
-var Login = ({ setLoggedInUser, display, setDisplay}) => {
+var Login = ({ username, setUsername,setLoggedInUser, display, setDisplay}) => {
   const [open, setOpen] = useState(false);
 
-  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   useEffect(() => {}, [display]);
 
@@ -52,12 +51,7 @@ var Login = ({ setLoggedInUser, display, setDisplay}) => {
     const temp = { ...errors };
 
     if ('username' in formValues) {
-      if (!formValues.username) {
-        temp.username = "This is a required Field";
-      }
-      // else {
-      //   temp.username = (/$^|.+@.+..+/).test(formValues.username) ? "" : "Email is not valid.";
-      // }
+      temp.username = !formValues.username ? "This is a required Field" : "";
     }
     if ('password' in formValues) {
       temp.password = formValues.password ? "" : "This is a required Field";
