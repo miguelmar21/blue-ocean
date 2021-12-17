@@ -45,12 +45,12 @@ var setMedia = function(e) {
 
 var addMedia = function() {
   var newMedia = details.media.slice();
-  var improvedMediaURL = newMediaURL;
-  if (improvedMediaURL.substring(0,17) === 'https://youtu.be/') {
-    var yID = improvedMediaURL.substring(17, improvedMediaURL.length)
-    improvedMediaURL = 'https://www.youtube.com/embed/' + yID;
+  var youtubeFriendlyMediaURL = newMediaURL;
+  if (youtubeFriendlyMediaURL.substring(0,17) === 'https://youtu.be/') {
+    var yID = youtubeFriendlyMediaURL.substring(17, youtubeFriendlyMediaURL.length)
+    youtubeFriendlyMediaURL = 'https://www.youtube.com/embed/' + yID;
   }
-  newMedia.push(improvedMediaURL);
+  newMedia.push(youtubeFriendlyMediaURL);
   var mediaObj = {media: newMedia}
   var clone = Object.assign(details, mediaObj)
   setDetails(clone)
