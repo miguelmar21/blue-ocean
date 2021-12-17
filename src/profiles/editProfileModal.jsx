@@ -215,7 +215,7 @@ useEffect(() => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'span'}>
             <table><tbody>
-              <tr><td width='150'>name: </td><td><input type='text' id='name' size='70' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
+              <tr><td width='150'>name: </td><td><input type='text' id='name' size='60' placeholder={details.name} onChange={saveText.bind(null,'name')}></input></td></tr>
               {/* <tr><td>new password:  </td><td><input type='password' id='password' size='20' placeholder='' onChange={saveText.bind(null,'password')}></input></td></tr> */}
 
               {
@@ -224,22 +224,22 @@ useEffect(() => {
                 : <tr><td>performer?</td><td><select id='is_performer' defaultValue='false' onChange={saveText.bind(null,'is_performer')} ><option value='true'>True</option><option value='false'>False</option></select></td></tr>
               }
 
-              <tr><td>bio: </td><td><input type='text' id='bio' size='70' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
-              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='70' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
+              <tr><td>bio: </td><td><input type='text' id='bio' size='60' placeholder={details.bio} onChange={saveText.bind(null,'bio')}></input></td></tr>
+              <tr><td>user_picture: </td><td><input type='text' id='user_picture' size='60' placeholder={details.user_picture} onChange={saveText.bind(null,'user_picture')}></input></td></tr>
               {
                 (details.social_media)
-                ? <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='70' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
-                : <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='70' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                ? <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='60' placeholder={details.social_media.facebook} onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
+                : <tr><td>facebook link: </td><td><input type='text' id='social_media.facebook' size='60' placeholder='' onChange={saveText.bind(null,'social_media.facebook')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='70' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
-                : <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='70' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                ? <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='60' placeholder={details.social_media.instagram} onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
+                : <tr><td>instagram link: </td><td><input type='text' id='social_media.instagram' size='60' placeholder='' onChange={saveText.bind(null,'social_media.instagram')}></input></td></tr>
               }
               {
                 (details.social_media)
-                ? <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='70' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
-                : <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='70' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                ? <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='60' placeholder={details.social_media.twitter} onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
+                : <tr><td>twitter link: </td><td><input type='text' id='social_media.twitter' size='60' placeholder='' onChange={saveText.bind(null,'social_media.twitter')}></input></td></tr>
               }
 
               <tr>
@@ -286,14 +286,18 @@ useEffect(() => {
                   ? details.media.map((medium, index) => {
                       return (
                         <div key={index}>
-                        <input type='button' value='x' id={`media-${index}`} key={index} onClick={deleteMedia.bind(null, index)}></input> {medium}
+                        <input type='button' value='x' id={`media-${index}`} key={index} onClick={deleteMedia.bind(null, index)}></input> {
+                        (medium.length > 50)
+                        ? medium.substring(0, 25).concat(' ... '.concat(medium.substring(medium.length-25, medium.length)))
+                        : medium
+                        }
                         </div>
                       )
                     })
                   : null
                 }
                 <input type='button' id='media+' key='+' value='+' onClick={addMedia}></input>
-                <input type='text' id='newMediaURLVal' key='nm+' size='70' placeholder='new media link' onChange={setMedia}></input>
+                <input type='text' id='newMediaURLVal' key='nm+' size='60' placeholder='new media link' onChange={setMedia}></input>
               </td></tr>
 
             </tbody></table>
