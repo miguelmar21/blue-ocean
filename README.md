@@ -52,7 +52,7 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 <br>
 
 **STEP TWO:** Install dependencies using node package manager.
-  > npm install (you may need to run npm install --peer-legacy-deps if first installation fails)
+  > npm install (you may need to run npm install --legacy-peer-deps if first installation fails)
 
 <br>
 
