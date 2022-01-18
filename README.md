@@ -42,9 +42,9 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 Finding performances <br>
 ![Map-GIF](https://user-images.githubusercontent.com/76494184/149995986-dae74874-961f-4d66-a4a1-2cff1c92306d.gif) <br>
 The main feature of this app. You can traverse through the map (which has about the same functionality of a google map) to find performances scattered across the world. You also have the ability to search any area of your liking by typing it on the search bar on top of the map. Clicking the compass on the far right of the map will use google's API to take you to your current location. When viewing a particular area, the app will notify you of nearby performers. Although not shown here, you can click on the filter button that is found below the compass to view performances by date and time. Finally, you can click on a performance icon to view the specific details of that one performance. <br> <br>
-
+Profiles <br>
 ![Profiles-GIF](https://user-images.githubusercontent.com/76494184/149993900-581b1392-92f3-45f7-a90c-9148116f5579.gif) <br>
-Hi this is profiles <br>
+You can login if you already have an account by clicking the login button on the top left to automatically view your profile and edit it to your liking. In the edit modal you can change your name, bio, profile pictures, social medias and more. On the top of the profiles section, you can search up other profiles by typing in their name and or username. This will bring you to the profile of the searched user where you can view their information as well as their posted photos or videos. You also have the option to favorite and unfavorite a profile by clicking the heart found on the top right of the profile section.<br> <br>
 ![Performers-GIF](https://user-images.githubusercontent.com/76494184/149993926-609a184e-7631-4115-b8f4-d9caf768dda8.gif)
 
 <br>
