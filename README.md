@@ -7,8 +7,9 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 
 ## CONTENTS
 1. [Authors](#authors)
-1. [Installation](#installation)
-1. [API Documentation](#api-documentation)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [API Documentation](#api-documentation)
     * [/updatePerformances](#get-updateperformances)
     * [/performersNearby](#get-performersnearby)
     * [/getUser](#get-getuser)
@@ -37,7 +38,19 @@ Sounds like you need Buskamove: a social networking app that helps performers an
 <br>
 
 ---
+## FEATURES
+Finding performances <br>
+![Map-GIF](https://user-images.githubusercontent.com/76494184/149995986-dae74874-961f-4d66-a4a1-2cff1c92306d.gif) <br>
+The main feature of this app. You can traverse through the map (which has about the same functionality of a google map) to find performances scattered across the world. You also have the ability to search any area of your liking by typing it on the search bar on top of the map. Clicking the compass on the far right of the map will use google's API to take you to your current location. When viewing a particular area, the app will notify you of nearby performers. Although not shown here, you can click on the filter button that is found below the compass to view performances by date and time. Finally, you can click on a performance icon to view the specific details of that one performance. <br> <br>
 
+![Profiles-GIF](https://user-images.githubusercontent.com/76494184/149993900-581b1392-92f3-45f7-a90c-9148116f5579.gif) <br>
+Hi this is profiles <br>
+![Performers-GIF](https://user-images.githubusercontent.com/76494184/149993926-609a184e-7631-4115-b8f4-d9caf768dda8.gif)
+
+<br>
+
+---
+   
 ## INSTALLATION
 **Prequisites:** Git, Express, NodeJS, React, an Internet connection and web browser. <br>
 **3rd Party APIS:** Google Maps
