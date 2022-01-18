@@ -45,8 +45,9 @@ The main feature of this app. You can traverse through the map (which has about 
 Profiles <br>
 ![Profiles-GIF](https://user-images.githubusercontent.com/76494184/149993900-581b1392-92f3-45f7-a90c-9148116f5579.gif) <br>
 You can login if you already have an account by clicking the login button on the top left to automatically view your profile and edit it to your liking. In the edit modal you can change your name, bio, profile pictures, social medias and more. On the top of the profiles section, you can search up other profiles by typing in their name and or username. This will bring you to the profile of the searched user where you can view their information as well as their posted photos or videos. You also have the option to favorite and unfavorite a profile by clicking the heart found on the top right of the profile section.<br> <br>
-![Performers-GIF](https://user-images.githubusercontent.com/76494184/149993926-609a184e-7631-4115-b8f4-d9caf768dda8.gif)
-
+Performer Access <br>
+![Performers-GIF](https://user-images.githubusercontent.com/76494184/149993926-609a184e-7631-4115-b8f4-d9caf768dda8.gif) <br>
+If you are a performer (which can be toggled on and off in your edit profile menu), you can click on any area of the map to create a performance and update its details. You can choose the category and date/time in the module that pop ups after clicking on the map. Once created, your performance will remain on the map unless you decide to delete it which can be done by clicking on the performance in question. You can only delete performances that are created by you and only you.
 <br>
 
 ---
